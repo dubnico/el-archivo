@@ -1,0 +1,50 @@
+{
+  "slug": "no-creo-que-debamos-entregar-el-libre-albedrio-humano-a-la-ia",
+  "title": "No creo que debamos «entregar el libre albedrío humano» a la IA",
+  "kicker": "Inteligencia Artificial · Gobernanza y Seguridad",
+  "section": "Inteligencia Artificial",
+  "deck": "Respuesta en X a una publicación de Axios sobre la visión de Anthropic respecto de la agencia humana y la inteligencia artificial.",
+  "masthead": "X",
+  "sourceName": "X",
+  "sourceUrl": "",
+  "author": "Dario Amodei",
+  "date": "25 de noviembre de 2026",
+  "dateIso": "2026-11-25",
+  "addedAt": "2026-11-25T21:00:34.167Z",
+  "dateline": "",
+  "blocks": [
+    {
+      "type": "lead",
+      "html": "No, no creo que debamos «entregar el libre albedrío humano» a los sistemas de IA, y es absurdo sugerir que sí lo creo. He escrito cientos de páginas de ensayos y un tema constante en ellos es la necesidad de que la IA esté gobernada por procesos democráticos legítimos. Durante milenios (remontándonos hasta los filósofos griegos y romanos), los defensores de la autocracia han afirmado que esta conduce a una toma de decisiones mejor, más rápida o más decisiva que el proceso desordenado de la democracia. Incluso si eso fuera cierto (¡cosa que dudo!), jamás deberíamos sacrificar la legitimidad o la autodeterminación en el altar de la eficiencia o la seguridad. Este argumento contra la autocracia se aplica palabra por palabra contra el gobierno ejercido por la IA, y siento con igual firmeza que ceder la gobernanza a la IA es una mala idea."
+    },
+    {
+      "type": "paragraph",
+      "html": "Nadie que haya leído cuidadosamente mis escritos o mis entrevistas podría concluir razonablemente que creo algo distinto. Por ejemplo, en una entrevista en <em>CBS</em> hace un par de meses, pedí específicamente que la IA sea gobernada democráticamente. Pido lo mismo en <em>Policy on the AI Exponential</em>, <em>Machines of Loving Grace</em>, <em>The Adolescence of Technology</em> y <em>We Must Pace the Frontier</em>. <em>Machines of Loving Grace</em> contiene una extensa sección sobre el uso de la IA para revitalizar la democracia y analiza el uso de la IA como ayuda para los ciudadanos en su toma de decisiones, «agregando opiniones e impulsando el consenso entre los ciudadanos, resolviendo conflictos, encontrando puntos en común y buscando acuerdos». La implicación clara y obvia es que los humanos deben seguir siendo quienes toman las decisiones políticas y de gobierno. <em>The Adolescence of Technology</em> tiene una sección entera dedicada a combatir la tiranía impulsada por la IA, e incluso analizo el peligro de que los laboratorios de IA usurpen el poder y me pronuncio enérgicamente en contra; por implicación, ¡esto incluye sin duda que un laboratorio de IA usurpe el poder y se lo entregue a la propia IA!"
+    },
+    {
+      "type": "paragraph",
+      "html": "Si pensara que algo de esto es una buena idea, lo estaría defendiendo en público, tal como no he tenido miedo de defender muchísimas posturas impopulares a lo largo de los últimos años. Pero no lo defiendo, porque creo que ceder el gobierno a la IA es una idea terrible."
+    },
+    {
+      "type": "paragraph",
+      "html": "Por separado, creo que existe una confusión frecuente (incluida en este artículo) entre la idea de «entregar el libre albedrío humano» a la IA en algún gran sentido de gobernanza global, y la idea más prosaica de que, a medida que avanzan los sistemas de IA, se vuelven capaces de realizar tareas específicas de manera más automatizada. Esto no es la IA «gobernando el mundo», sino una IA conduciendo un automóvil, diseñando un fármaco contra el cáncer o escribiendo software de punta a punta. Aquí mi postura es matizada. Que la IA realice tareas más completas o más amplias tiene valor económico y puede impulsar avances importantes en software, medicina, transporte, energía, etcétera. Es claramente deseable en muchos casos y salvará muchísimas vidas. Pero también tiene desventajas y, en algunas áreas, puede que no valga la pena."
+    },
+    {
+      "type": "paragraph",
+      "html": "Por ejemplo, usar la IA de forma demasiado autónoma para construir la próxima generación de sistemas de IA (lo que se conoce como automejora recursiva, o RSI) puede hacer que la IA mejore más rápido de lo que podemos controlarla o adaptarnos a ella, por lo que quizá queramos poner límites a ese proceso. Como dijimos públicamente a principios de noviembre, no esperamos que sea seguro que Claude construya sucesivos modelos de frontera de manera totalmente autónoma, sin una supervisión y comprensión humanas significativas. En segundo lugar, en algunos contextos, usar la IA de un modo demasiado integral de punta a punta puede provocar una grave disrupción laboral, y puede tener sentido desacelerar o incluso detener algunos despliegues de IA para dar a las personas más tiempo para adaptarse. En tercer lugar, aunque el uso de la IA para la investigación en alineación es una herramienta sumamente valiosa, debe hacerse con cautela, porque podríamos no ser capaces de confiar en el trabajo del sistema de IA. Por último, en muchos casos, los humanos simplemente preferirían realizar ciertas actividades por sí mismos para seguir profundamente involucrados en aquello que les importa, incluso si la IA puede hacer esas actividades mejor. Hay innumerables otros ejemplos y casos difíciles. No creo que existan respuestas fáciles aquí, ni que haya (ni deba haber) un único tomador de decisiones: algunas de estas decisiones las tomará la sociedad, otras el gobierno, otras las empresas de IA y otras se tomarán de manera descentralizada por individuos que expresan sus propias preferencias como consumidores, las cuales pueden diferir de las preferencias de otros."
+    },
+    {
+      "type": "paragraph",
+      "html": "No creo que otros líderes de IA u otras empresas de IA tengan opiniones significativamente distintas de las mías sobre si deben automatizarse tareas específicas. Desde luego, los productos que ofrecen no difieren de manera sustancial en su orientación hacia la automatización de tareas; todas las empresas parecen estar lanzando modelos cada vez más capaces de automatizar tareas (ya que esa ha sido la consecuencia general de escalar el entrenamiento de la IA), y todas las empresas afirman comprender que existen riesgos y desventajas en esa automatización y ofrecer salvaguardas. En todo caso, Anthropic ha sido la más clara y la más proactiva a la hora de reconocer esas desventajas e intentar abordarlas. Por ejemplo, resulta bastante absurdo citar mi declaración de que las armas totalmente autónomas podrían «algún día ser necesarias para la defensa de la democracia» como algo distinto de la postura de otras empresas de IA, cuando estuve dispuesto a arriesgar el futuro de Anthropic como compañía al negarme a permitir que nuestros modelos actuales de IA se utilizaran para armas autónomas incluso frente a sanciones legales, y ninguna otra empresa de IA hizo lo mismo."
+    },
+    {
+      "type": "paragraph",
+      "html": "En resumen, en lo referido a las grandes cuestiones sobre cómo gobernamos una IA cada vez más capaz, he sido claro y coherente en que la IA debe ser gobernada mediante un proceso democrático legítimo y en que «entregar el libre albedrío humano» a los sistemas de IA es una idea terrible. En lo referido a la automatización de tareas específicas por o para las personas, mis opiniones son más matizadas, pero no creo que difieran de las de otras empresas de IA: la mayoría de las demás compañías parecen estar ofreciendo productos similares y enfrentando disyuntivas similares sin tener respuestas perfectas para ellas. Lo que está ocurriendo es una especie de posicionamiento comercial y político basado en sensaciones (<em>vibes</em>) en el que participan algunos directores ejecutivos de IA, repitiendo consignas como «control y agencia humanos» o «la IA debería ser solo una herramienta», sin hacer realmente nada distinto en sus productos ni tomarse en serio las preguntas difíciles que subyacen detrás de esas consignas."
+    },
+    {
+      "type": "callout",
+      "titleHtml": "Contexto",
+      "bodyHtml": "Publicado por Dario Amodei en X en respuesta a una publicación de <em>Axios</em> que decía: «Líderes rivales de IA rechazan la visión de Anthropic de entregar la agencia humana a la IA» (<em>«Rival AI leaders push back against Anthropic vision of surrendering human agency to AI»</em>)."
+    }
+  ]
+}
