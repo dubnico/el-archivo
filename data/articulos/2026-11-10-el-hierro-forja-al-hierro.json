@@ -1,0 +1,154 @@
+{
+  "slug": "el-hierro-forja-al-hierro",
+  "title": "El hierro forja al hierro",
+  "kicker": "Inteligencia Artificial · Gobernanza y Seguridad",
+  "section": "Inteligencia Artificial",
+  "deck": "Sobre los dos tipos de automejora recursiva.",
+  "masthead": "Hyperdimensional",
+  "sourceName": "Hyperdimensional",
+  "sourceUrl": "https://www.hyperdimensional.co/p/iron-makes-iron",
+  "author": "Dean W. Ball",
+  "date": "10 de noviembre de 2026",
+  "dateIso": "2026-11-10",
+  "addedAt": "2026-11-25T20:02:40.528Z",
+  "dateline": "",
+  "blocks": [
+    {
+      "type": "lead",
+      "html": "La semana pasada, la organización sin fines de lucro dedicada a la seguridad en IA Model Evaluation and Threat Research (METR) publicó un estudio sobre la «aceleración de la I+D en IA» dentro de Anthropic. El estudio, basado en el amplio acceso concedido por Anthropic al personal de METR, concluye que, «a octubre de 2026, es probable que Anthropic esté mejorando las capacidades de sus modelos en tareas bien especificadas a aproximadamente el doble del ritmo registrado entre marzo de 2024 y octubre de 2025». El hallazgo de METR llegó pocos días después de que Anthropic, en su presentación enmendada del formulario S-1 previa a su salida a bolsa planificada, revelara que «podría cumplir de manera inminente la definición de nuestra Política de Escalado Responsable de \"progreso drásticamente acelerado atribuible a la IA\"»."
+    },
+    {
+      "type": "paragraph",
+      "html": "El estudio de METR, sumado a la revelación previa de Anthropic, desató una cascada de reacciones en línea. Algunos miembros prominentes de la comunidad de seguridad en IA llegaron a decir que los hallazgos de METR sobre el uso de IA por parte de Anthropic para acelerar la investigación en IA los hacían sentir físicamente mal. Otros, incluidos mi nuevo colega en OpenAI David Holtz y Seb Krier de Google DeepMind (ambos publicando a título personal y no en representación de sus respectivos empleadores), se mostraron más escépticos respecto de los resultados, señalando una falta de rigor empírico (debida, en buena medida, a las agresivas tachaduras de datos y otra información aplicadas por Anthropic al informe público de METR) u observando que el crecimiento de las capacidades de Anthropic parece estar impulsado por un gasto de capital en cómputo que crece incluso más rápido."
+    },
+    {
+      "type": "paragraph",
+      "html": "Sentirse físicamente mal puede parecer una reacción exagerada frente al uso de IA por parte de una empresa de IA, y bien podría serlo. Pero la cosmovisión que produce ese tipo de reacciones se funda en el temor a la «automejora recursiva» —cuando la IA se vuelve lo suficientemente inteligente como para crear una IA aún mejor, que a su vez puede crear una IA aún mejor, y así sucesivamente— como la antesala de una inevitable pérdida de poder humano. A grandes rasgos, quienes sostienen esa cosmovisión han acertado en muchísimo de lo ocurrido con la IA hasta ahora, por lo que nadie debería descartar sus reacciones sin más."
+    },
+    {
+      "type": "paragraph",
+      "html": "Al mismo tiempo, me preocupa que la conversación sobre la automejora recursiva (RSI, por sus siglas en inglés) se haya vuelto desenfocada, extrema y drásticamente simplificada. Me recuerda a cómo, a lo largo de mi vida, el movimiento climático pasó de concentrarse en las emisiones de carbono a convertirse en un movimiento anticrecimiento más amplio que tendió a patologizar el uso de energía en general, pese a que el consumo energético per cápita es uno de los correlatos más seguros de la riqueza, el bienestar y la salud humanos. De manera similar, y haciéndome eco de la reciente crítica de Scott Alexander sobre la evolución del movimiento de seguridad en IA, creo que existe el riesgo de que el temor a una RSI incontrolable conduzca a políticas que patologicen el uso de IA para mejorar la IA (una práctica de larga data en el campo, para ser claros), prohíban el progreso de la IA en ámbitos cruciales como la biomedicina e ignoren disyuntivas muy reales que enfrenta Estados Unidos en materia de crecimiento económico, competencia geopolítica y seguridad nacional."
+    },
+    {
+      "type": "paragraph",
+      "html": "Empecemos por dejar una cosa clara: permitir que la IA controle el desarrollo de sus sucesoras sin supervisión humana práctica o con una supervisión mínima —es decir, entregarle a la IA las llaves de las mayores empresas de IA de Estados Unidos— es una mala idea. Por más útil que sea la IA para acelerar la I+D en IA, los humanos deben conservar el control, no solo en el nombre sino en los hechos concretos, sobre el desarrollo de la IA. Ninguna cantidad de progreso tecnológico justifica renunciar al control humano práctico sobre las empresas de IA ni, en realidad, sobre otras instituciones humanas. Apoyo el desarrollo de leyes, regulaciones y normas para garantizarlo en todo el mundo."
+    },
+    {
+      "type": "paragraph",
+      "html": "Pero ese riesgo —uno relativamente acotado— no es aquello en lo que se enfocan en la práctica las conversaciones actuales sobre la RSI. Para entender lo que quiero decir, resulta útil pensar en dos formas distintas en que una tecnología puede mejorarse recursivamente a sí misma. Las llamaré recursión débil y recursión fuerte."
+    },
+    {
+      "type": "paragraph",
+      "html": "La recursión débil ocurre cuando una tecnología es un insumo clave para producir más y mejores versiones de esa misma tecnología. Es un patrón sumamente común en el desarrollo tecnológico; en realidad, es la norma histórica más que una aberración. Los herreros de la Edad del Hierro usaban hierro como uno de los insumos clave para fabricar más hierro, y también aleaciones más resistentes. Los ferrocarriles se utilizaron para transportar el equipamiento y los materiales necesarios para tender aún más ferrocarriles. Los ingenieros de software usan software para crear software nuevo, mejorado y más seguro. Y en la IA, primero como campo académico y luego como una gran industria, la IA viene siendo un insumo central para el desarrollo de nueva y mejor IA desde hace años. Es más fácil pensar en tecnologías aceleradas por la recursión débil que pensar en tecnologías que no lo sean."
+    },
+    {
+      "type": "paragraph",
+      "html": "La recursión débil ha sido un motor decisivo del progreso tecnológico humano a lo largo de siglos y milenios, y en ese sentido no tiene nada de especialmente débil. En términos absolutos, es una de las dinámicas más poderosas de la historia tecnológica. La recursión débil es débil únicamente en comparación con la recursión fuerte."
+    },
+    {
+      "type": "paragraph",
+      "html": "La recursión fuerte ocurre cuando una tecnología puede planificar y ejecutar de manera autónoma el desarrollo de su sucesora. Hasta donde sabemos, la recursión fuerte no ha ocurrido jamás en ningún punto de la historia. Incluso si uno considerara al cerebro humano como una tecnología (cosa que ni siquiera yo hago, pese a tener una concepción amplia de la tecnología), no es cierto que los seres humanos seamos capaces de recursión fuerte. Cada generación humana suma al cimiento de conocimientos y capacidades de nuestra civilización, lo que ofrece a la generación siguiente una base más sólida desde la cual construir, pero no diseñamos los cerebros de nuestros hijos para que sean superiores a los nuestros."
+    },
+    {
+      "type": "paragraph",
+      "html": "La recursión fuerte sería algo genuinamente nuevo bajo el sol. Debemos tomar en serio esa posibilidad, pero parte de tomar algo en serio consiste en atenerse a una rigurosa disciplina epistémica en el análisis. Por eso, no deberíamos saltar a la conclusión de que «la automejora recursiva está ocurriendo» si esa recursión pertenece a la variedad débil y no a la fuerte."
+    },
+    {
+      "type": "paragraph",
+      "html": "El estudio de METR sobre la aceleración interna de la I+D en Anthropic constituye sin duda una buena prueba de que la recursión débil está en marcha. Pero ¿es prueba de que la recursión fuerte esté ocurriendo? Depende de cómo se lo mire. El hallazgo de METR es específicamente que Anthropic ha duplicado el ritmo al que mejoran las capacidades de sus modelos en tareas bien especificadas, lo que lleva a preguntarse quién, exactamente, está haciendo esa especificación. Muy a menudo, sospecho, se trata de tareas especificadas por investigadores humanos, basadas en objetivos generales de toda la empresa decididos por gerentes y ejecutivos humanos. Si es así, eso se parece mucho más a la recursión débil que a la recursión fuerte. Casi no veo pruebas —ni en el estudio de METR ni en las divulgaciones públicas sobre métricas de aceleración de la investigación de OpenAI o Anthropic— de que esté ocurriendo recursión fuerte. En cambio, veo pruebas abundantes en esas mismas fuentes de que la recursión débil está ocurriendo a una escala grande y en rápido crecimiento."
+    },
+    {
+      "type": "paragraph",
+      "html": "METR afirma confiar en que la aceleración que midió no se debe al escalado del cómputo de entrenamiento, pero el cómputo de entrenamiento no es el único cómputo que importa. La ingeniería de software, el diseño de experimentos, la generación de datos sintéticos y el análisis dentro de Anthropic corren sobre cómputo de inferencia, que todos los laboratorios de frontera han escalado enormemente desde el período de referencia del informe, de marzo de 2024 a octubre de 2025. Esas tareas conforman buena parte de lo que llamamos «I+D en IA». Así es precisamente como se ve la recursión débil: una tecnología de propósito general actuando como insumo de su propia mejora, limitada por el capital que sus constructores logren movilizar."
+    },
+    {
+      "type": "paragraph",
+      "html": "Ahora bien, como señalé, la recursión débil no es realmente débil: es una de las dinámicas más potentes de la historia humana, que rima —si no es directamente sinónimo— con la idea de crecimiento compuesto. En el contexto de la IA, la recursión débil podría producir un rápido salto en las capacidades de la IA de frontera —más rápido que cualquier cosa que hayamos visto hasta ahora— durante el próximo año más o menos. Podría elevar significativamente el perfil de riesgo de los principales sistemas de IA, incluso en ámbitos con potencial de provocar daños a gran escala como la criptografía, la biomedicina y el diseño químico."
+    },
+    {
+      "type": "paragraph",
+      "html": "Todo esto constituye un buen motivo para exigir que las mayores empresas de IA incorporen evaluadores externos dentro de sus equipos de desarrollo, publiquen informes sobre incidentes preocupantes de desalineación o pérdida de control (incluso si esos incidentes fueron «disparos de advertencia» que no causaron daños materiales), mantengan una ciberseguridad rigurosa, sean transparentes sobre sus prácticas de seguridad y se sometan a auditorías de cumplimiento de esas prácticas: medidas que he apoyado una por una."
+    },
+    {
+      "type": "paragraph",
+      "html": "Pero ¿justifican los riesgos de la recursión débil prohibir la práctica de usar IA como insumo para crear más y mejor IA? En mi opinión, no. Cada uno de los riesgos que señalé es solo una cara de la moneda: un mejor diseño químico puede producir nuevos materiales o mejores procesos industriales para fabricar sustancias químicas existentes. Contar con capacidades superiores en biología sintética es esencial para abrir paso a la revolución en biomedicina que yo y otros observadores de la IA creemos plenamente alcanzable en el corto plazo. Los sistemas de IA capaces de hallar vulnerabilidades en software o debilidades en la criptografía simplemente están descubriendo fallas que ya existían, listas para ser explotadas en cualquier momento (y que, plausiblemente, ya eran conocidas por grandes Estados nación, incluidos adversarios de Estados Unidos y sus aliados)."
+    },
+    {
+      "type": "paragraph",
+      "html": "Más aún, la recursión débil con IA puede utilizarse para volver más seguros a los sistemas de IA. La estrategia de seguridad de todas las empresas de IA de frontera se apoya en el uso de sistemas de IA cada vez más capaces para una panoplia de tareas, que incluyen monitorear agentes para detectar conductas maliciosas o pérdidas de control, usar IA para reforzar la ciberseguridad interna y emplear IA para investigar en campos como la interpretabilidad y la alineación (que, además de ser áreas capaces de mejorar la seguridad, también pueden potenciar las capacidades). El camino hacia la seguridad en IA se volvería mucho más escabroso —quizás imposible— sin la IA como herramienta para multiplicar masivamente el esfuerzo humano. Por estas razones, una prohibición de la «RSI» que incluya la recursión débil podría terminar, en la práctica, prohibiendo la mayor parte del desarrollo de IA de frontera."
+    },
+    {
+      "type": "paragraph",
+      "html": "¿Qué hay, sin embargo, de la recursión fuerte? ¿Es un riesgo real y, si pudiéramos aislar de algún modo la recursión fuerte en el plano jurídico, deberíamos prohibirla?"
+    },
+    {
+      "type": "paragraph",
+      "html": "Mi postura es que la recursión fuerte constituye un riesgo genuino, posiblemente en el corto plazo, aunque la evidencia a favor de su inminencia sea más delgada de lo que a veces se supone. La recursión fuerte exige que la IA asuma la investigación y el desarrollo de IA de punta a punta: detectar problemas, recorrer el espinoso trayecto que va desde problemas nebulosos hasta preguntas afiladas (a menudo la parte más ardua de cualquier empresa intelectual), idear soluciones, diseñar experimentos, ejecutarlos e integrar las mejoras en una infraestructura técnica que, en el caso de las empresas de IA de frontera, atiende a millones o incluso miles de millones de personas por día. Y exige una IA capaz de hacer todo eso no en un espacio abstracto, sino en el mundo real, donde la información es imperfecta y los recursos son escasos. Decisiones complejas sobre cómo asignar capital (cómputo) entre numerosas líneas de investigación prometedoras —que hoy se toman en los niveles más altos de las empresas de IA— también tendrían que ser tomadas de forma totalmente autónoma por las IA."
+    },
+    {
+      "type": "paragraph",
+      "html": "Es cierto que la IA mejora con rapidez, pero buena parte de lo que acabo de describir ha seguido resultando esquivo incluso para los mejores sistemas. Parte de este trabajo requiere buen criterio —<em>taste</em>— y discernimiento, cualidades sumamente difíciles de medir de manera objetiva, así como la capacidad de afinar esas destrezas a lo largo de años. Muchos de los científicos más veteranos del campo del aprendizaje profundo (<em>deep learning</em>), sobre el cual reposa toda la IA moderna, se volcaron a esa disciplina años o décadas antes de que diera frutos. Una evaluación empírica de su criterio investigador habría concluido que tenían bastante mal olfato y una productividad científica bastante baja… justo hasta que estalló la revolución del aprendizaje profundo en 2012. Hoy existen entornos de entrenamiento donde los modelos trabajan durante días o más, pero ¿durante años? Ni siquiera está claro cómo diseñaríamos evaluaciones para el criterio intelectual de largo aliento."
+    },
+    {
+      "type": "paragraph",
+      "html": "Resultaba mucho más fácil observar las capacidades de los sistemas de IA de la cosecha de 2020, como GPT-3, y predecir que pronto superarían a los humanos en terrenos como la ciberseguridad. Incluso las capacidades rudimentarias de aquellos sistemas más antiguos dejaban ver claramente hacia dónde iba el viento, y para cuando apareció GPT-4 —que ya podía escribir de forma confiable programas sencillos de software— resultaba evidente que los modelos acelerarían hacia niveles altísimos de destreza en programación. Desde ese momento y en adelante, los modelos lograron avances confiables en programación mes tras mes."
+    },
+    {
+      "type": "paragraph",
+      "html": "El progreso en materia de criterio o <em>taste</em>, en cambio, aunque no sea nulo, ha sido pequeño en comparación. He usado los mejores sistemas de IA que he podido conseguir casi literalmente todos los días durante cuatro años y, aunque me han potenciado muchísimo y mi trabajo cotidiano se ha transformado, sigo sintiendo que soy muy claramente yo quien da forma al rumbo de mi investigación. Las ideas que sugieren los sistemas de IA para investigaciones abiertas han mejorado en los últimos cuatro años, pero siguen careciendo de originalidad, de proyección o de ambas cosas."
+    },
+    {
+      "type": "paragraph",
+      "html": "No me resulta obvio que el hecho de que los modelos se vuelvan aún más sobrehumanos en matemáticas, o sobrehumanos en el diseño de fármacos, o capaces de componer fugas al estilo de Bach tan bien o mejor que el propio Bach vaya a cambiar esa dinámica por sí solo. Las preguntas «¿puede el modelo hacer bien esto [algo siquiera medianamente especificado]?» y «¿sabe el modelo qué hacer a continuación en una exploración intelectual abierta?» son distintas entre sí, y esa distinción no debería descartarse —como ocurre con demasiada frecuencia— tachándola de «insuficientemente convencida de la AGI». La realidad es que no sabemos cuánto importa esa distinción ni cuánto tiempo les llevará a los modelos dominar el <em>taste</em> en ámbitos intelectuales abiertos."
+    },
+    {
+      "type": "paragraph",
+      "html": "El informe de METR coincide con esto al señalar: «Entendemos que la IA todavía no es capaz de realizar contribuciones altamente significativas y plenamente autónomas a las partes más importantes del proceso de entrenamiento de modelos», y que la I+D interna se ha acelerado gracias a la IA que asiste a investigadores humanos. También indica que empleados de Anthropic reportan «señales de vida» en cuanto a lograr «contribuciones altamente significativas y plenamente autónomas» a la I+D en IA, aunque los detalles vuelven a estar tachados. Esto podría anunciar un criterio mucho mejor en el corto plazo, pero es difícil saber qué significa exactamente; además, vale recordar que cada modelo de frontera que he probado ha mostrado «señales de vida» en criterio intelectual respecto de sus predecesores."
+    },
+    {
+      "type": "paragraph",
+      "html": "La evidencia que hemos visto de recursión débil, por convincente que sea, no constituye por sí sola una prueba especialmente sólida de que los saltos necesarios para la recursión fuerte estén a la vuelta de la esquina. Pero, como ya dije, la recursión fuerte es a la vez inédita y un riesgo genuino. Las capacidades de la IA avanzan con suficiente rapidez, y existe suficiente incertidumbre sobre lo que podrían implicar futuras mejoras, como para que valga la pena tomarse en serio el riesgo de un desarrollo totalmente autónomo de la IA, incluso en el corto plazo."
+    },
+    {
+      "type": "paragraph",
+      "html": "Durante un tiempo se especuló con que la debilidad relativa de los modelos en el uso de computadoras (la capacidad de manipular interfaces gráficas de usuario) era una limitación profunda; resultó quedar resuelta en gran medida este año. Lo mismo podría suceder con el <em>taste</em>: tal vez esa característica que nos parece tan inefable y misteriosa simplemente emerja de otra ronda de escalado. Es ciertamente posible, y nadie debería leer nada de lo que escribí aquí como un argumento de que los modelos nunca —o no pronto— desarrollarán criterio. Lo que sostengo, en cambio, es que el camino que va de «bajo criterio» a «alto criterio» no es tan directo como lo ha sido en muchos otros ámbitos de mejora de capacidades de la IA (por ejemplo, la ciberseguridad). Por eso son valiosas organizaciones como METR, que intentan medir la aceleración de la investigación en IA con tanto rigor como resulta practicable, y por eso apoyo leyes que fortalezcan el papel de tales organismos en la gobernanza de la IA de frontera."
+    },
+    {
+      "type": "paragraph",
+      "html": "Algunos argumentarán que lo que he llamado recursión débil, si se practica durante el tiempo suficiente, conduce inevitablemente a la recursión fuerte, porque la aceleración de capacidades derivada de la recursión débil producirá modelos capaces de recursión fuerte. Otros podrían decir que la recursión débil, practicada a suficiente escala, desdibujaría en los hechos las fronteras con la recursión fuerte. Esto resulta especialmente cierto en la investigación y el desarrollo de aprendizaje automático, dado que hoy es un campo empírico y guiado por la búsqueda, lo cual implica que la experimentación a escala masiva puede servir como sustituto del criterio. Aun así, el cómputo es escaso, y decidir cuál de los innumerables experimentos posibles lo merece es en sí mismo una cuestión de criterio. A medida que la escala de la recursión débil siga creciendo dentro de las empresas de IA de frontera, sería útil contar con mayor transparencia sobre cómo se toman las decisiones de asignación de cómputo, qué proporción de cambios de código se fusionan sin una revisión humana sustantiva y métricas similares. Esas métricas podrían resultar doblemente útiles, ya que podrían sentar la base para una definición legal de la recursión fuerte."
+    },
+    {
+      "type": "paragraph",
+      "html": "En un sentido más amplio, trazar la línea entre recursión débil y recursión fuerte deja en claro que la gobernanza de la IA de frontera debería centrarse en regular empresas más que en regular modelos. La recursión débil puede medirse a nivel de un modelo, pero la recursión fuerte atañe por definición a cuestiones vinculadas con la gestión de la firma, las decisiones de asignación de capital dentro de ella y temas conexos. Por consiguiente, la recursión fuerte solo puede evaluarse a nivel de la entidad, y esta es una de las muchas razones por las que creo que organismos técnicos independientes de evaluación como METR deberían considerarse a sí mismos analistas de las empresas de IA de frontera como entidades tanto como se consideran analistas de sus modelos."
+    },
+    {
+      "type": "paragraph",
+      "html": "También vale la pena señalar que el derecho vigente ya ofrece una serie de incentivos contra la recursión fuerte. El derecho societario impone a la dirección de una empresa deberes fiduciarios frente a los accionistas —deberes que, como mínimo, se verían seriamente puestos a prueba si la conducción decidiera entregar el control de los bienes de capital de la compañía a una IA en medio de una gran incertidumbre y con escasa injerencia práctica sobre lo que la IA haría con ellos—. La responsabilidad civil del <em>common law</em> establece un deber general de cuidado razonable de las empresas hacia el resto de la sociedad para evitar daños. También la legislación de protección al consumidor podría desempeñar un papel."
+    },
+    {
+      "type": "paragraph",
+      "html": "Todos estos cuerpos normativos existentes podrían ser movilizados por abogados creativos, y la mera existencia de una gran demanda judicial puede representar para una empresa un obstáculo tan grande como un fallo adverso. Mientras tanto, el Poder Ejecutivo federal dispone de amplias facultades para obstaculizar de manera unilateral a las empresas de IA de frontera (por ejemplo, los controles a las exportaciones impuestos por la Administración Trump sobre los modelos Fable y Mythos de Anthropic el pasado junio). Ninguna compañía que contemple traspasar el control práctico de los humanos a las máquinas puede ignorar esta clase de riesgo legal y regulatorio."
+    },
+    {
+      "type": "paragraph",
+      "html": "Aunque estos constituyen frenos legítimos frente a la recursión fuerte, también son improvisados, impredecibles y pueden volverse con la misma facilidad contra usos ordinarios y beneficiosos de la IA. Por eso, en este caso resultan preferibles reglas claras, estables y hechas a medida antes que aplicar el derecho existente a tontas y a locas para gobernar la automejora recursiva."
+    },
+    {
+      "type": "paragraph",
+      "html": "La política pública sobre IA se beneficiaría de trazar una distinción más nítida entre lo que he llamado recursión débil y recursión fuerte. Hoy en día, la evidencia de recursión débil —que, una vez más, es la norma en el desarrollo tecnológico, sobre todo en tecnologías de propósito general— se está utilizando como prueba de recursión fuerte, cuando en realidad la evidencia a favor de esta última sigue siendo cuestionable."
+    },
+    {
+      "type": "paragraph",
+      "html": "Dada la creciente relevancia pública de la IA, personas que han tenido influencia dentro del estrecho mundo de la política y la seguridad de la IA comenzarán a adquirir influencia fuera de sus burbujas. A medida que eso suceda, sus palabras tendrán mucho más peso. Lo que antes eran publicaciones informales en X se transforma en mensajes capaces de impulsar acciones políticas serias e inmediatas, o de azuzar el pánico en el público general. Es positivo que la IA cobre mayor relevancia y que, al menos en cierta medida, los responsables de políticas públicas y la ciudadanía recurran a personas con experiencia técnica en busca de consejo. Pero a medida que evoluciona la gravedad de ese asesoramiento, también debe evolucionar su tono. Es una transición que yo mismo he tenido que atravesar en mi comunicación pública, y que todavía navego —de forma despareja— hoy. Esto no significa suavizar las palabras sobre la seriedad del riesgo de la IA, pero sí exige una calibración excelente; y en este momento siento que las disciplinas de seguridad y política de la IA corren el riesgo de estar tan mal calibradas como nunca antes las había visto."
+    },
+    {
+      "type": "paragraph",
+      "html": "La clase de pánico que puede provocar la retórica actual podría derivar fácilmente en leyes que retrasen beneficios legítimos y deseables de la IA, coloquen a Estados Unidos en desventaja estratégica en el escenario global y centralicen el poder sobre la IA en manos del Estado. Este último desenlace se parece a lo que ocurrió con la tecnología nuclear, donde la centralización del poder y la proliferación normativa impidieron que los consumidores aprovecharan los beneficios de la energía nuclear, mientras los Estados acumulaban y mantenían arsenales de armas nucleares lo bastante poderosos como para extinguir la civilización humana muchas veces. Sigo creyendo que riesgos de esta índole figuran entre los malos futuros más probables de la IA, y me preocupa que se los subestime drásticamente frente a las proyecciones más tradicionales de los defensores de la seguridad en IA. Los ignoramos por nuestra cuenta y riesgo, porque en algo sí podemos coincidir todos: el futuro, traiga lo que traiga, está llegando más rápido de lo que ninguno de nosotros pensó."
+    },
+    {
+      "type": "callout",
+      "titleHtml": "Aclaración del autor",
+      "bodyHtml": "Esta publicación refleja únicamente mis opiniones personales y no representa las opiniones de OpenAI ni de ninguno de mis colegas en la empresa."
+    }
+  ]
+}
