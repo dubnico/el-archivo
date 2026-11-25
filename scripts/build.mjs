@@ -21,7 +21,25 @@ function formatEditionDate(date = new Date()) {
   }).format(date);
 }
 
-function renderBlock(block, article) {
+function guessMimeType(filePath) {
+  const ext = path.extname(filePath).toLowerCase();
+  if (ext === '.png') return 'image/png';
+  if (ext === '.jpg' || ext === '.jpeg') return 'image/jpeg';
+  if (ext === '.webp') return 'image/webp';
+  if (ext === '.gif') return 'image/gif';
+  if (ext === '.svg') return 'image/svg+xml';
+  return 'application/octet-stream';
+}
+
+async function resolveFigureSrc(src) {
+  if (/^(https?:|data:)/i.test(src)) return src;
+  const resolved = path.isAbsolute(src) ? src : path.resolve(ROOT, src);
+  const buf = await fs.readFile(resolved);
+  const mime = guessMimeType(resolved);
+  return `data:${mime};base64,${buf.toString('base64')}`;
+}
+
+async function renderBlock(block, article) {
   switch (block.type) {
     case 'lead': {
       const hasInlineDateline = /class\s*=\s*["']dateline["']/i.test(block.html);
@@ -46,6 +64,19 @@ function renderBlock(block, article) {
       const items = block.items.map((item) => `        <li>${item}</li>`).join('\n');
       return `      <${tag} class="editorial-list">\n${items}\n      </${tag}>`;
     }
+    case 'code': {
+      const langLabel = block.language
+        ? `<div class="code-lang">${escapeHtml(block.language)}</div>\n`
+        : '';
+      return `      <div class="editorial-code-wrap">\n${langLabel}        <pre class="editorial-code"><code>${escapeHtml(block.code)}</code></pre>\n      </div>`;
+    }
+    case 'figure': {
+      const resolvedSrc = await resolveFigureSrc(block.src);
+      const caption = block.caption
+        ? `\n        <figcaption>${escapeHtml(block.caption)}</figcaption>`
+        : '';
+      return `      <figure class="editorial-figure">\n        <img src="${escapeHtml(resolvedSrc)}" alt="${escapeHtml(block.alt)}" loading="lazy">${caption}\n      </figure>`;
+    }
     case 'section_break':
       return `      <hr class="section-break">`;
     case 'callout': {
@@ -60,7 +91,7 @@ function renderBlock(block, article) {
   }
 }
 
-function renderArticleSection(article, index, allArticles) {
+async function renderArticleSection(article, index, allArticles) {
   const { minutes } = estimateReadingMinutes(article);
   const bylineParts = [];
   if (article.author) {
@@ -82,7 +113,8 @@ function renderArticleSection(article, index, allArticles) {
   bylineParts.push(`<span>${minutes} min de lectura</span>`);
 
   const bylineHtml = bylineParts.join('\n          <span class="dot">·</span>\n          ');
-  const blocksHtml = article.blocks.map((b) => renderBlock(b, article)).join('\n\n');
+  const renderedBlocks = await Promise.all(article.blocks.map((b) => renderBlock(b, article)));
+  const blocksHtml = renderedBlocks.join('\n\n');
 
   const readersHtml = article.readersBox
     ? `\n    <section class="readers-box" aria-label="${escapeHtml(article.readersBox.title)}">
@@ -188,7 +220,7 @@ function renderStoryCard(article, isLead = false) {
       </article>`;
 }
 
-function buildHtml(config, articles) {
+async function buildHtml(config, articles) {
   const paperName = config.name || 'El Archivo';
   const paperSubtitle = config.subtitle || 'Lecturas escogidas · Edición personal';
   const sections = [...new Set(articles.map((a) => a.section).filter(Boolean))];
@@ -211,9 +243,9 @@ function buildHtml(config, articles) {
         <p>Todavía no hay notas en este archivo. Pasale un link, PDF o texto a Antigravity con <code>/nota</code> para publicar la primera.</p>
       </div>`;
 
-  const articlesViewsHtml = articles
-    .map((article, idx) => renderArticleSection(article, idx, articles))
-    .join('\n\n');
+  const articlesViewsHtml = (
+    await Promise.all(articles.map((article, idx) => renderArticleSection(article, idx, articles)))
+  ).join('\n\n');
 
   return `<!DOCTYPE html>
 <html lang="${escapeHtml(config.language || 'es')}">
@@ -888,6 +920,75 @@ function buildHtml(config, articles) {
       color: var(--accent);
     }
 
+    /* Bloques de código editoriales */
+    .editorial-code-wrap {
+      margin: 1.85rem 0;
+      background-color: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    .code-lang {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      padding: 0.45rem 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .editorial-code {
+      margin: 0;
+      padding: 1rem 1.15rem;
+      overflow-x: auto;
+      font-family: ui-monospace, 'Cascadia Code', 'SFMono-Regular', Menlo, Consolas, monospace;
+      font-size: 13.5px;
+      line-height: 1.55;
+      color: var(--text);
+      tab-size: 2;
+    }
+
+    .editorial-code code {
+      font-family: inherit;
+    }
+
+    .article-body p code,
+    .article-body li code {
+      font-family: ui-monospace, 'Cascadia Code', 'SFMono-Regular', Menlo, Consolas, monospace;
+      font-size: 0.84em;
+      background-color: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 0.08em 0.35em;
+    }
+
+    /* Gráficos e imágenes editoriales */
+    .editorial-figure {
+      margin: 2.15rem 0;
+      padding: 0;
+    }
+
+    .editorial-figure img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background-color: var(--surface);
+    }
+
+    .editorial-figure figcaption {
+      margin-top: 0.65rem;
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      line-height: 1.45;
+      color: var(--text-muted);
+      text-align: center;
+    }
+
     /* Separador editorial sutil */
     .section-break {
       border: 0;
@@ -1360,7 +1461,7 @@ export async function loadArticles(config) {
 export async function buildNewspaper() {
   const config = await loadConfig();
   const articles = await loadArticles(config);
-  const html = buildHtml(config, articles);
+  const html = await buildHtml(config, articles);
   const outputPath = path.resolve(ROOT, config.outputFile || 'periodico.html');
   await fs.writeFile(outputPath, html, 'utf8');
   // Mantener index.html sincronizado para GitHub Pages / hosting estático

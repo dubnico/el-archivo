@@ -73,6 +73,8 @@ Escribir el artículo traducido y estructurado en `.tmp/new-article.json` siguie
     { "type": "subheading", "text": "Subtítulo secundario (opcional)" },
     { "type": "blockquote", "html": "Cita destacada (opcional)", "cite": "Autor de la cita (opcional)" },
     { "type": "list", "ordered": false, "items": ["Primer ítem", "Segundo ítem"] },
+    { "type": "code", "language": "json", "code": "{ \"sin_traducir\": true }" },
+    { "type": "figure", "src": "assets/slug/fig-1.jpg", "alt": "Descripción", "caption": "Pie de gráfico (opcional)" },
     { "type": "section_break" },
     { "type": "callout", "titleHtml": "Título (solo si existe en el original)", "bodyHtml": "Texto" }
   ]

@@ -18,7 +18,8 @@ Este proyecto genera y mantiene un **único archivo HTML autónomo** ([periodico
 - `data/articulos/*.json`: Fuente de verdad de cada nota publicada.
 - `entrada/`: Carpeta para dejar PDFs o textos locales.
 - `scripts/extract.mjs`: Extrae texto de URLs (`@mozilla/readability` + `linkedom`), PDFs (`unpdf`) o archivos de texto; detecta paywalls/bloqueos.
-- `scripts/build.mjs`: Reconstruye `periodico.html` (soporta `--list` para listar notas existentes sin duplicar).
+- `scripts/build.mjs`: Reconstruye `periodico.html` e `index.html` (soporta `--list` para listar notas existentes sin duplicar; renderiza bloques `lead`, `paragraph`, `heading`, `subheading`, `blockquote`, `list`, `code`, `figure`, `section_break` y `callout`, embebiendo imágenes locales de `assets/` como data URIs base64 para mantener el HTML 100% autónomo).
+- `assets/`: Imágenes y gráficos originales descargados por artículo (embebidos automáticamente al compilar `periodico.html`).
 - `scripts/add-article.mjs`: Valida el JSON editorial, guarda en `data/articulos/`, reconstruye `periodico.html` y soporta `--open`, `--overwrite` y `--cleanup`.
 
 ## Automatización diaria

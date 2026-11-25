@@ -89,6 +89,8 @@ export function validateAndNormalizeArticle(raw, config = {}) {
     'subheading',
     'blockquote',
     'list',
+    'code',
+    'figure',
     'section_break',
     'callout',
   ]);
@@ -128,6 +130,32 @@ export function validateAndNormalizeArticle(raw, config = {}) {
           ordered: Boolean(block.ordered),
           items: block.items.map((item) => sanitizeInlineHtml(item)).filter(Boolean),
         };
+      }
+      case 'code': {
+        const code = String(block.code ?? block.text ?? '');
+        if (!code.trim()) {
+          throw new Error(`Bloque #${index + 1} (code) está vacío.`);
+        }
+        const out = { type: 'code', code };
+        if (block.language && String(block.language).trim()) {
+          out.language = String(block.language).trim();
+        }
+        return out;
+      }
+      case 'figure': {
+        const src = String(block.src ?? '').trim();
+        if (!src) {
+          throw new Error(`Bloque #${index + 1} (figure) requiere "src".`);
+        }
+        const out = {
+          type: 'figure',
+          src,
+          alt: String(block.alt ?? '').trim(),
+        };
+        if (block.caption && String(block.caption).trim()) {
+          out.caption = String(block.caption).trim();
+        }
+        return out;
       }
       case 'section_break':
         return { type: 'section_break' };

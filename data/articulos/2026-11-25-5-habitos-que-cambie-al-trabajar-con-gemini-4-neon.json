@@ -1,0 +1,197 @@
+{
+  "slug": "5-habitos-que-cambie-al-trabajar-con-gemini-4-neon",
+  "title": "5 hábitos que cambié al trabajar con Gemini 4 Neon",
+  "kicker": "Inteligencia Artificial · Herramientas",
+  "section": "Inteligencia Artificial",
+  "deck": "Tras semanas corriendo evaluaciones y programando a diario con Gemini 4 Neon, descubrí que muchas de las reglas, barandillas y skills que escribí para modelos anteriores lo estaban frenando.",
+  "masthead": "X",
+  "sourceName": "X",
+  "sourceUrl": "https://x.com/_philschmid/status/2125579472594223340?s=20",
+  "author": "Philipp Schmid (@_philschmid)",
+  "date": "25 de noviembre de 2026",
+  "dateIso": "2026-11-25",
+  "addedAt": "2026-11-25T15:28:23.702Z",
+  "dateline": "",
+  "blocks": [
+    {
+      "type": "lead",
+      "html": "Cuando usás un agente de programación todos los días, tu <em>prompt</em> es apenas una pequeña parte de lo que ve el modelo. Las instrucciones del sistema, las definiciones de herramientas, los <em>skills</em> y los turnos previos llenan el resto de la ventana de contexto. A diferencia de un <em>prompt</em> puntual, todo eso persiste en cada pedido futuro, de modo que las reglas demasiado específicas terminan chocando con lo que realmente estás pidiendo."
+    },
+    {
+      "type": "paragraph",
+      "html": "Después de semanas corriendo evaluaciones (<em>evals</em>) y construyendo a diario con Gemini 4 Neon, me di cuenta de que muchas de las barandillas, los <em>skills</em> y las reglas que había escrito para modelos anteriores lo estaban frenando o haciendo que fallara en casos borde que puede resolver por su cuenta."
+    },
+    {
+      "type": "paragraph",
+      "html": "Pasar a Gemini 4 Neon implicó dar un paso atrás. Acá van 5 cosas que cambié."
+    },
+    {
+      "type": "heading",
+      "text": "Eliminá las reglas estrictas"
+    },
+    {
+      "type": "paragraph",
+      "html": "Mis instrucciones del sistema y mis reglas fueron creciendo con el tiempo. Sumé una regla cuando un modelo anterior escribía comentarios ruidosos, luego otra para bloquear ediciones que yo no había pedido. Más adelante, mis reglas de usuario, las reglas del proyecto y mi pedido actual empezaron a contradecirse entre sí. Por ejemplo, una prohibición general de escribir comentarios entra en conflicto en el mismo instante en que le pido al agente que documente una función pública."
+    },
+    {
+      "type": "paragraph",
+      "html": "Cuando las instrucciones entran en conflicto, Gemini 4 Neon gasta <em>tokens</em> de pensamiento adicionales intentando resolver la contradicción y muchas veces obedece la regla vieja en lugar de mi pedido actual. Borré las prohibiciones rígidas de estilo de código y las reemplacé por pautas simples de criterio, como pedirle al modelo que coincida con el estilo, la nomenclatura y la densidad de comentarios del código circundante. Eso redujo el razonamiento desperdiciado y aumentó la precisión."
+    },
+    {
+      "type": "figure",
+      "src": "assets/5-habitos-gemini-4-neon/fig-1.jpg",
+      "alt": "Comparación entre una configuración tradicional sobrecargada y una configuración liviana para Gemini 4 Neon",
+      "caption": "Arquitectura tradicional frente a una configuración liviana para Gemini 4 Neon."
+    },
+    {
+      "type": "paragraph",
+      "html": "Ahora mi archivo <code>GEMINI.md</code> a nivel de usuario entra en una sola pantalla. Conservo únicamente unos pocos hábitos que aplican a todas las sesiones: límites duros de seguridad alrededor de aprobaciones, verificación de fuentes y tareas largas, más breves preferencias de formato sobre cómo quiero que el agente me responda. Todo lo específico de cada tarea vive, en cambio, en <em>skills</em>."
+    },
+    {
+      "type": "code",
+      "code": "<!-- Excerpt from my user-level GEMINI.md -->\n- Draft locally and show diffs or commands before pushing, deploying, opening PRs, or editing shared docs.\n- Verify claims, numbers, quotes, and URLs against primary sources or raw outputs instead of guessing.\n- Set a monitoring timer with progress updates for long evals or background jobs.\n- Front-load answers in Simplified Technical English using short sentences, active voice, and honest phrasing.\n- Avoid inline backticks, bold text, em dashes, horizontal dividers, and parenthetical clutter in prose.",
+      "language": "markdown"
+    },
+    {
+      "type": "paragraph",
+      "html": "En mis pruebas, las listas infladas de prohibiciones ni siquiera ayudaban siempre a los modelos anteriores a mantenerse en modo solo lectura durante la depuración. Simplemente agregaban instrucciones contradictorias y <em>tokens</em> de pensamiento extra. Con Gemini 4 Neon, eliminar listas largas de prohibiciones mantiene las ediciones limpiamente dentro del alcance."
+    },
+    {
+      "type": "heading",
+      "text": "Definí las reglas de herramientas una sola vez en interfaces claras"
+    },
+    {
+      "type": "paragraph",
+      "html": "En generaciones anteriores de modelos, tenía que explicar las herramientas dos veces. Escribía una descripción dentro de la definición de la herramienta y luego repetía las reglas sobre cómo y cuándo llamarla dentro de las instrucciones del sistema. También agregaba ejemplos <em>few-shot</em> para mostrar argumentos válidos."
+    },
+    {
+      "type": "code",
+      "code": "# Previous setup: duplicated rules in system instructions + tool descriptions\n# System instruction:\n#   - For code edits, always call edit_file on small sections instead of rewriting whole files.\n#   - Always update your plan with update_plan before editing, keeping one step in_progress.\n#\n# Tool description (repeated again):\n#   - edit_file: \"Edit a file. Prefer small targeted edits over full rewrites.\"\n#   - update_plan: \"Track steps. Keep one item in_progress. Example: [...]\"",
+      "language": "markdown"
+    },
+    {
+      "type": "paragraph",
+      "html": "Con Gemini 4 Neon, quité las reglas repetidas de herramientas de mis instrucciones del sistema y borré los ejemplos <em>few-shot</em>. Los ejemplos <em>few-shot</em> funcionan en entradas comunes, pero restringen cómo maneja el modelo los casos borde. Cuando una tarea difiere del ejemplo, el modelo copia campos sobrantes o la estructura incorrecta de argumentos del ejemplo y envía llamadas inválidas."
+    },
+    {
+      "type": "paragraph",
+      "html": "En su lugar, pongo la regla de uso una sola vez dentro de una interfaz expresiva. Si construís agentes propios sobre la API de Gemini, colocá tipos de parámetros claros, enumeraciones (<em>enums</em>) y campos obligatorios directamente en el esquema JSON de la herramienta:"
+    },
+    {
+      "type": "code",
+      "code": "{\n  \"name\": \"update_plan\",\n  \"description\": \"Update the task checklist. Keep only one step in_progress at a time.\",\n  \"parameters\": {\n    \"type\": \"object\",\n    \"properties\": {\n      \"steps\": {\n        \"type\": \"array\",\n        \"items\": {\n          \"type\": \"object\",\n          \"properties\": {\n            \"title\": { \"type\": \"string\" },\n            \"status\": {\n              \"type\": \"string\",\n              \"enum\": [\"pending\", \"in_progress\", \"done\", \"skipped\"]\n            }\n          },\n          \"required\": [\"title\", \"status\"],\n          \"additionalProperties\": false\n        }\n      }\n    },\n    \"required\": [\"steps\"],\n    \"additionalProperties\": false\n  }\n}",
+      "language": "json"
+    },
+    {
+      "type": "paragraph",
+      "html": "Si usás un agente de programación todos los días, aplicá la misma idea a los scripts auxiliares del repositorio y a las herramientas de línea de comandos (CLI). Banderas claras, opciones estrictas y mensajes de error directos guían al modelo mucho mejor que párrafos enteros de ejemplos de uso."
+    },
+    {
+      "type": "paragraph",
+      "html": "Mantené además la superficie de herramientas reducida y las salidas acotadas. Eliminar herramientas de búsqueda superpuestas y escribir los registros largos de comandos en un archivo —en lugar de volcar enormes bloques de salida estándar (<em>stdout</em>) al contexto— mantiene cada turno enfocado."
+    },
+    {
+      "type": "paragraph",
+      "html": "Gemini 4 Neon sigue una regla escrita una sola vez dentro del esquema de la herramienta incluso en sesiones largas. Quitar las reglas duplicadas del sistema reduce el ruido en el contexto sin perder disciplina en el uso de herramientas."
+    },
+    {
+      "type": "heading",
+      "text": "Cargá skills solo cuando hagan falta"
+    },
+    {
+      "type": "paragraph",
+      "html": "Borré casi todos los archivos <code>AGENTS.md</code> y <code>GEMINI.md</code> a nivel de proyecto que tenía. La mayoría de esos archivos repetían estructuras de directorios que el modelo puede ver leyendo el repositorio, o terminaban convirtiéndose en registros de memoria a los que solo se les agregaban líneas hasta quedar desactualizados."
+    },
+    {
+      "type": "paragraph",
+      "html": "Ahora mantengo corto el archivo de instrucciones del proyecto: un breve resumen de qué hace el repositorio, más las trampas reales que el modelo no puede inferir del código, como un comando de pruebas no estándar o el único archivo donde deben vivir todos los tipos compartidos. Moví los flujos de trabajo de dominio —como edición de textos largos, guías de interfaz, revisiones de API y guías de CLI— a <em>skills</em> con una descripción de una sola línea en un índice."
+    },
+    {
+      "type": "figure",
+      "src": "assets/5-habitos-gemini-4-neon/fig-2.jpg",
+      "alt": "Diagrama de carga bajo demanda de skills y herramientas",
+      "caption": "Carga bajo demanda de skills y herramientas."
+    },
+    {
+      "type": "paragraph",
+      "html": "Mantené livianos también los <em>skills</em>. Usalos para convenciones del equipo y verificaciones obligatorias en lugar de guionar cada caso borde. Para <em>skills</em> más extensos, dividí los detalles en un pequeño árbol de archivos enlazados para que el agente lea únicamente la parte que necesita."
+    },
+    {
+      "type": "paragraph",
+      "html": "Los <em>skills</em> rinden más en CLIs, SDKs y APIs internas que cambian rápido. Cargar una guía actualizada bajo demanda evita que el modelo adivine banderas obsoletas o <em>endpoints</em> deprecados, lo que reduce los turnos de prueba y error y baja el consumo total de <em>tokens</em> incluso en las tareas que cargan el <em>skill</em>."
+    },
+    {
+      "type": "paragraph",
+      "html": "Gemini 4 Neon encuentra y carga <em>skills</em> y herramientas diferidas de manera confiable. Lee solo los archivos y definiciones de herramientas que coinciden con la tarea y omite el resto, recortando contexto ocioso del primer turno casi sin activaciones falsas."
+    },
+    {
+      "type": "heading",
+      "text": "Verificá y guiá con imágenes y video"
+    },
+    {
+      "type": "paragraph",
+      "html": "Para ediciones normales de código de <em>backend</em>, un pedido breve en texto funciona bien. Cuando importan el diseño de interfaz, los diagramas o el movimiento, las descripciones de texto dejan demasiado margen de error."
+    },
+    {
+      "type": "paragraph",
+      "html": "Con Gemini 4 Neon ahora uso mucho más imágenes y video tanto como referencias como para chequeos de verificación. En lugar de escribir dos párrafos de reglas CSS para una página o diagrama, le paso una captura de pantalla de referencia o una grabación breve para mostrar el estilo exacto y el espaciado que quiero."
+    },
+    {
+      "type": "paragraph",
+      "html": "Después hago que el agente verifique visualmente su propia salida: renderizar la página, el diagrama o los cuadros de video, abrir el PNG o clip real e inspeccionarlo antes de darlo por terminado. Mirar una sola imagen renderizada detecta texto recortado, etiquetas partidas y alineaciones rotas que los registros de texto nunca muestran."
+    },
+    {
+      "type": "heading",
+      "text": "Hacé traspasos de contexto en lugar de compactar"
+    },
+    {
+      "type": "paragraph",
+      "html": "Incluso con una ventana de contexto de un millón de <em>tokens</em>, las sesiones largas de programación siguen llenándose de ruido, se vuelven más lentas y eventualmente necesitan compactación. Compactar siempre duele. Cuando un agente resume una sesión a mitad de tarea, rompe la caché del <em>prompt</em>, pierde detalles a nivel de línea y obliga al modelo a gastar los turnos siguientes volviendo a leer archivos que ya había abierto."
+    },
+    {
+      "type": "figure",
+      "src": "assets/5-habitos-gemini-4-neon/fig-3.jpg",
+      "alt": "Diagrama de retención de contexto y traspasos entre fases frente a compactación",
+      "caption": "Retención de contexto y traspasos entre fases."
+    },
+    {
+      "type": "paragraph",
+      "html": "Como la compactación conlleva pérdida de información, ahora divido el trabajo de manera deliberada en vez de dejar que un único hilo crezca para siempre. Cuando una tarea cambia de fase, le pido al agente que escriba un breve archivo de traspaso (<em>handoff</em>) con el objetivo, las decisiones verificadas y las rutas exactas de archivos, y luego arranco una nueva sesión a partir de ese archivo."
+    },
+    {
+      "type": "paragraph",
+      "html": "Cuando a mitad de una sesión noto que quiero trabajar en una segunda cosa en paralelo, bifurco (<em>fork</em>) la sesión ahí mismo en lugar de empujar ambas tareas en serie por un mismo hilo. Por ejemplo, después de correr una batería de evaluaciones y revisar registros de fallos en un hilo, escribo un archivo de traspaso e inicio una sesión limpia para redactar el informe. Al mismo tiempo, bifurco el hilo de las evaluaciones para generar e inspeccionar los gráficos a partir de los resultados ya cargados."
+    },
+    {
+      "type": "paragraph",
+      "html": "Si construís tu propio bucle de agente y mantenés la compactación automática como respaldo, no la dispares demasiado pronto. Alrededor de 500.000 <em>tokens</em> es un buen umbral para mí antes de compactar. Dejar crecer la ventana evita reinicios prematuros de caché y relecturas de archivos, y fijar en el resumen las rutas de archivos activos más las decisiones verificadas preserva lo que el modelo necesita para seguir avanzando."
+    },
+    {
+      "type": "heading",
+      "text": "Cómo armar tu configuración"
+    },
+    {
+      "type": "paragraph",
+      "html": "Cuando actualices una configuración de agente para Gemini 4 Neon, simplificá cada capa de contexto una por una:"
+    },
+    {
+      "type": "list",
+      "ordered": false,
+      "items": [
+        "<strong>Reglas de usuario:</strong> mantené corto tu <code>GEMINI.md</code> global. Quedate con hábitos universales de seguridad y preferencias de respuesta, y reemplazá las prohibiciones de estilo de código por pautas de criterio.",
+        "<strong>Interfaces de herramientas y scripts:</strong> si armás agentes propios, poné cada regla de herramienta una sola vez dentro de su esquema JSON con parámetros tipados y <em>enums</em>, y borrá ejemplos <em>few-shot</em> y reglas repetidas del sistema. Para agentes de programación diarios, diseñá banderas de CLI claras y scripts auxiliares de la misma manera.",
+        "<strong>Archivos de proyecto y skills:</strong> borrá archivos <code>AGENTS.md</code> y <code>GEMINI.md</code> inflados a nivel de proyecto, dejá solo las trampas genuinas del código y mové los flujos de dominio a <em>skills</em> livianos divididos en archivos enlazados cuando crezcan.",
+        "<strong>Referencias y chequeos visuales:</strong> pasá capturas de referencia o grabaciones breves para trabajo visual, y hacé que el agente inspeccione directamente sus salidas renderizadas antes de terminar.",
+        "<strong>Traspasos de sesión:</strong> evitá la compactación a mitad de tarea escribiendo un breve archivo de traspaso entre fases o bifurcando la sesión cuando se desprende un segundo frente de trabajo."
+      ]
+    },
+    {
+      "type": "paragraph",
+      "html": "Eliminá las instrucciones contradictorias y las reglas duplicadas de herramientas para que Gemini 4 Neon gaste sus <em>tokens</em> de pensamiento en la tarea real."
+    },
+    {
+      "type": "paragraph",
+      "html": "¡Gracias por leer!"
+    }
+  ]
+}
