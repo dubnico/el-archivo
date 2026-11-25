@@ -1,0 +1,70 @@
+{
+  "objetivo": "Seleccionar 1 o 2 lecturas diarias de fondo sobre Inteligencia Artificial para traducirlas íntegramente al español y publicarlas en periodico.html.",
+  "cantidad_por_dia": "1 o 2 notas",
+  "temas_prioritarios": [
+    "Inteligencia Artificial (avances, modelos de frontera, nuevas herramientas y agentes)",
+    "Alineación y seguridad en IA (AI safety, alignment, control y riesgos)",
+    "Impacto de la IA en la productividad, el trabajo y las organizaciones",
+    "Filosofía, ética y cognición vinculadas a la IA",
+    "Geopolítica, regulación, semiconductores y economía política de la IA"
+  ],
+  "formatos_aceptados": [
+    "Ensayos largos",
+    "Entrevistas de fondo",
+    "Artículos de investigación accesibles o reportes técnicos divulgativos",
+    "Columnas de opinión y análisis",
+    "Newsletters técnicas o editoriales"
+  ],
+  "reglas_geograficas_y_fuentes": {
+    "incluir": "Exclusivamente autores y medios internacionales de economías centrales (EE. UU., Reino Unido, Unión Europea, Suiza, Canadá, Japón, Singapur, etc.).",
+    "excluir": "No incluir medios latinoamericanos ni traducciones secundarias de terceros; ir siempre a la fuente primaria internacional.",
+    "acceso": "Priorizar artículos de acceso abierto (sin paywall) que puedan extraerse completos con scripts/extract.mjs."
+  },
+  "personajes_curados": {
+    "investigacion_seguridad_y_alineacion": [
+      { "nombre": "Dario Amodei", "sitio": "darioamodei.com", "enfoque": "Futuro de la IA, seguridad, geopolítica y economía" },
+      { "nombre": "Boaz Barak", "sitio": "windowsontheory.org", "enfoque": "Empoderamiento humano, seguridad y fundamentos de IA" },
+      { "nombre": "Holden Karnofsky", "sitio": "cold-takes.com", "enfoque": "Riesgos, gobernanza y siglo más importante" },
+      { "nombre": "Daniel Kokotajlo", "sitio": "ai-2027.com / LessWrong", "enfoque": "Escenarios de futuro, alineación y seguridad" },
+      { "nombre": "Yoshua Bengio", "sitio": "yoshuabengio.org", "enfoque": "Seguridad científica, gobernanza y IA segura" },
+      { "nombre": "Zvi Mowshowitz", "sitio": "thezvi.substack.com", "enfoque": "Análisis exhaustivo de seguridad, modelos y política de IA" },
+      { "nombre": "Nathan Lambert", "sitio": "interconnects.ai", "enfoque": "Investigación abierta, RLHF, modelos y ecosistema" },
+      { "nombre": "Ajeya Cotra", "sitio": "Open Philanthropy / LessWrong", "enfoque": "Horizontes de cómputo y seguridad" },
+      { "nombre": "Paul Christiano", "sitio": "alignmentforum.org", "enfoque": "Alineación técnica y supervisión escalable" }
+    ],
+    "herramientas_ingenieria_y_productividad": [
+      { "nombre": "Andrej Karpathy", "sitio": "karpathy.bearblog.dev", "enfoque": "Modelos, ingeniería de software y futuro de la programación" },
+      { "nombre": "Simon Willison", "sitio": "simonwillison.net", "enfoque": "Nuevas herramientas, agentes y uso práctico de LLMs" },
+      { "nombre": "Ethan Mollick", "sitio": "oneusefulthing.org", "enfoque": "IA aplicada al trabajo, productividad y educación" },
+      { "nombre": "Dan Shipper", "sitio": "every.to", "enfoque": "Herramientas de IA, escritura y flujos de trabajo" },
+      { "nombre": "Benedict Evans", "sitio": "ben-evans.com", "enfoque": "Estrategia tecnológica y adopción de IA" },
+      { "nombre": "Ben Thompson", "sitio": "stratechery.com", "enfoque": "Negocios y plataforma en la era de la IA (artículos abiertos)" }
+    ],
+    "entrevistas_geopolitica_y_filosofia": [
+      { "nombre": "Dwarkesh Patel", "sitio": "dwarkesh.com", "enfoque": "Entrevistas largas con investigadores y CEOs de IA" },
+      { "nombre": "Jack Clark", "sitio": "importai.substack.com", "enfoque": "Import AI: papers, política pública y geopolítica" },
+      { "nombre": "Dean Ball", "sitio": "hyperdimensional.co", "enfoque": "Regulación, Estado y geopolítica de la IA" },
+      { "nombre": "Leopold Aschenbrenner", "sitio": "situational-awareness.ai", "enfoque": "Seguridad nacional, cómputo y escalado" },
+      { "nombre": "Gary Marcus", "sitio": "garymarcus.substack.com", "enfoque": "Crítica científica y filosofía de la IA" },
+      { "nombre": "Tyler Cowen", "sitio": "marginalrevolution.com", "enfoque": "Economía, cultura e impacto macro de la IA" },
+      { "nombre": "Shannon Vallor", "sitio": "University of Edinburgh / ensayos", "enfoque": "Filosofía y ética de la inteligencia artificial" },
+      { "nombre": "Ted Chiang", "sitio": "The New Yorker / ensayos", "enfoque": "Filosofía del lenguaje, creatividad y tecnología" }
+    ]
+  },
+  "publicaciones_abiertas_recomendadas": [
+    "Anthropic Research & Alignment Blog (anthropic.com/research)",
+    "Google DeepMind Blog (deepmind.google/discover/blog)",
+    "OpenAI Blog & Research (openai.com/news)",
+    "Transformer News (transformernews.ai)",
+    "Asterisk Magazine (asteriskmag.com)",
+    "Noema Magazine (noemamag.com)",
+    "Works in Progress (worksinprogress.co)",
+    "Aeon (aeon.co)",
+    "LessWrong / Alignment Forum (lesswrong.com)",
+    "RAND Corporation AI Research (rand.org)",
+    "CSET Georgetown (cset.georgetown.edu)",
+    "CSIS AI & Tech Policy (csis.org)",
+    "MIT Technology Review (artículos abiertos)",
+    "Substack de los autores listados arriba"
+  ]
+}

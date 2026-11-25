@@ -1,0 +1,17 @@
+{
+  "name": "traductor-de-articulos",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Archivo periodístico personal en un único HTML autónomo, integrado con Antigravity.",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "extract": "node scripts/extract.mjs",
+    "add": "node scripts/add-article.mjs"
+  },
+  "dependencies": {
+    "@mozilla/readability": "^0.6.0",
+    "linkedom": "^0.18.12",
+    "unpdf": "^1.4.0"
+  }
+}

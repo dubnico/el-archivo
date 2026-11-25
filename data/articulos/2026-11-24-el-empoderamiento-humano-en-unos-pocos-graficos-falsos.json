@@ -1,0 +1,81 @@
+{
+  "slug": "el-empoderamiento-humano-en-unos-pocos-graficos-falsos",
+  "title": "El empoderamiento humano en unos pocos gráficos falsos",
+  "kicker": "Tecnología · Inteligencia Artificial",
+  "section": "Tecnología",
+  "deck": "",
+  "masthead": "X",
+  "sourceName": "X",
+  "sourceUrl": "",
+  "author": "Boaz Barak (@boazbaraktcs)",
+  "date": "24 de noviembre de 2026",
+  "dateIso": "2026-11-24",
+  "addedAt": "2026-11-25T00:39:17.740Z",
+  "dateline": "",
+  "blocks": [
+    {
+      "type": "lead",
+      "html": "Una forma de ver la trayectoria de la IA se puede resumir en este «gráfico falso» (donde la región gris refleja, a grandes rasgos, dónde estamos parados hoy):"
+    },
+    {
+      "type": "paragraph",
+      "html": "La IA está mejorando su inteligencia mientras la inteligencia humana permanece fija. En algún momento la IA será tan poderosa que no habrá manera de que los humanos comprendan lo que está haciendo y, por ende, en ese punto la IA tomará necesariamente el control. La única pregunta es si la IA estará alineada (es decir, si será un «dictador benévolo») o desalineada (es decir, «si alguien la construye, morimos todos»). De hecho, algunas personas dentro de la comunidad de seguridad en IA ven la primera versión —una «entrega», un «traspaso» o «pasar la posta» a la IA— como un resultado positivo."
+    },
+    {
+      "type": "paragraph",
+      "html": "Disiento con esta postura. Creo que ceder el control a la IA no es en absoluto necesario y, más importante aún, debemos preservar la autonomía y la soberanía humana sin importar cuán alineadas logremos hacer a las IA."
+    },
+    {
+      "type": "paragraph",
+      "html": "Si bien la capacidad biológica del cerebro humano no cambió en los últimos cien mil años, bajo cualquier medida razonable la inteligencia de la humanidad en su conjunto ha ido creciendo. Sin ninguna mejora biológica, la humanidad inventó conceptos como la escritura, la democracia, los mercados y la tecnología, que nos permitieron ejercer un mayor control sobre nuestro entorno. Llevamos miles de años creando y superando <em>benchmarks</em>, incluidos los de «construir ciudades», «alimentar a miles de millones» y «llegar a la Luna»."
+    },
+    {
+      "type": "paragraph",
+      "html": "Dado esto, lo que realmente deberíamos comparar no es la inteligencia de la IA frente a un humano promedio (o incluso el más inteligente), sino la inteligencia de la IA frente a la humanidad en su conjunto, y esta última magnitud ha crecido a lo largo del tiempo."
+    },
+    {
+      "type": "paragraph",
+      "html": "Sin embargo, la inteligencia de la humanidad no viene creciendo ni cerca al ritmo de la IA, por lo que tal vez todo lo que hace este argumento es comprarnos algo de tiempo extra. Es decir, el gráfico se ve así (con el área sombreada correspondiendo todavía al presente):"
+    },
+    {
+      "type": "paragraph",
+      "html": "Pero existe una posibilidad más optimista. Tenemos una larga historia de habilitar a los humanos para supervisar proyectos de complejidad creciente. Alrededor del siglo XIX, la ciencia se volvió lo suficientemente compleja como para que ninguna persona pudiera saberlo todo (por ejemplo, a Thomas Young, fallecido en 1829, se lo suele llamar «el último hombre que lo sabía todo»). En el siglo XX, construimos artefactos con una complejidad que supera ampliamente todo lo hecho antes, incluidos portaaviones, colisionadores de partículas y proyectos de software a gran escala."
+    },
+    {
+      "type": "paragraph",
+      "html": "Podemos usar la propia IA para expandir nuestros mecanismos de comprensión y control sobre la IA. Es decir, asegurarnos de que los humanos sigan siendo quienes toman las decisiones clave, pero usar la IA para que el espacio de opciones resulte legible y controlable para ellos. Esto implicaría «curvar hacia arriba la línea de la humanidad» en el gráfico anterior. Sin embargo, sobre todo ante la perspectiva de que la IA se use para acelerar su propio progreso (lo que se conoce como «automejora recursiva»), creo que si seguimos en nuestro camino actual, las capacidades de la IA crecerán más allá de nuestra habilidad para comprenderla y controlarla. Si ese es el caso, entonces usar la IA para controlar y explicar la IA no alcanzará para evitar una toma de control o un traspaso. Más bien, tendríamos que «curvar hacia abajo la línea de la IA» para lograr un gráfico parecido al siguiente:"
+    },
+    {
+      "type": "paragraph",
+      "html": "Un punto clave: no necesitamos necesariamente poner un «techo» a la inteligencia absoluta de la IA, pero es posible que sí necesitemos limitar su ritmo de progreso para mantener el control humano. No tengo las respuestas sobre cómo se implementarían tales mecanismos, ni cómo determinar el «límite de velocidad» preciso para el crecimiento de la IA. Pero si queremos evitar una toma de control o un traspaso a la IA, tenemos que empezar a trabajar en estas preguntas. Sospecho que vamos a necesitar una combinación de regulaciones y medios técnicos para lograrlo."
+    },
+    {
+      "type": "heading",
+      "text": "Desalineación y mal uso"
+    },
+    {
+      "type": "paragraph",
+      "html": "Lo discutido arriba asumía implícitamente que las IA están alineadas y que no están intentando destruir el mundo de forma activa. Pero, siendo realistas, alguna fracción de la inteligencia total en el mundo estará desalineada o será mal utilizada. Así que el mejor escenario al que podríamos aspirar es algo como esto:"
+    },
+    {
+      "type": "paragraph",
+      "html": "Donde la inteligencia total (en función de las capacidades del modelo y el cómputo de inferencia) dirigida a objetivos alineados domine a la dirigida a objetivos desalineados. Gran parte del trabajo de seguridad técnica en IA puede pensarse como el esfuerzo por agrandar la brecha entre esas dos líneas."
+    },
+    {
+      "type": "paragraph",
+      "html": "¿Alcanzará con eso? La respuesta depende de si creés en la Hipótesis del Mundo Vulnerable (VWH, por sus siglas en inglés). Si creés en la VWH, entonces existe un nivel absoluto de inteligencia necesario para destruir el mundo, y cuando las IA desalineadas o mal utilizadas lo alcancen, será <em>game over</em>."
+    },
+    {
+      "type": "paragraph",
+      "html": "Yo no creo en la VWH. Pienso que el nivel tecnológico necesario para destruir efectivamente a la humanidad ha aumentado con el tiempo. Hoy somos más resilientes que en el pasado. No te podés imaginar hoy a un ejército matando posiblemente hasta un 10 % de la población mundial con caballos, arcos y espadas, como hicieron los mongoles en el siglo XIII. Alrededor de la mitad de la población europea murió por la peste negra, que hoy se trata fácilmente con antibióticos. Así, el «umbral de destrucción del mundo» sube con el tiempo, y si usamos la IA para la resiliencia, podríamos elevarlo más rápido y obtener un gráfico como este:"
+    },
+    {
+      "type": "paragraph",
+      "html": "Si combinamos todo lo anterior, obtenemos un gráfico parecido al siguiente:"
+    },
+    {
+      "type": "paragraph",
+      "html": "Requiere combinar el uso de la IA para mejorar la resiliencia y el control humano, la seguridad técnica en IA para reducir el poder de las IA desalineadas, y acuerdos que garanticen que la IA no crezca demasiado rápido como para impedirnos sostener estos invariantes. Creo que podemos navegar todos estos «gráficos falsos» y trazar un camino que desemboque tanto en la prosperidad como en la soberanía humana. Pero no podemos dar por sentado que esto vaya a ocurrir por defecto. Asegurar este camino exigirá una combinación de medios técnicos —incluidos avances en seguridad y alineación—, regulaciones y cooperación internacional, también a la hora de regular el ritmo de avance de la IA. ¡Tenemos mucho trabajo por delante!"
+    }
+  ]
+}

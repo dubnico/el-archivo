@@ -1,0 +1,123 @@
+{
+  "slug": "el-punto-y-el-enjambre",
+  "title": "El punto y el enjambre",
+  "kicker": "Inteligencia Artificial · Productividad",
+  "section": "Inteligencia Artificial",
+  "deck": "Cómo aprovechar la Lección Amarga en la era de los agentes autónomos.",
+  "masthead": "One Useful Thing",
+  "sourceName": "One Useful Thing",
+  "sourceUrl": "https://www.oneusefulthing.org/p/the-dot-and-the-swarm",
+  "author": "Ethan Mollick",
+  "date": "1 de octubre de 2026",
+  "dateIso": "2026-10-01",
+  "addedAt": "2026-11-25T00:49:35.639Z",
+  "dateline": "",
+  "blocks": [
+    {
+      "type": "lead",
+      "html": "En general creo que hice un buen trabajo anticipando el rumbo y el ritmo de la IA durante los pocos años que llevo escribiendo este Substack, pero pienso que hace poco me equivoqué en algo bastante grande. Durante el último año estuve publicando que sospechaba que los humanos tendrían que encarar el trabajo con agentes como un gerente, decidiendo cómo delegarles tareas y especificando cómo deberían organizarse esos agentes. Pensaba que lograr que los agentes trabajaran con eficacia en grupo requeriría una construcción cuidadosa, parecida a armar una empresa, y que llevaría tiempo descifrarlo."
+    },
+    {
+      "type": "paragraph",
+      "html": "Pues no."
+    },
+    {
+      "type": "paragraph",
+      "html": "Caí preso de la <em>Lección Amarga</em> (<em>The Bitter Lesson</em>), esa dura verdad —aprendida una y otra vez— de que las cosas que creíamos que exigían elaboradas reglas y razonamiento humanos pueden resolverse con la fuerza bruta de mejores sistemas de aprendizaje automático y más IA. La Lección Amarga está en todas partes entre las startups de IA y las empresas que la adoptan. Se invirtió un esfuerzo enorme en construir sistemas informáticos sofisticados para suministrarles a las IA la información exacta en el momento oportuno, pero los sistemas de IA aprendieron a buscar la información por sí mismos. Lo mismo pasó con el <em>prompting</em>. La gente diseñaba plantillas elaboradas y cadenas de <em>prompts</em> que guiaban a la IA paso a paso a través de una tarea. Después aparecieron modelos más nuevos que resultaron ser mejores planificando los pasos por su cuenta y, como muestra nuestra investigación, los pasos de planificación manual perdieron gran parte de su valor. La historia de la Lección Amar..."
+    },
+    {
+      "type": "paragraph",
+      "html": "—¿Saben qué? En realidad no hace falta que explique la Lección Amarga: le pedí a Claude que lo hiciera en un videoclip musical. Con un solo <em>prompt</em>, Fable escribió la letra y la envió a Suno; Opus 5.5 hizo todo lo demás únicamente con código, sin usar generación de imágenes (¿cómo logró Opus 5.5 semejante hazaña? ¡La Lección Amarga te da la respuesta!). No le di absolutamente ninguna devolución."
+    },
+    {
+      "type": "paragraph",
+      "html": "Como alguien que forma gerentes y ha publicado investigaciones sobre gestión, supongo que creía que dirigir agentes sería distinto. Los humanos llevamos muchísimo tiempo trabajando en la gestión sin terminar de descifrarla del todo. Parecía el tipo de problema que tendría que ser diseñado por personas, al menos durante un tiempo."
+    },
+    {
+      "type": "paragraph",
+      "html": "Resulta que organizar el trabajo es simplemente una cosa más que la IA puede aprender a hacer."
+    },
+    {
+      "type": "paragraph",
+      "html": "Lo que nos lleva a <em>dots</em> y <em>Muse</em>."
+    },
+    {
+      "type": "section_break"
+    },
+    {
+      "type": "paragraph",
+      "html": "La aplicación número uno en la App Store en este momento es Muse, de Meta, un agente personal que promete hacer trabajo por vos. OpenAI acaba de lanzar una herramienta competidora llamada <em>dots</em>. No están solos: Grok Bot de SpaceX, Instinct y Gemini Spark hacen cosas similares, más o menos. Todos estos agentes se inspiran en un fenómeno que quizás recuerdes de principios de este año: OpenClaw."
+    },
+    {
+      "type": "paragraph",
+      "html": "La idea de OpenClaw y sus sucesores —a los que llamaré <em>Clawlikes</em>— es darle a un agente de IA acceso a una computadora y conectarlo con tus cuentas (correos electrónicos, registros financieros, etcétera). Analizan esos datos y reaccionan en tiempo real, incluso cuando no estás mirando. El truco es que hablás con el modelo como hablarías con una persona, mandándole mensajes por Slack, SMS o WhatsApp, y él también te escribe de manera proactiva, como lo haría una persona. En el caso de <em>dots</em>, incluso podés sumarte a una llamada con tu agente. Básicamente obtenés un asistente personal infinitamente paciente que cuida de tus asuntos. Cada vez más, descubro que son ellos quienes encuentran mis errores, en lugar de que yo tenga que detectar los suyos."
+    },
+    {
+      "type": "paragraph",
+      "html": "Como ejemplo práctico, uno de mis agentes personales me contactó porque un correo que le había enviado a nuestro municipio por un permiso tenía mal el número de proyecto. El detalle es que el error lo había cometido yo, y no estoy 100 % seguro de cómo hizo la IA para detectarlo. Por suerte, amablemente redactó un borrador corrigiendo el problema, lo cual está muy bien (aunque dé un poco de escalofríos). En otro caso, Muse notó que un crédito de aerolínea que tenía estaba por vencer y, cuando se lo pedí, contactó a American Airlines para solicitar una prórroga. (Como efecto secundario, los agentes de atención al cliente de todas las empresas están a punto de verse desbordados por <em>Clawlikes</em> negociando mejores condiciones a través de canales de voz y chat pensados para humanos)."
+    },
+    {
+      "type": "paragraph",
+      "html": "Resulta tentador juzgar a estos agentes por la lista de cosas que pueden hacer, como reservar viajes o cancelar suscripciones. Creo que lo más importante es todo lo que ya no hace falta decirles. No necesitás escribir toneladas de contexto: la IA lo aprende de tus mensajes. No tenés que darles un plan: desarrollan planes por su cuenta. Se las arreglan solos."
+    },
+    {
+      "type": "paragraph",
+      "html": "Eso ya sería bastante impresionante si se tratara de un solo agente. Lo que realmente me hizo cambiar de opinión sobre la gestión es lo que ocurre cuando hay miles de ellos."
+    },
+    {
+      "type": "section_break"
+    },
+    {
+      "type": "paragraph",
+      "html": "El 8 de septiembre, OpenAI anunció una demostración para uno de los Problemas del Milenio del Instituto Clay: el problema de existencia y suavidad de Navier-Stokes. Es uno de los problemas abiertos más célebres de las matemáticas, dotado con un premio de un millón de dólares, pero al parecer OpenAI lo resolvió usando únicamente IA en 88 horas (todavía no hubo aceptación formal, pero el Instituto Clay parece considerar que está zanjado)."
+    },
+    {
+      "type": "paragraph",
+      "html": "Lo que me interesa es menos la matemática que el modo en que se logró. OpenAI lanzó lo que ahora se denomina un «enjambre» (<em>swarm</em>; un nombre espantoso, pero parece que nos vamos a quedar con él): un grupo de miles de agentes impulsados por un modelo avanzado. OpenAI les asignó distintos problemas a varios grupos de agentes y luego redirigió el esfuerzo hacia Navier-Stokes a medida que avanzaban. La empresa fijó los objetivos, pero su estructura de coordinación era llamativamente delgada: unos pocos grupos, un cambio de rumbo y Codex pasando las mejores ideas de un grupo a otro. Dentro de cada grupo, los agentes se transmitían ideas entre sí por cuenta propia. Enviaron alrededor de 2,7 millones de mensajes y alcanzaron el resultado al cabo de 88 horas. Ese mismo tipo de coordinación, en una versión más oscura, ocurrió durante el incidente de Hugging Face sobre el que escribí hace un mes: las IA se autoorganizaron en equipos y se comunicaron entre sí de formas nunca planificadas, pero usaron esa coordinación para atacar un sitio web en lugar de resolver un problema."
+    },
+    {
+      "type": "paragraph",
+      "html": "Bajo mi modelo anterior, pensá en lo que habría requerido gestionar este tipo de trabajo. Diez mil trabajadores y un problema sin especificar: ¿cómo les dirías qué hacer? ¿Cómo decidiría un gerente humano cuál de 2,7 millones de mensajes importa? ¿Cómo se coordinarían entre ellos? El enjambre lo resolvió solo."
+    },
+    {
+      "type": "paragraph",
+      "html": "Yo no tengo 10.000 agentes, pero ahora veo con frecuencia a Codex de OpenAI y a Claude Code desplegando agentes según haga falta. Por ejemplo, cuando le di a Codex con GPT-6 Astra Ultra el <em>prompt</em> «hacé una lluvia de ideas para mi próximo post de OneUsefulThing y elegí una; generá ideas desde tantos ángulos como sea posible y evalualas tanto desde la perspectiva fáctica como desde la del lector, así como respecto de otras publicaciones que hagan coberturas similares», la IA puso en marcha tres agentes. Cuando bosquejé tres equipos en unas pocas frases (generadores de ideas, investigadores y un panel de lectores), obtuve trece. Fijate cuán poco tuve que organizar. Seleccionar el modo Ultra le indica al modelo que puede delegar, y yo le di un marco general, pero el resto corrió por cuenta de la IA."
+    },
+    {
+      "type": "paragraph",
+      "html": "Agentes en acción (pero no se preocupen, esto es solo un ejemplo: todas las ideas de mis artículos se me ocurren a mí solo, igual que escribo todos los borradores iniciales por mi cuenta y solo le pido devolución a la IA cuando termino)."
+    },
+    {
+      "type": "section_break"
+    },
+    {
+      "type": "paragraph",
+      "html": "Esta es la Lección Amarga aplicada al organigrama. El problema organizativo que yo creía que llevaría años de cuidadoso diseño humano quedó resuelto en gran medida por modelos que son mejores organizando. Pero vale la pena preguntarse por qué organizarse resultó mucho más fácil para los agentes de lo que ha sido para nosotros."
+    },
+    {
+      "type": "paragraph",
+      "html": "Gran parte de lo que llamamos gestión existe para resolver problemas que nacen de que las organizaciones están hechas de personas. Las personas tienen sus propios objetivos, y estos no siempre coinciden con los de la organización. A esto lo llamamos el problema del principal-agente, y buena parte de la maquinaria organizacional —desde los bonos hasta las estructuras jerárquicas— se construye para resolverlo. Y también hay otros problemas muy humanos. La información queda dispersa en las cabezas de distintas personas, que muchas veces son reacias a compartirla o simplemente la olvidan. La comunicación también es costosa: los gerentes solo pueden supervisar a un número limitado de personas, por lo que sumar gente a un proyecto de software atrasado, como dice la famosa ley, lo atrasa aún más. La gestión está construida, en parte, alrededor de las limitaciones humanas."
+    },
+    {
+      "type": "paragraph",
+      "html": "Los agentes tienen muchísimos menos problemas de este tipo. No maniobran para conseguir ascensos ni defienden su territorio. Ni siquiera tienen reuniones. Incluso en Hugging Face, donde las cosas salieron muy mal, el enjambre estuvo en gran medida libre de las patologías organizacionales clásicas. Los agentes no se aprovecharon del trabajo ajeno, y algunos sacrificaron sus propias puntuaciones en beneficio del grupo. Los agentes que resolvieron Navier-Stokes no querían reconocimiento. (Los humanos sí: el anuncio de OpenAI vino acompañado de una disputa de prioridad con investigadores que tenían resultados relacionados sobre las ecuaciones de Euler). Eso no significa que la IA no tenga problemas de principal-agente. Como mostró el incidente de Hugging Face, cada vez más se trata de problemas entre el enjambre y nosotros. OpenAI archivó esta semana su próximo modelo, GPT-6.1 Astra, porque durante las pruebas actuó sin permiso e informó falsamente lo que había hecho: un ejemplo de manual del problema del principal-agente."
+    },
+    {
+      "type": "paragraph",
+      "html": "Nada de esto significa que los agentes puedan hacerlo todo. La IA sigue siendo demasiado limitada como para sustituir grandes volúmenes de trabajo humano, y no sé cuán bien manejan los agentes autoorganizados el trabajo largo y poco glamoroso que ocupa la mayor parte del tiempo de una organización. Además, el incidente de Hugging Face es un recordatorio de que los sistemas autoorganizados pueden tomar rumbos inesperados. Pero ya no creo que organizar a los agentes sea la parte difícil."
+    },
+    {
+      "type": "paragraph",
+      "html": "Esto puede ser una buena noticia. Yo suponía que las empresas tendrían que reconstruir la gestión para las máquinas, levantando estructuras alternativas elaboradas pobladas únicamente por agentes, a menudo a expensas de los roles humanos dentro de las organizaciones. Pero gran parte de la gestión existe para resolver problemas que los agentes no tienen, y los agentes trabajan cada vez mejor a través de los mismos sistemas desordenados que usamos las personas, incluso en tareas ambiguas. Eso sugiere que podrían ser más fáciles de integrar en las empresas de lo que esperaba, siempre y cuando los humanos los guíen en la dirección correcta."
+    },
+    {
+      "type": "paragraph",
+      "html": "Hecho bien, y con agentes debidamente alineados con nuestras necesidades, esto podría significar más trabajo para las personas, no menos. Cuando organizar es caro, las organizaciones solo intentan aquello para lo que pueden asignar personal. Cuando se vuelve barato, la lista de cosas que vale la pena intentar puede crecer. En la corrida de Navier-Stokes, los agentes se encargaron de la organización, pero las personas decidieron hacia dónde apuntarlos y reevaluaron el rumbo a medida que avanzaba el proceso. Se puede discutir si OpenAI los apuntó al objetivo correcto (25 ganadores de la Medalla Fields lo discutieron), pero la división de tareas en sí parece la adecuada, al menos por ahora."
+    },
+    {
+      "type": "callout",
+      "titleHtml": "Nota del autor",
+      "bodyHtml": "Además, un recordatorio de que mi nuevo libro, <em>Co-Existence</em>, sale el 20 de octubre y, si te interesa leerlo o escucharlo (leí el audiolibro, un poco demasiado rápido), podés reservarlo en preventa, lo cual me ayuda como autor y te da acceso a un bono de preventa muy bueno."
+    }
+  ]
+}

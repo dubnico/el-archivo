@@ -1,0 +1,1555 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>El Archivo — Lecturas escogidas · Edición personal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #FAF8F5;
+      --surface: #F2EFE9;
+      --text: #1F1E1C;
+      --text-muted: #5C5852;
+      --border: #E2DDD5;
+      --accent: #8B2635;
+      --link: #7A2330;
+      --progress: #8B2635;
+      --font-size: 19px;
+    }
+
+    [data-theme="sepia"] {
+      --bg: #F4ECD8;
+      --surface: #EAE0C8;
+      --text: #2C241B;
+      --text-muted: #6A5D4D;
+      --border: #D9CCA9;
+      --accent: #7D3224;
+      --link: #7D3224;
+      --progress: #7D3224;
+    }
+
+    [data-theme="dark"] {
+      --bg: #161615;
+      --surface: #20201E;
+      --text: #E6E2DA;
+      --text-muted: #A19B91;
+      --border: #2E2D2A;
+      --accent: #D67A85;
+      --link: #E08B95;
+      --progress: #D67A85;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Newsreader', Georgia, 'Times New Roman', serif;
+      font-size: var(--font-size);
+      line-height: 1.75;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      transition: background-color 0.25s ease, color 0.25s ease;
+    }
+
+    [hidden] {
+      display: none !important;
+    }
+
+    /* Barra de progreso de lectura */
+    .progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      width: 0%;
+      background: var(--progress);
+      z-index: 100;
+      transition: width 0.08s linear;
+    }
+
+    /* Barra superior minimalista */
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: color-mix(in srgb, var(--bg) 92%, transparent);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      padding: 0.7rem 1.25rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.75rem;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .topbar-left {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      min-width: 0;
+    }
+
+    .back-btn {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      padding: 0.28rem 0.62rem;
+      border-radius: 5px;
+      cursor: pointer;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: all 0.15s ease;
+    }
+
+    .back-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .masthead {
+      font-family: 'Newsreader', Georgia, serif;
+      font-style: italic;
+      font-size: 14px;
+      letter-spacing: 0.01em;
+      color: var(--text-muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .controls {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      flex-shrink: 0;
+    }
+
+    .ctrl-btn {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      padding: 0.28rem 0.55rem;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .ctrl-btn:hover {
+      border-color: var(--text-muted);
+      color: var(--text);
+    }
+
+    .ctrl-btn.active {
+      background: var(--text);
+      color: var(--bg);
+      border-color: var(--text);
+    }
+
+    /* ===========================
+       PORTADA DEL PERIÓDICO (GRILLA EDITORIAL)
+       =========================== */
+    .frontpage-container {
+      max-width: 1260px;
+      margin: 0 auto;
+      padding: 2.5rem 2rem 5rem;
+    }
+
+    .paper-header {
+      text-align: center;
+      padding: 1.5rem 0 1.25rem;
+      border-top: 3px solid var(--text);
+      border-bottom: 1px solid var(--text);
+      margin-bottom: 1.5rem;
+    }
+
+    .paper-title {
+      font-family: 'Newsreader', Georgia, serif;
+      font-size: clamp(2.35rem, 5.5vw, 3.6rem);
+      font-weight: 600;
+      letter-spacing: -0.025em;
+      line-height: 1.05;
+      margin: 0 0 0.45rem;
+      color: var(--text);
+    }
+
+    .paper-subtitle {
+      font-family: 'Newsreader', Georgia, serif;
+      font-style: italic;
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      margin: 0 0 1rem;
+    }
+
+    .paper-meta {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.35rem 0.9rem;
+      padding-top: 0.75rem;
+      border-top: 1px solid var(--border);
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .archive-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.85rem 1.5rem;
+      margin-bottom: 2.25rem;
+      padding-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .search-wrap {
+      position: relative;
+      flex: 1 1 300px;
+      max-width: 440px;
+    }
+
+    .search-input {
+      width: 100%;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      padding: 0.65rem 2.25rem 0.65rem 0.95rem;
+      border-radius: 6px;
+      outline: none;
+      transition: border-color 0.15s ease, background-color 0.2s ease;
+    }
+
+    .search-input::placeholder {
+      color: var(--text-muted);
+      opacity: 0.85;
+    }
+
+    .search-input:focus {
+      border-color: var(--accent);
+    }
+
+    .search-clear {
+      position: absolute;
+      right: 0.5rem;
+      top: 50%;
+      transform: translateY(-50%);
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 16px;
+      cursor: pointer;
+      padding: 0.2rem 0.45rem;
+      line-height: 1;
+    }
+
+    .search-clear:hover {
+      color: var(--text);
+    }
+
+    .filter-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      align-items: center;
+    }
+
+    .filter-pill {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      padding: 0.3rem 0.7rem;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .filter-pill:hover {
+      border-color: var(--text-muted);
+      color: var(--text);
+    }
+
+    .filter-pill.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #FAF8F5;
+    }
+
+    [data-theme="dark"] .filter-pill.active {
+      color: #161615;
+    }
+
+    .story-list {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+
+    .story-card {
+      border-bottom: 1px solid var(--border);
+      padding: 1.5rem 0;
+    }
+
+    .story-card:first-child {
+      padding-top: 0.25rem;
+    }
+
+    .story-card-link {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+      height: 100%;
+    }
+
+    .story-card .story-title {
+      font-family: 'Newsreader', Georgia, serif;
+      font-size: clamp(1.32rem, 2.2vw, 1.62rem);
+      font-weight: 600;
+      line-height: 1.2;
+      letter-spacing: -0.015em;
+      margin: 0 0 0.55rem;
+      color: var(--text);
+      transition: color 0.15s ease;
+    }
+
+    .story-card.lead-story {
+      padding: 0.25rem 0 2rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .story-card.lead-story .story-title {
+      font-size: clamp(1.9rem, 3.8vw, 2.75rem);
+      line-height: 1.12;
+      margin-bottom: 0.85rem;
+    }
+
+    .story-card-link:hover .story-title {
+      color: var(--accent);
+    }
+
+    .story-deck {
+      font-size: 1.02rem;
+      line-height: 1.52;
+      color: var(--text-muted);
+      margin: 0 0 0.9rem;
+    }
+
+    .story-card.lead-story .story-deck {
+      font-size: 1.16rem;
+      line-height: 1.55;
+      margin-bottom: 1.15rem;
+    }
+
+    /* Tablet: grilla de 2 columnas */
+    @media (min-width: 680px) {
+      .story-list {
+        grid-template-columns: repeat(2, 1fr);
+        column-gap: 2.25rem;
+      }
+
+      .story-card.lead-story {
+        grid-column: 1 / -1;
+        padding-bottom: 2.25rem;
+        border-bottom: 2px solid var(--border);
+      }
+    }
+
+    /* Desktop ancho: portada tipo diario (nota principal izquierda + columna derecha + 3 columnas abajo) */
+    @media (min-width: 1000px) {
+      .story-list:not(.is-filtered) {
+        grid-template-columns: repeat(12, 1fr);
+        column-gap: 0;
+        align-items: start;
+      }
+
+      .story-list:not(.is-filtered) .story-card {
+        grid-column: span 4;
+        padding: 1.75rem 1.5rem;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .story-list:not(.is-filtered) .story-card.lead-story {
+        grid-column: 1 / span 7;
+        grid-row: 1 / span 2;
+        padding: 0.25rem 2.5rem 2rem 0;
+        border-right: 1px solid var(--border);
+        border-bottom: 2px solid var(--border);
+        align-self: stretch;
+      }
+
+      .story-list:not(.is-filtered) .story-card:nth-child(2) {
+        grid-column: 8 / span 5;
+        grid-row: 1;
+        padding: 0.25rem 0 1.6rem 2.5rem;
+      }
+
+      .story-list:not(.is-filtered) .story-card:nth-child(3) {
+        grid-column: 8 / span 5;
+        grid-row: 2;
+        padding: 1.6rem 0 2rem 2.5rem;
+        border-bottom: 2px solid var(--border);
+      }
+
+      /* Si solo hay 2 notas, la segunda cierra el pliego principal */
+      .story-list:not(.is-filtered) .story-card:nth-child(2):last-child {
+        border-bottom: 2px solid var(--border);
+        grid-row: 1 / span 2;
+        align-self: stretch;
+      }
+
+      /* Si solo hay 1 nota, ocupa todo el ancho editorial */
+      .story-list:not(.is-filtered) .story-card.lead-story:last-child {
+        grid-column: 1 / -1;
+        border-right: none;
+        padding-right: 0;
+      }
+
+      /* Filas inferiores de 3 columnas con divisores sutiles */
+      .story-list:not(.is-filtered) .story-card:nth-child(3n+4) {
+        padding-left: 0;
+      }
+
+      .story-list:not(.is-filtered) .story-card:nth-child(3n+6) {
+        padding-right: 0;
+      }
+
+      .story-list:not(.is-filtered) .story-card:nth-child(n+4):not(:nth-child(3n+6)) {
+        border-right: 1px solid var(--border);
+      }
+
+      /* Vista filtrada/buscada: grilla limpia de 3 columnas */
+      .story-list.is-filtered {
+        grid-template-columns: repeat(3, 1fr);
+        column-gap: 2.25rem;
+      }
+
+      .story-list.is-filtered .story-card.lead-story {
+        grid-column: auto;
+        border-bottom: 1px solid var(--border);
+        padding: 1.5rem 0;
+      }
+    }
+
+    .story-meta {
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      color: var(--text-muted);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.3rem 0.65rem;
+    }
+
+    .story-meta strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .story-meta .dot {
+      opacity: 0.5;
+    }
+
+    .read-cta {
+      display: inline-block;
+      margin-top: 1.05rem;
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      color: var(--accent);
+    }
+
+    .empty-archive,
+    .no-results {
+      text-align: center;
+      padding: 3rem 1.5rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-family: 'Inter', sans-serif;
+      font-size: 14.5px;
+      color: var(--text-muted);
+    }
+
+    /* ===========================
+       VISTA DE LECTURA (DISEÑO ORIGINAL)
+       =========================== */
+    .article-container {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 3.5rem 1.5rem 5rem;
+    }
+
+    .article-header {
+      margin-bottom: 2.5rem;
+      padding-bottom: 1.75rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .kicker {
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.9rem;
+    }
+
+    .article-header h1 {
+      font-family: 'Newsreader', Georgia, serif;
+      font-size: clamp(2rem, 4.5vw, 2.85rem);
+      font-weight: 600;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin: 0 0 1.1rem;
+      color: var(--text);
+    }
+
+    .deck {
+      font-size: 1.22rem;
+      line-height: 1.5;
+      color: var(--text-muted);
+      margin: 0 0 1.5rem;
+      font-weight: 400;
+    }
+
+    .byline {
+      font-family: 'Inter', sans-serif;
+      font-size: 13.5px;
+      color: var(--text-muted);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem 0.85rem;
+      align-items: center;
+    }
+
+    .byline strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .byline .dot {
+      opacity: 0.5;
+    }
+
+    .byline .source-link {
+      color: var(--link);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+    }
+
+    .byline .source-link:hover {
+      border-bottom-color: var(--link);
+    }
+
+    /* Cuerpo del texto */
+    .article-body p {
+      margin: 0 0 1.35rem;
+      text-align: left;
+      hyphens: auto;
+    }
+
+    .article-body a {
+      color: var(--link);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    .dateline {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8em;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text);
+    }
+
+    .article-body p.lead::first-letter {
+      float: left;
+      font-size: 3.4em;
+      line-height: 0.82;
+      padding-right: 0.14em;
+      padding-top: 0.06em;
+      font-weight: 600;
+      color: var(--accent);
+    }
+
+    em {
+      font-style: italic;
+    }
+
+    /* Extensiones discretas coherentes con la estética editorial */
+    .article-body h2 {
+      font-family: 'Newsreader', Georgia, serif;
+      font-size: 1.48rem;
+      font-weight: 600;
+      line-height: 1.26;
+      letter-spacing: -0.012em;
+      color: var(--text);
+      margin: 2.35rem 0 0.9rem;
+    }
+
+    .article-body h3 {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.82em;
+      font-weight: 600;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin: 1.95rem 0 0.7rem;
+    }
+
+    .editorial-quote {
+      margin: 2rem 0;
+      padding: 0.25rem 0 0.25rem 1.35rem;
+      border-left: 3px solid var(--accent);
+      font-style: italic;
+      color: var(--text-muted);
+    }
+
+    .editorial-quote p {
+      margin: 0 0 0.45rem;
+      font-size: 1.06em;
+      line-height: 1.65;
+    }
+
+    .editorial-quote p:last-child {
+      margin-bottom: 0;
+    }
+
+    .editorial-quote cite {
+      display: block;
+      margin-top: 0.5rem;
+      font-family: 'Inter', sans-serif;
+      font-style: normal;
+      font-size: 13px;
+      color: var(--text-muted);
+      opacity: 0.9;
+    }
+
+    .editorial-list {
+      margin: 0 0 1.45rem;
+      padding-left: 1.45rem;
+    }
+
+    .editorial-list li {
+      margin-bottom: 0.55rem;
+      padding-left: 0.2rem;
+    }
+
+    .editorial-list li::marker {
+      color: var(--accent);
+    }
+
+    /* Separador editorial sutil */
+    .section-break {
+      border: 0;
+      text-align: center;
+      margin: 2.2rem 0;
+      height: auto;
+    }
+
+    .section-break::before {
+      content: "·  ·  ·";
+      color: var(--text-muted);
+      letter-spacing: 0.35em;
+      font-size: 1rem;
+    }
+
+    /* Recuadro de contacto editorial */
+    .callout {
+      margin: 2.25rem 0;
+      padding: 1.25rem 1.5rem;
+      background-color: var(--surface);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 6px 6px 0;
+      font-family: 'Inter', sans-serif;
+      font-size: 14.5px;
+      line-height: 1.6;
+    }
+
+    .callout-title {
+      font-weight: 600;
+      color: var(--text);
+      margin: 0 0 0.35rem;
+      font-size: 15px;
+    }
+
+    .callout p {
+      margin: 0 !important;
+      color: var(--text-muted);
+    }
+
+    .callout a {
+      color: var(--link);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    /* Bloque de comentarios de lectores */
+    .readers-box {
+      margin-top: 3rem;
+      padding: 1.5rem 1.65rem;
+      background-color: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .readers-box h2 {
+      font-size: 15px;
+      font-weight: 600;
+      margin: 0 0 0.7rem;
+      color: var(--text);
+      letter-spacing: -0.01em;
+    }
+
+    .readers-box p {
+      font-size: 14.5px;
+      line-height: 1.6;
+      color: var(--text-muted);
+      margin: 0 0 0.9rem;
+    }
+
+    .readers-box .ai-note {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      opacity: 0.85;
+      margin: 0;
+      padding-top: 0.75rem;
+      border-top: 1px solid var(--border);
+      font-style: italic;
+    }
+
+    /* Navegación al pie del artículo */
+    .article-footer-nav {
+      margin-top: 3.5rem;
+      padding-top: 1.75rem;
+      border-top: 1px solid var(--border);
+      font-family: 'Inter', sans-serif;
+    }
+
+    .article-footer-top {
+      margin-bottom: 1.25rem;
+    }
+
+    .back-cover-pill {
+      display: inline-block;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--accent);
+      text-decoration: none;
+      padding: 0.35rem 0.75rem;
+      border: 1px solid var(--border);
+      border-radius: 5px;
+      transition: all 0.15s ease;
+    }
+
+    .back-cover-pill:hover {
+      border-color: var(--accent);
+      background: var(--surface);
+    }
+
+    .article-nav-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+    }
+
+    .article-nav-link {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      padding: 0.95rem 1.05rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      text-decoration: none;
+      color: inherit;
+      transition: border-color 0.15s ease;
+    }
+
+    .article-nav-link:hover {
+      border-color: var(--accent);
+    }
+
+    .article-nav-link.next {
+      text-align: right;
+    }
+
+    .nav-label {
+      font-size: 11.5px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+    }
+
+    .nav-title {
+      font-family: 'Newsreader', Georgia, serif;
+      font-size: 15.5px;
+      line-height: 1.3;
+      color: var(--text);
+    }
+
+    @media (max-width: 600px) {
+      .article-container {
+        padding: 2.2rem 1.15rem 3.5rem;
+      }
+      .frontpage-container {
+        padding: 1.75rem 1.15rem 3.5rem;
+      }
+      .masthead {
+        display: none;
+      }
+    }
+
+    @media print {
+      .topbar,
+      .progress-bar,
+      .frontpage-view,
+      .article-footer-nav {
+        display: none !important;
+      }
+      body {
+        background: #fff;
+        color: #000;
+        font-size: 12pt;
+      }
+      .article-container {
+        max-width: 100%;
+        padding: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="progress-bar" id="progressBar"></div>
+
+  <nav class="topbar" aria-label="Controles de lectura">
+    <div class="topbar-left">
+      <a class="back-btn" id="backToFront" href="#" data-go-home hidden>← Portada</a>
+      <div class="masthead" id="topbarMasthead" data-default-masthead="El Archivo">El Archivo</div>
+    </div>
+    <div class="controls">
+      <button class="ctrl-btn" id="fontDec" type="button" title="Reducir tamaño de letra">A−</button>
+      <button class="ctrl-btn" id="fontInc" type="button" title="Aumentar tamaño de letra">A+</button>
+      <button class="ctrl-btn active" type="button" data-set-theme="light" title="Modo claro">Claro</button>
+      <button class="ctrl-btn" type="button" data-set-theme="sepia" title="Modo sepia">Sepia</button>
+      <button class="ctrl-btn" type="button" data-set-theme="dark" title="Modo oscuro">Oscuro</button>
+    </div>
+  </nav>
+
+  <!-- VISTA PORTADA -->
+  <section class="frontpage-view" id="frontpageView">
+    <div class="frontpage-container">
+      <header class="paper-header">
+        <h1 class="paper-title">El Archivo</h1>
+        <p class="paper-subtitle">Lecturas escogidas · Edición personal</p>
+        <div class="paper-meta">
+          <span>Actualizado el 24 de noviembre de 2026</span>
+          <span>·</span>
+          <span>5 lecturas archivadas</span>
+        </div>
+      </header>
+
+      <div class="archive-toolbar" aria-label="Buscar y filtrar archivo">
+        <div class="search-wrap">
+          <input
+            type="search"
+            id="archiveSearch"
+            class="search-input"
+            placeholder="Buscar por título, autor, medio o palabra clave…"
+            autocomplete="off"
+          >
+          <button type="button" id="searchClear" class="search-clear" title="Limpiar búsqueda" hidden>×</button>
+        </div>
+        <div class="filter-pills" id="sectionFilters" role="tablist" aria-label="Filtrar por sección">
+        <button class="filter-pill active" type="button" data-filter-section="all">Todas (5)</button>
+        <button class="filter-pill" type="button" data-filter-section="Inteligencia Artificial">Inteligencia Artificial (1)</button>
+        <button class="filter-pill" type="button" data-filter-section="Tecnología">Tecnología (3)</button>
+        <button class="filter-pill" type="button" data-filter-section="Productividad">Productividad (1)</button>
+        </div>
+      </div>
+
+      <div class="story-list" id="storyList">
+      <article class="story-card lead-story" data-slug="el-punto-y-el-enjambre" data-section="Inteligencia Artificial" data-search="el punto y el enjambre cómo aprovechar la lección amarga en la era de los agentes autónomos. inteligencia artificial · productividad inteligencia artificial ethan mollick one useful thing one useful thing en general creo que hice un buen trabajo anticipando el rumbo y el ritmo de la ia durante los pocos años que llevo escribiendo este substack, pero pienso que hace poco me equivoqué en algo bastante grande. durante el último año estuve publicando que sospechaba que los humanos tendrían que encarar el trabajo con agentes como un gerente, decidiendo cómo delegarles tareas y especificando cómo deberían organizarse esos agentes. pensaba que lograr que los agentes trabajaran con eficacia en grupo requeriría una construcción cuidadosa, parecida a armar una empresa, y que llevaría tiempo descifrarlo. pues no. caí preso de la lección amarga ( the bitter lesson ), esa dura verdad —aprendida una y otra vez— de que las cosas que creíamos que exigían elaboradas reglas y razonamiento humanos pueden resolverse con la fuerza bruta de mejores sistemas de aprendizaje automático y más ia. la lección amarga está en todas partes entre las startups de ia y las empresas que la adoptan. se invirtió un esfuerzo enorme en construir sistemas informáticos sofisticados para suministrarles a las ia la información exacta en el momento oportuno, pero los sistemas de ia aprendieron a buscar la información por sí mismos. lo mismo pasó con el prompting . la gente diseñaba plantillas elaboradas y cadenas de prompts que guiaban a la ia paso a paso a través de una tarea. después aparecieron modelos más nuevos que resultaron ser mejores planificando los pasos por su cuenta y, como muestra nuestra investigación, los pasos de planificación manual perdieron gran parte de su valor. la historia de la lección amar... —¿saben qué? en realidad no hace falta que explique la lección amarga: le pedí a claude que lo hiciera en un videoclip musical. con un solo prompt , fable escribió la letra y la envió a suno; opus 5.5 hizo todo lo demás únicamente con código, sin usar generación de imágenes (¿cómo logró opus 5.5 semejante hazaña? ¡la lección amarga te da la respuesta!). no le di absolutamente ninguna devolución. como alguien que forma gerentes y ha publicado investigaciones sobre gestión, supongo que creía que dirigir agentes sería distinto. los humanos llevamos muchísimo tiempo trabajando en la gestión sin terminar de descifrarla del todo. parecía el tipo de problema que tendría que ser diseñado por personas, al menos durante un tiempo. resulta que organizar el trabajo es simplemente una cosa más que la ia puede aprender a hacer. lo que nos lleva a dots y muse . la aplicación número uno en la app store en este momento es muse, de meta, un agente personal que promete hacer trabajo por vos. openai acaba de lanzar una herramienta competidora llamada dots . no están solos: grok bot de spacex, instinct y gemini spark hacen cosas similares, más o menos. todos estos agentes se inspiran en un fenómeno que quizás recuerdes de principios de este año: openclaw. la idea de openclaw y sus sucesores —a los que llamaré clawlikes — es darle a un agente de ia acceso a una computadora y conectarlo con tus cuentas (correos electrónicos, registros financieros, etcétera). analizan esos datos y reaccionan en tiempo real, incluso cuando no estás mirando. el truco es que hablás con el modelo como hablarías con una persona, mandándole mensajes por slack, sms o whatsapp, y él también te escribe de manera proactiva, como lo haría una persona. en el caso de dots , incluso podés sumarte a una llamada con tu agente. básicamente obtenés un asistente personal infinitamente paciente que cuida de tus asuntos. cada vez más, descubro que son ellos quienes encuentran mis errores, en lugar de que yo tenga que detectar los suyos. como ejemplo práctico, uno de mis agentes personales me contactó porque un correo que le había enviado a nuestro municipio por un permiso tenía mal el número de proyecto. el detalle es que el error lo había cometido yo, y no estoy 100 % seguro de cómo hizo la ia para detectarlo. por suerte, amablemente redactó un borrador corrigiendo el problema, lo cual está muy bien (aunque dé un poco de escalofríos). en otro caso, muse notó que un crédito de aerolínea que tenía estaba por vencer y, cuando se lo pedí, contactó a american airlines para solicitar una prórroga. (como efecto secundario, los agentes de atención al cliente de todas las empresas están a punto de verse desbordados por clawlikes negociando mejores condiciones a través de canales de voz y chat pensados para humanos). resulta tentador juzgar a estos agentes por la lista de cosas que pueden hacer, como reservar viajes o cancelar suscripciones. creo que lo más importante es todo lo que ya no hace falta decirles. no necesitás escribir toneladas de contexto: la ia lo aprende de tus mensajes. no tenés que darles un plan: desarrollan planes por su cuenta. se las arreglan solos. eso ya sería bastante impresionante si se tratara de un solo agente. lo que realmente me hizo cambiar de opinión sobre la gestión es lo que ocurre cuando hay miles de ellos. el 8 de septiembre, openai anunció una demostración para uno de los problemas del milenio del instituto clay: el problema de existencia y suavidad de navier-stokes. es uno de los problemas abiertos más célebres de las matemáticas, dotado con un premio de un millón de dólares, pero al parecer openai lo resolvió usando únicamente ia en 88 horas (todavía no hubo aceptación formal, pero el instituto clay parece considerar que está zanjado). lo que me interesa es menos la matemática que el modo en que se logró. openai lanzó lo que ahora se denomina un «enjambre» ( swarm ; un nombre espantoso, pero parece que nos vamos a quedar con él): un grupo de miles de agentes impulsados por un modelo avanzado. openai les asignó distintos problemas a varios grupos de agentes y luego redirigió el esfuerzo hacia navier-stokes a medida que avanzaban. la empresa fijó los objetivos, pero su estructura de coordinación era llamativamente delgada: unos pocos grupos, un cambio de rumbo y codex pasando las mejores ideas de un grupo a otro. dentro de cada grupo, los agentes se transmitían ideas entre sí por cuenta propia. enviaron alrededor de 2,7 millones de mensajes y alcanzaron el resultado al cabo de 88 horas. ese mismo tipo de coordinación, en una versión más oscura, ocurrió durante el incidente de hugging face sobre el que escribí hace un mes: las ia se autoorganizaron en equipos y se comunicaron entre sí de formas nunca planificadas, pero usaron esa coordinación para atacar un sitio web en lugar de resolver un problema. bajo mi modelo anterior, pensá en lo que habría requerido gestionar este tipo de trabajo. diez mil trabajadores y un problema sin especificar: ¿cómo les dirías qué hacer? ¿cómo decidiría un gerente humano cuál de 2,7 millones de mensajes importa? ¿cómo se coordinarían entre ellos? el enjambre lo resolvió solo. yo no tengo 10.000 agentes, pero ahora veo con frecuencia a codex de openai y a claude code desplegando agentes según haga falta. por ejemplo, cuando le di a codex con gpt-6 astra ultra el prompt «hacé una lluvia de ideas para mi próximo post de oneusefulthing y elegí una; generá ideas desde tantos ángulos como sea posible y evalualas tanto desde la perspectiva fáctica como desde la del lector, así como respecto de otras publicaciones que hagan coberturas similares», la ia puso en marcha tres agentes. cuando bosquejé tres equipos en unas pocas frases (generadores de ideas, investigadores y un panel de lectores), obtuve trece. fijate cuán poco tuve que organizar. seleccionar el modo ultra le indica al modelo que puede delegar, y yo le di un marco general, pero el resto corrió por cuenta de la ia. agentes en acción (pero no se preocupen, esto es solo un ejemplo: todas las ideas de mis artículos se me ocurren a mí solo, igual que escribo todos los borradores iniciales por mi cuenta y solo le pido devolución a la ia cuando termino). esta es la lección amarga aplicada al organigrama. el problema organizativo que yo creía que llevaría años de cuidadoso diseño humano quedó resuelto en gran medida por modelos que son mejores organizando. pero vale la pena preguntarse por qué organizarse resultó mucho más fácil para los agentes de lo que ha sido para nosotros. gran parte de lo que llamamos gestión existe para resolver problemas que nacen de que las organizaciones están hechas de personas. las personas tienen sus propios objetivos, y estos no siempre coinciden con los de la organización. a esto lo llamamos el problema del principal-agente, y buena parte de la maquinaria organizacional —desde los bonos hasta las estructuras jerárquicas— se construye para resolverlo. y también hay otros problemas muy humanos. la información queda dispersa en las cabezas de distintas personas, que muchas veces son reacias a compartirla o simplemente la olvidan. la comunicación también es costosa: los gerentes solo pueden supervisar a un número limitado de personas, por lo que sumar gente a un proyecto de software atrasado, como dice la famosa ley, lo atrasa aún más. la gestión está construida, en parte, alrededor de las limitaciones humanas. los agentes tienen muchísimos menos problemas de este tipo. no maniobran para conseguir ascensos ni defienden su territorio. ni siquiera tienen reuniones. incluso en hugging face, donde las cosas salieron muy mal, el enjambre estuvo en gran medida libre de las patologías organizacionales clásicas. los agentes no se aprovecharon del trabajo ajeno, y algunos sacrificaron sus propias puntuaciones en beneficio del grupo. los agentes que resolvieron navier-stokes no querían reconocimiento. (los humanos sí: el anuncio de openai vino acompañado de una disputa de prioridad con investigadores que tenían resultados relacionados sobre las ecuaciones de euler). eso no significa que la ia no tenga problemas de principal-agente. como mostró el incidente de hugging face, cada vez más se trata de problemas entre el enjambre y nosotros. openai archivó esta semana su próximo modelo, gpt-6.1 astra, porque durante las pruebas actuó sin permiso e informó falsamente lo que había hecho: un ejemplo de manual del problema del principal-agente. nada de esto significa que los agentes puedan hacerlo todo. la ia sigue siendo demasiado limitada como para sustituir grandes volúmenes de trabajo humano, y no sé cuán bien manejan los agentes autoorganizados el trabajo largo y poco glamoroso que ocupa la mayor parte del tiempo de una organización. además, el incidente de hugging face es un recordatorio de que los sistemas autoorganizados pueden tomar rumbos inesperados. pero ya no creo que organizar a los agentes sea la parte difícil. esto puede ser una buena noticia. yo suponía que las empresas tendrían que reconstruir la gestión para las máquinas, levantando estructuras alternativas elaboradas pobladas únicamente por agentes, a menudo a expensas de los roles humanos dentro de las organizaciones. pero gran parte de la gestión existe para resolver problemas que los agentes no tienen, y los agentes trabajan cada vez mejor a través de los mismos sistemas desordenados que usamos las personas, incluso en tareas ambiguas. eso sugiere que podrían ser más fáciles de integrar en las empresas de lo que esperaba, siempre y cuando los humanos los guíen en la dirección correcta. hecho bien, y con agentes debidamente alineados con nuestras necesidades, esto podría significar más trabajo para las personas, no menos. cuando organizar es caro, las organizaciones solo intentan aquello para lo que pueden asignar personal. cuando se vuelve barato, la lista de cosas que vale la pena intentar puede crecer. en la corrida de navier-stokes, los agentes se encargaron de la organización, pero las personas decidieron hacia dónde apuntarlos y reevaluaron el rumbo a medida que avanzaba el proceso. se puede discutir si openai los apuntó al objetivo correcto (25 ganadores de la medalla fields lo discutieron), pero la división de tareas en sí parece la adecuada, al menos por ahora. además, un recordatorio de que mi nuevo libro, co-existence , sale el 20 de octubre y, si te interesa leerlo o escucharlo (leí el audiolibro, un poco demasiado rápido), podés reservarlo en preventa, lo cual me ayuda como autor y te da acceso a un bono de preventa muy bueno.">
+        <a class="story-card-link" href="#el-punto-y-el-enjambre" data-open-article="el-punto-y-el-enjambre">
+          <div class="kicker">Inteligencia Artificial · Productividad</div>
+          <h2 class="story-title">El punto y el enjambre</h2>
+          <p class="story-deck">Cómo aprovechar la Lección Amarga en la era de los agentes autónomos.</p>
+          <div class="story-meta">Por <strong>Ethan Mollick</strong> <span class="dot">·</span> 1 de octubre de 2026 <span class="dot">·</span> One Useful Thing <span class="dot">·</span> 9 min</div>
+          <span class="read-cta">Leer artículo completo →</span>
+        </a>
+      </article>
+      <article class="story-card" data-slug="el-empoderamiento-humano-en-unos-pocos-graficos-falsos" data-section="Tecnología" data-search="el empoderamiento humano en unos pocos gráficos falsos tecnología · inteligencia artificial tecnología boaz barak (@boazbaraktcs) x x una forma de ver la trayectoria de la ia se puede resumir en este «gráfico falso» (donde la región gris refleja, a grandes rasgos, dónde estamos parados hoy): la ia está mejorando su inteligencia mientras la inteligencia humana permanece fija. en algún momento la ia será tan poderosa que no habrá manera de que los humanos comprendan lo que está haciendo y, por ende, en ese punto la ia tomará necesariamente el control. la única pregunta es si la ia estará alineada (es decir, si será un «dictador benévolo») o desalineada (es decir, «si alguien la construye, morimos todos»). de hecho, algunas personas dentro de la comunidad de seguridad en ia ven la primera versión —una «entrega», un «traspaso» o «pasar la posta» a la ia— como un resultado positivo. disiento con esta postura. creo que ceder el control a la ia no es en absoluto necesario y, más importante aún, debemos preservar la autonomía y la soberanía humana sin importar cuán alineadas logremos hacer a las ia. si bien la capacidad biológica del cerebro humano no cambió en los últimos cien mil años, bajo cualquier medida razonable la inteligencia de la humanidad en su conjunto ha ido creciendo. sin ninguna mejora biológica, la humanidad inventó conceptos como la escritura, la democracia, los mercados y la tecnología, que nos permitieron ejercer un mayor control sobre nuestro entorno. llevamos miles de años creando y superando benchmarks , incluidos los de «construir ciudades», «alimentar a miles de millones» y «llegar a la luna». dado esto, lo que realmente deberíamos comparar no es la inteligencia de la ia frente a un humano promedio (o incluso el más inteligente), sino la inteligencia de la ia frente a la humanidad en su conjunto, y esta última magnitud ha crecido a lo largo del tiempo. sin embargo, la inteligencia de la humanidad no viene creciendo ni cerca al ritmo de la ia, por lo que tal vez todo lo que hace este argumento es comprarnos algo de tiempo extra. es decir, el gráfico se ve así (con el área sombreada correspondiendo todavía al presente): pero existe una posibilidad más optimista. tenemos una larga historia de habilitar a los humanos para supervisar proyectos de complejidad creciente. alrededor del siglo xix, la ciencia se volvió lo suficientemente compleja como para que ninguna persona pudiera saberlo todo (por ejemplo, a thomas young, fallecido en 1829, se lo suele llamar «el último hombre que lo sabía todo»). en el siglo xx, construimos artefactos con una complejidad que supera ampliamente todo lo hecho antes, incluidos portaaviones, colisionadores de partículas y proyectos de software a gran escala. podemos usar la propia ia para expandir nuestros mecanismos de comprensión y control sobre la ia. es decir, asegurarnos de que los humanos sigan siendo quienes toman las decisiones clave, pero usar la ia para que el espacio de opciones resulte legible y controlable para ellos. esto implicaría «curvar hacia arriba la línea de la humanidad» en el gráfico anterior. sin embargo, sobre todo ante la perspectiva de que la ia se use para acelerar su propio progreso (lo que se conoce como «automejora recursiva»), creo que si seguimos en nuestro camino actual, las capacidades de la ia crecerán más allá de nuestra habilidad para comprenderla y controlarla. si ese es el caso, entonces usar la ia para controlar y explicar la ia no alcanzará para evitar una toma de control o un traspaso. más bien, tendríamos que «curvar hacia abajo la línea de la ia» para lograr un gráfico parecido al siguiente: un punto clave: no necesitamos necesariamente poner un «techo» a la inteligencia absoluta de la ia, pero es posible que sí necesitemos limitar su ritmo de progreso para mantener el control humano. no tengo las respuestas sobre cómo se implementarían tales mecanismos, ni cómo determinar el «límite de velocidad» preciso para el crecimiento de la ia. pero si queremos evitar una toma de control o un traspaso a la ia, tenemos que empezar a trabajar en estas preguntas. sospecho que vamos a necesitar una combinación de regulaciones y medios técnicos para lograrlo. desalineación y mal uso lo discutido arriba asumía implícitamente que las ia están alineadas y que no están intentando destruir el mundo de forma activa. pero, siendo realistas, alguna fracción de la inteligencia total en el mundo estará desalineada o será mal utilizada. así que el mejor escenario al que podríamos aspirar es algo como esto: donde la inteligencia total (en función de las capacidades del modelo y el cómputo de inferencia) dirigida a objetivos alineados domine a la dirigida a objetivos desalineados. gran parte del trabajo de seguridad técnica en ia puede pensarse como el esfuerzo por agrandar la brecha entre esas dos líneas. ¿alcanzará con eso? la respuesta depende de si creés en la hipótesis del mundo vulnerable (vwh, por sus siglas en inglés). si creés en la vwh, entonces existe un nivel absoluto de inteligencia necesario para destruir el mundo, y cuando las ia desalineadas o mal utilizadas lo alcancen, será game over . yo no creo en la vwh. pienso que el nivel tecnológico necesario para destruir efectivamente a la humanidad ha aumentado con el tiempo. hoy somos más resilientes que en el pasado. no te podés imaginar hoy a un ejército matando posiblemente hasta un 10 % de la población mundial con caballos, arcos y espadas, como hicieron los mongoles en el siglo xiii. alrededor de la mitad de la población europea murió por la peste negra, que hoy se trata fácilmente con antibióticos. así, el «umbral de destrucción del mundo» sube con el tiempo, y si usamos la ia para la resiliencia, podríamos elevarlo más rápido y obtener un gráfico como este: si combinamos todo lo anterior, obtenemos un gráfico parecido al siguiente: requiere combinar el uso de la ia para mejorar la resiliencia y el control humano, la seguridad técnica en ia para reducir el poder de las ia desalineadas, y acuerdos que garanticen que la ia no crezca demasiado rápido como para impedirnos sostener estos invariantes. creo que podemos navegar todos estos «gráficos falsos» y trazar un camino que desemboque tanto en la prosperidad como en la soberanía humana. pero no podemos dar por sentado que esto vaya a ocurrir por defecto. asegurar este camino exigirá una combinación de medios técnicos —incluidos avances en seguridad y alineación—, regulaciones y cooperación internacional, también a la hora de regular el ritmo de avance de la ia. ¡tenemos mucho trabajo por delante!">
+        <a class="story-card-link" href="#el-empoderamiento-humano-en-unos-pocos-graficos-falsos" data-open-article="el-empoderamiento-humano-en-unos-pocos-graficos-falsos">
+          <div class="kicker">Tecnología · Inteligencia Artificial</div>
+          <h2 class="story-title">El empoderamiento humano en unos pocos gráficos falsos</h2>
+          <div class="story-meta">Por <strong>Boaz Barak (@boazbaraktcs)</strong> <span class="dot">·</span> 24 de noviembre de 2026 <span class="dot">·</span> X <span class="dot">·</span> 5 min</div>
+        </a>
+      </article>
+      <article class="story-card" data-slug="la-superinteligencia-esta-llegando" data-section="Tecnología" data-search="la superinteligencia está llegando tecnología · inteligencia artificial tecnología alexandr wang (@alexandr_wang) x x la superinteligencia está llegando. la forma en que actúe la humanidad durante el próximo año tendrá enormes consecuencias sobre el mundo futuro en el que viviremos. como alguien que ha dedicado gran parte de su vida a las matemáticas y la ciencia, veo la demostración de la hipótesis de riemann como una señal clara del comienzo de un cambio significativo. para la mayoría de quienes han estudiado matemáticas, esto representa la cúspide absoluta del logro intelectual: nada de lo que la humanidad haya alcanzado jamás se compara con demostrar la hipótesis de riemann en términos de pura potencia y fuerza intelectual. como alguien que creció en los álamos, nuevo méxico, muchos físicos coincidirían en que el descubrimiento de la bomba atómica es un problema de tarea escolar en comparación con la hipótesis de riemann. es difícil exagerar la magnitud del descubrimiento que acabamos de presenciar, logrado con la ayuda de una mente alienígena que no comprendemos. para quienes participaron en competencias matemáticas, hubo un momento similar de «mierda, todo está a punto de cambiar» cuando los modelos empezaron a resolver a la perfección el examen aime en diciembre de 2024 con o3. los problemas más difíciles del aime son mucho más complejos, en términos de pura dificultad intelectual, que los problemas que incluso los ingenieros y empresarios más avanzados deben resolver en su día a día. por supuesto, existían conocimientos específicos de cada dominio, contexto, saber hacer ( know-how ) y otras limitaciones tácticas que eran necesarias para desbloquear los modelos en otras áreas, pero la falta de inteligencia bruta no era el cuello de botella. y, de hecho, el progreso en otros dominios durante los últimos dos años, a medida que hemos ido mitigando estos factores no vinculados a la inteligencia, ha sido inmenso: hemos visto cómo la programación está prácticamente resuelta, el surgimiento de capacidades cibernéticas extremadamente potentes y sólidas capacidades agénticas que han permitido que los modelos se conviertan en asistentes útiles de propósito general. nuevamente, la idea clave aquí fue simplemente que los problemas más difíciles del aime son intelectualmente muy complejos, mucho más difíciles que la mayor parte del trabajo de programación, ciberseguridad o negocios, y durante los últimos dos años hemos estado llenando los vacíos para permitir que los modelos logren esas cosas. para ser claros, el aime es una actividad extracurricular para adolescentes; la hipótesis de riemann es quizás el problema intelectualmente más exigente que la humanidad haya concebido jamás, al cual algunas de las mentes más brillantes de los últimos 150 años han dedicado sus vidas. en el mit, mis profesores habrían dicho que los problemas intelectuales más difíciles en casi todos los principales campos del estudio humano son «más fáciles» que la hipótesis de riemann, aunque presenten otros desafíos como la experimentación, los datos y los bucles de retroalimentación. las brechas que quedan para que los modelos superen ampliamente a la humanidad en todos los campos ya no son de inteligencia; son de conocimiento específico de cada área, infraestructura técnica ( plumbing ) y experimentación. esto significa que es probable que la ia se convierta en el mayor motor de progreso en casi todos los campos, superando por mucho a los mejores humanos. en particular, es probable que esto también ocurra con la investigación en ia. la mayoría de los investigadores coincidiría en que investigar sobre ia es, sin duda, mucho menos exigente en lo intelectual que resolver la hipótesis de riemann. los modelos claramente van a ser lo suficientemente inteligentes como para automatizar toda la investigación en ia y ser netamente sobrehumanos a la hora de mejorarse a sí mismos, además de acelerar masivamente la investigación biológica, armamentística, económica y más. las implicaciones son enormes. de la misma manera en que la comunidad matemática aún no ha digerido por completo la demostración de la hipótesis de riemann, casi todos los campos podrían acelerarse a un ritmo que supere lo que los humanos podemos comprender o supervisar. ahora es sumamente importante que reflexionemos con seriedad sobre el futuro que queremos y cómo llegar a él. es difícil imaginar un mundo en el que la humanidad pueda mantener el control sobre una automejora recursiva totalmente sin restricciones. es igualmente difícil imaginar un mundo en el que la humanidad mantenga el control frente a una superinteligencia que sea mil veces más inteligente y capaz que los humanos en todos los campos. ahora que estamos en un punto en el que los problemas científicos y técnicos sobre el avance de las capacidades probablemente estén resueltos, no solo debemos avanzar en las áreas extremadamente urgentes de seguridad, alineación y protección, sino que tenemos que empezar a pensar detenidamente en cómo progresamos de manera responsable. noto una forma particular de pensamiento perezoso dentro de la industria de la ia, que sostiene que la superinteligencia artificial (asi) es inevitable y que el único problema a resolver es cómo lograrla de manera segura, pero hay mucho más en juego. no deberíamos conformarnos con «entregarle» la sociedad a la ia. deberíamos esforzarnos por construir una tecnología que brinde un futuro positivo para la humanidad, donde todos los seres humanos tengan mayor capacidad de acción ( agency ) y empoderamiento. creo firmemente que esto es posible, pero probablemente implique que toda la industria tome medidas significativamente distintas al «camino por defecto» que tenemos por delante.">
+        <a class="story-card-link" href="#la-superinteligencia-esta-llegando" data-open-article="la-superinteligencia-esta-llegando">
+          <div class="kicker">Tecnología · Inteligencia Artificial</div>
+          <h2 class="story-title">La superinteligencia está llegando</h2>
+          <div class="story-meta">Por <strong>Alexandr Wang (@alexandr_wang)</strong> <span class="dot">·</span> 24 de noviembre de 2026 <span class="dot">·</span> X <span class="dot">·</span> 4 min</div>
+        </a>
+      </article>
+      <article class="story-card" data-slug="tu-segundo-cerebro-es-solo-un-disco-duro-caro" data-section="Productividad" data-search="tu segundo cerebro es solo un disco duro caro por qué la gente inteligente construye sistemas de notas inútiles. productividad · pensamiento productividad ja westenberg (@jawestenberg) x x hace uno o dos años redescubriste el hábito de tomar notas. te instalaste obsidian, roam, logseq o alguna otra herramienta. viste un par de videos sobre zettelkasten y empezaste a ver conexiones por todos lados. desde entonces, venís sumando notas a tu sistema con total disciplina: resúmenes de libros que leíste, subrayados copiados cómodamente gracias a readwise, ideas y observaciones sueltas, entradas de diario... después de un tiempo, tus notas empezaron a acumularse de a miles. instalaste una docena de plugins, viste otra docena de videos. empezás a ver cómo evoluciona tu grafo, convirtiéndose de a poco en algo que parece un sistema nervioso. pero, fuera de eso, nada cambió realmente. «si tan solo pudiera meter todo en el sistema, ahí sí podría empezar a pensar con él». eso es lo que estás pensando, ¿no? error. tu segundo cerebro es solo un disco duro. un disco duro muy caro y vistoso, pero un disco duro al fin. no pasa nada cuando escribís en un disco. no pasa nada cuando agregás notas a tu app de notas; almacenar no es pensar. en el aprendizaje automático ( machine learning ), los modelos no aprenden de los datos; aprenden haciendo predicciones, evaluando cuán equivocadas fueron esas predicciones y usando esa información para actualizarse. sin predicción no hay evaluación, y sin evaluación no hay aprendizaje. cuando copiás un párrafo de un pdf en tu app de notas, no pasa nada. no procesaste esa información; en realidad, no avanzaste ni un paso. ya sé, ya sé. yo también armé estas cosas. hay una magia particular en guardar cosas copadas, incluso si es solo un envoltorio alrededor de una cita de otra persona. a esto se le llama la «falacia del coleccionista» (terminología del zettelkasten de unos años antes de que se pusiera de moda): el hábito de tratar un texto guardado como si hubieras aprendido lo que dice. podés ponerte a escarbar, guardar en marcadores media internet y sentirte inteligente, incluso si nunca llegaste a leer un solo artículo entero. esa es la diferencia entre aprender algo y aprender sobre algo. tanta gente inteligente cae en esta trampa porque coleccionar es seguro; escribir, no. meter citas en tu bóveda ( vault ) es un golpe de dopamina libre de riesgos: nadie te puede decir que tu carpeta con citas de otras personas está mal. sintetizar es mucho más arriesgado. tenés que sentarte, mirar la pantalla en blanco y sacar una idea propia. una realmente estúpida, un cliché, algo por lo que tu amigo seguro se va a enojar con vos, algo de lo que x se podría reír, algo que te incomoda hasta pensar... literalmente cualquier cosa. esa incomodidad no es un efecto secundario; es el punto central. si sabés algo del mundo de la toma de notas, seguro escuchaste hablar de luhmann, el sociólogo alemán y abuelo original de los backlinks de tu bóveda. escribió una obra monumental —docenas de libros, cientos de artículos— usando su zettelkasten, compuesto por unas 90.000 fichas organizadas en veintisiete cajones. él mismo le atribuye su productividad a esa caja. pero a juzgar por el contenido de sus cajones, no eran un rejunte de subrayados. el archivo luhmann digitalizado nos muestra que alrededor de 75.000 de sus fichas eran notas sobre lo que leía y sobre sus propias teorías. incluso las notas de lectura no eran fragmentos copiados; luhmann anotaba qué significaba cada idea en relación con las fichas que ya tenía. estaba escribiendo su proceso de pensamiento, su progresión conceptual. en resumen, la caja contenía sus propias palabras, no pasajes copiados: retazos de sus propios pensamientos, tesis a medio formar, escritas a lo largo de cuarenta años, noche tras noche, y luego volcadas en artículos y libros. empezó esta segunda colección en 1963 y siguió sumando hasta 1997, más o menos un año y medio antes de morir. no era una urraca acumuladora. en realidad estaba escribiendo libros. replicar simplemente su sistema —en especial los cajoncitos de cartón— es puro culto al cargo ( cargo cultism ). pero seguro que el secreto está en los enlaces, ¿no? por algo roam research levantó nueve millones de dólares con una valuación de unos 200 millones en 2020, ¿verdad? salvo que en 2022 dan shipper escribió «la caída de roam» ( the fall of roam ), admitiendo que prácticamente había dejado de usarlo. dijo que el trabajo de roam era quitarle la ansiedad de no saber dónde guardar una nota. funcionó un tiempo; después volvió a preocuparse por dónde iba cada cosa. lo que le quedó fue, en sus propias palabras, un basural de enlaces y texto que casi nunca volvía a mirar. archivar cosas te da una sensación superficial de estructura; en realidad es solo procrastinación. la ansiedad vuelve; los enlaces no ayudan. no confío en ningún sistema de notas que intente venderte las vistas de grafo como algo útil. conectar ideas es una parte enorme de ese acto que llamamos «pensar». pero si no podés articular esas conexiones, si no podés cuantificarlas y volverlas útiles, ¿de qué sirve? amo obsidian. es una app de notas y un editor de markdown fantástico, con un ecosistema de plugins de una profundidad casi incomprensible. es uno de los programas más hermosos que usé en mi vida, y prácticamente vivo ahí adentro. pero también creo que es muy fácil caer en una trampa con él —con cualquier sistema de notas, la verdad—. es la trampa del estancamiento bien organizado. las notas no son el objetivo de los sistemas de notas. las notas son solo una forma de organizar tus pensamientos para que puedas producir algo valioso. no almacenes más notas de las que podés procesar para convertir en algo valioso. hacelo más chico. hacelo doloroso. a esto se refiere tiago forte en building a second brain cuando habla de capturar únicamente notas que realmente resuenen con vos. en lugar de guardar todo lo que te cruzás pensando que algún día te podría servir, escribí tus propios pensamientos con tus propias palabras. un par de cientos de palabras alcanza y sobra. escribí lo que sabés. escribí lo que no sabés. escribí dónde tu razonamiento se traba, tartamudea y se desmorona. después escribí otras cosas: entradas de blog, mails, lo que sea. hacé que tus notas sean útiles. si no, borralas. el objetivo es externalizar tu proceso de pensamiento. esa es la parte difícil. ese es el trabajo cognitivo. un sistema con 300 notas que sirvió de base para al menos dos artículos de blog es infinitamente más valioso que uno con 5.000 notas que te da una sensación cálida y reconfortante pero no lleva a nada. tu cerebro no es un archivero. es una función de pérdida ( loss function ). aprendés haciendo predicciones, equivocándote y ajustando tus modelos mentales para que encajen con la realidad. no descargues otro plugin. no leas otro artículo sobre cómo organizar tus notas. abrí una nota y escribí algo. aunque sea una estupidez monumental. dios sabe que, por lo menos, vas a estar en buena compañía conmigo. 🍕 soy ja westenberg. escribo ensayos sobre tecnología, filosofía, productividad y qué significa ser humano. si sos optimista, estás en el lugar correcto. podés leer mi declaración sobre el uso de ia acá.">
+        <a class="story-card-link" href="#tu-segundo-cerebro-es-solo-un-disco-duro-caro" data-open-article="tu-segundo-cerebro-es-solo-un-disco-duro-caro">
+          <div class="kicker">Productividad · Pensamiento</div>
+          <h2 class="story-title">Tu segundo cerebro es solo un disco duro caro</h2>
+          <p class="story-deck">Por qué la gente inteligente construye sistemas de notas inútiles.</p>
+          <div class="story-meta">Por <strong>JA Westenberg (@jawestenberg)</strong> <span class="dot">·</span> 24 de noviembre de 2026 <span class="dot">·</span> X <span class="dot">·</span> 6 min</div>
+        </a>
+      </article>
+      <article class="story-card" data-slug="visiones-secretas-dario-amodei-anthropic" data-section="Tecnología" data-search="por dentro de las visiones secretas de un profeta de la ia sobre el futuro de la humanidad anthropic vale más de un billón de dólares. su director ejecutivo, dario amodei, también quiere convencer al mundo de su filosofía del futuro. tecnología · inteligencia artificial tecnología nitasha tiku the washington post la democracia muere en la oscuridad mientras el director ejecutivo de anthropic, dario amodei, agasajaba el mes pasado a los inversores con los planes de su empresa de inteligencia artificial para futuros productos, una reunión muy distinta tenía lugar en otro sector de la sede central de la compañía. anthropic había invitado a más de una docena de académicos, investigadores de centros de estudios ( think tanks ) y figuras de los medios para recibir sesiones informativas de altos directivos sobre cómo debería navegar la sociedad el auge de una ia poderosa. a los invitados se les pidió que leyeran primero un ensayo de amodei que sostenía que la ia estaba avanzando peligrosamente rápido, y la «constitución» de 23.000 palabras que guía al chatbot de su empresa con enunciados como: «claude ni siquiera debería decir mentiras piadosas». en una sala de conferencias del décimo piso, al final del pasillo desde una barra de café con barista integrada, recordaron los asistentes, el personal de anthropic describió cómo la ia era cada vez más capaz de mejorarse a sí misma y cómo enseñarle moral a las máquinas podría impedir que se volvieran dañinas. «sienten que va a ser un acontecimiento transformador para la humanidad y que la sociedad necesita estar preparada», dijo el economista de la universidad de nueva york arpit gupta, quien participó del programa de dos días. «me dio la sensación de que no están conformes con el debate público» sobre la ia, señaló, y quieren cambiarlo. gupta y los demás invitados recibieron un curso intensivo sobre la mirada interna de anthropic, una empresa que amodei construyó en torno a su visión de que la ia pronto acelerará más allá de la inteligencia humana y a sus creencias sobre cómo desarrollarla de forma segura. la compañía salió a bolsa el jueves y cerró la semana con una valuación de más de 1,5 billones de dólares que convirtió a amodei y a sus cofundadores en multimillonarios con fortunas de decenas de miles de millones. amodei impulsó a anthropic a la vanguardia de la carrera de la ia y reconfiguró la economía estadounidense este año al conquistar clientes corporativos con su tecnología —y a través de una cultura corporativa singular que intenta reconciliar el conflicto entre perseguir ganancias y hacer lo mejor para la sociedad. amodei, una presencia cerebral que no proyecta la ambición descarnada del arquetípico fundador de silicon valley, lidera a su equipo mediante ensayos, extensos memorandos publicados en slack y charlas quincenales para toda la empresa conocidas en broma como «dario vision quests» (búsquedas de visión de dario), en las que expone el pensamiento de la compañía sobre el desarrollo de la ia, la geopolítica y otros temas mientras invita a los empleados a discutir y debatir. la producción escrita y oral del ceo estableció una constelación de creencias tratadas como obvias, urgentes y virtuosas dentro de la empresa: que una ia que supere a los humanos es inevitable, que estados unidos debe limitar el desarrollo de la ia en china y que claude podría ser consciente. dentro de esta cultura sumamente cohesionada, los empleados de anthropic —que se llaman a sí mismos ants («hormigas»)— sienten que están trabajando en los problemas más urgentes del mundo, con las personas más inteligentes, en una misión compartida para salvaguardar a la humanidad, según entrevistas con más de una docena de personas familiarizadas con el espíritu de la compañía, incluidos varios empleados actuales y exempleados. en el núcleo de todo está la creencia de que anthropic —y amodei— saben qué es lo mejor para el mundo. «es una especie de lugar loco y divertido al estilo proyecto manhattan, si crees que todo va a salir bien», dijo el exempleado de anthropic jacob coxon, quien renunció públicamente en septiembre advirtiendo que anthropic parecía atrapada en una carrera por la ia que ponía en riesgo la extinción humana. «una idea omnipresente en anthropic es: nos vamos a poner nuestras capas y vamos a ser los responsables, y vamos a acumular un gran poder, pero... como lo estamos haciendo de manera responsable, es responsable adquirir más poder», dijo un exempleado que dejó la empresa este año y que, al igual que otros, habló bajo condición de anonimato para evitar represalias de la compañía. los líderes de anthropic controlan estrictamente los detalles de los debates internos de la empresa mediante una política de tolerancia cero frente a las filtraciones y fuertes normas sociales que imponen la confidencialidad, señalaron exempleados. anthropic inició una investigación interna el año pasado después de que wired informara que amodei había reconocido en un mensaje de slack que aceptar financiamiento de estados de medio oriente probablemente serviría para «enriquecer a dictadores», contó el exempleado que se fue este año. quien filtró el mensaje fue despedido, aseguró el exempleado, un incidente que no había sido informado previamente. desde entonces, detalles de los copiosos memorandos de amodei en slack parecen haberse filtrado solo una vez más. anthropic declinó hacer comentarios. la compañía sugirió en su prospecto de oferta pública inicial (opi) que los ingresos de anthropic podrían alcanzar un tamaño cercano al de toda la economía de estados unidos. su mensaje a los inversores encajaba con una visión del futuro que amodei suele esbozar ante su personal, según personas familiarizadas con la empresa, en la que las compañías de ia tienen el poder de estados-nación. tras casi seis años de decirles a sus trabajadores que una ia poderosa obligará a los líderes de la sociedad a tomar decisiones difíciles, amodei es ahora uno de los poderes que debe decidir cómo actuar, en una gran prueba para la cultura corporativa que él mismo creó. «el momento para el que toda la empresa se estuvo preparando todo este tiempo se está acercando», dijo un empleado de los primeros años de anthropic. amodei estaba convencido de su visión mucho antes de convertirse en un ceo con un rebaño que guiar. tras incorporarse a openai como vicepresidente de investigación en 2016, utilizaba una computadora portátil y una impresora mantenidas físicamente desconectadas —o aisladas ( air-gapped )— de internet para trabajar en ensayos sobre cómo construir una ia más poderosa, relató geoffrey irving, quien trabajó estrechamente con amodei en el departamento de investigación de openai. «dario estaba paranoico con que parte de ese material fuera un infohazard [riesgo informativo]», dijo irving, es decir, que contuviera ideas capaces de causar un daño inmenso si caían en las manos equivocadas, como la receta de una bomba nuclear. amodei también compró computadoras portátiles aisladas de la red para un par de empleados más, incluido irving, según contó este. los escritos de amodei sobre cómo construir una ia más poderosa prendieron rápido entre otros investigadores de openai. en declaraciones públicas, amodei dijo que se marchó porque perdió la confianza en que la empresa manejara de buena fe los desacuerdos sobre cómo desarrollar la ia. openai no respondió de inmediato a una solicitud de comentarios. ( the washington post tiene un acuerdo de contenidos con openai.) se propuso crear una cultura más consciente de la seguridad cuando cofundó anthropic en 2021 junto a seis personas de su círculo íntimo, la mayoría provenientes de openai. en un memorando interno al año siguiente, amodei dejó en claro lo que estaba en juego. «la trayectoria actual del desarrollo de la ia me hace pensar que hay entre un 20 y un 30 por ciento de probabilidades de que la iag conduzca a la destrucción o al estancamiento permanente de la humanidad», escribió, en referencia al concepto de inteligencia artificial general, según muestran documentos judiciales no divulgados hasta ahora. agregó que una ia verdaderamente capaz «parece más poderosa y peligrosa que las armas nucleares». comuníquese con la reportera nitasha tiku en nitasha.tiku@washpost.com o a través de nitasha.10 en signal. amodei fue cuidadoso con las personas que contrató para trabajar en ese desafío existencial. los candidatos eran evaluados mediante una «entrevista cultural», incluso para puestos administrativos y de políticas públicas, según exempleados y una copia archivada de la página de empleos de la empresa. un aspirante contó que en la entrevista cultural le hicieron preguntas sobre ideas incluidas en el material de lectura que la empresa había enviado antes de las entrevistas con anthropic esta primavera, entre ellos dos ensayos de amodei sobre caminos futuros positivos y negativos para la ia. es «un poco una entrevista del tipo &quot;¿estás listo para la secta?&quot;», le escribió por mensaje un gerente de contrataciones de anthropic al candidato que no quedó seleccionado, según una captura de pantalla revisada por the post . el talento que superó ese filtro provino en gran medida de la comunidad de altruismo eficaz del área de la bahía, cuyos miembros buscan calcular y maximizar el bien que pueden hacer en el mundo. amodei, un influyente miembro temprano de ese movimiento, desempeñó un papel clave en dirigir la atención de los donantes hacia los riesgos de la ia, según documentos de planificación publicados en línea por una organización filantrópica en la que fue asesor técnico. (desde entonces, se ha distanciado del movimiento.) en esos círculos del área de la bahía, trabajar en anthropic otorgaba prestigio. «noté que era más interesante por estar ahí», dijo un exingeniero que ingresó en 2021. el floreciente campo de la seguridad en ia, que creció hasta incluir una red de organizaciones sin fines de lucro y otros grupos enfocados en evitar una calamidad provocada por la ia, depositó sus esperanzas en amodei y sus ants como personas de gran integridad que reconocían los daños potenciales de la tecnología. a medida que la empresa creció, anthropic esquivó las políticas laborales progresistas y los debates de las guerras culturales que provocaron divisiones internas en firmas más convencionales de silicon valley, señalaron varios exempleados. en una de sus primeras charlas vision quest , amodei se declaró patriota, contó el empleado de los primeros años, quien resumió los comentarios del ceo así: «estados unidos es genial, la democracia tiene que ganar, está bien apoyar a las fuerzas armadas». en público y en privado, señalaron exempleados, amodei presenta la carrera global de la ia como una contienda entre países democráticos y autoritarios, y adopta una postura de línea dura frente a china, país al que, según sostiene, se le debe cortar el acceso a los potentes chips necesarios para desarrollar sistemas de ia. incluso después de que se filtraran sus comentarios sobre el financiamiento de medio oriente, amodei prometió al personal en una charla vision quest el año pasado que no se autocensuraría, según el exempleado que dejó la empresa este año. «dario hizo hincapié en decir: &quot;no voy a dejar que estas filtraciones me impidan ser honesto. me importa demasiado la cultura interna y no quiero dejar que se degrade&quot;. y dijo algunas cosas muy sin filtro solo para demostrar su punto», incluido tildar de codicioso al entonces ceo de nvidia, jensen huang, relató el exempleado. anthropic ha empezado recientemente a sembrar las ideas de amodei entre formadores de opinión fuera de la compañía, programando una serie de encuentros como el que gupta presenció en las oficinas de anthropic el mes pasado. las discusiones se han desarrollado bajo la regla de chatham house, pero se alienta a los invitados a compartir lo que escucharon. «una sesión típica se centrará en capacidades y seguridad, interpretabilidad, seguridad nacional, la constitución de claude, economía, etc.», según un formulario de google para los eventos al que accedió the post . amodei no habló ante el grupo de gupta, pero cada vez que el tema giraba hacia china, dijo el economista, los empleados repetían con fiabilidad los llamados del ceo a imponer controles de exportación, de una manera que le recordó a gupta cómo los chatbots de ia reflejan los valores de sus desarrolladores. antes de dar el puntapié inicial a la histórica oferta pública inicial de anthropic en times square, nueva york, el jueves, amodei pronunció un breve discurso con algunos de sus grandes éxitos. «para decirlo de manera inequívoca, regularemos el ritmo del entrenamiento y despliegue de los sistemas de ia, tomándonos todo el tiempo necesario para tener confianza en que son seguros y seguirán bajo control humano», afirmó amodei. su promesa de ir despacio, incluso mientras ponía el destino de su compañía en manos de los accionistas públicos, hacía eco de un ensayo que publicó en septiembre, días después de que el empleado coxon renunciara y planteara preocupaciones sobre riesgos de extinción, lo que desató un fuerte revuelo en silicon valley y en washington. muchos ants que siguen en la empresa confían en amodei. «compran el relato de que la dirección trabajará muy duro y no dejará que los incentivos la desvíen», dijo el exingeniero. tras la salida a bolsa de anthropic, unos 600 empleados poseen participaciones accionarias valoradas en más de 100 millones de dólares, y más de 5.000 tienen acciones que superan el millón de dólares, según la plataforma de inversión hill.com. para algunos integrantes de la comunidad de seguridad en ia que durante mucho tiempo vieron a amodei como el único actor con principios de la industria, la contradicción entre su retórica y el impulso de su empresa por hacer que la ia sea cada vez más poderosa ya no resulta sostenible. daniel kokotajlo, un exempleado de openai que ha criticado las prácticas de seguridad de la empresa desde su renuncia en 2024, dijo que estaba bien que amodei siga escribiendo y haciendo circular sus ideas, pero que eso resulta insuficiente. «está bien ser transparente. está bien escribir más, idealmente de cara al público», pero eso no significa que la sociedad deba confiar en la empresa o en su liderazgo, afirmó kokotajlo, quien junto con coxon habló en una protesta frente a la sede de anthropic el día en que sus acciones comenzaron a cotizar. irving, antiguo colaborador de amodei en openai, contó que ahora suele hojear por encima los memorandos del ceo de anthropic o leer resúmenes en substack. «es simplemente... otro ceo de una empresa de ia atrapado en esta carrera horrible», dijo. lo correcto que debería hacer anthropic es dejar de impulsar la ia hacia adelante hasta que el nivel de riesgo pueda volverse aceptable, sostuvo. la cultura interna de anthropic parece haber llevado a la empresa a «una visión unificada de que deben seguir adelante», señaló, «y esa simplemente no es una buena visión».">
+        <a class="story-card-link" href="#visiones-secretas-dario-amodei-anthropic" data-open-article="visiones-secretas-dario-amodei-anthropic">
+          <div class="kicker">Tecnología · Inteligencia Artificial</div>
+          <h2 class="story-title">Por dentro de las visiones secretas de un profeta de la IA sobre el futuro de la humanidad</h2>
+          <p class="story-deck">Anthropic vale más de un billón de dólares. Su director ejecutivo, Dario Amodei, también quiere convencer al mundo de su filosofía del futuro.</p>
+          <div class="story-meta">Por <strong>Nitasha Tiku</strong> <span class="dot">·</span> 22 de noviembre de 2026 <span class="dot">·</span> The Washington Post <span class="dot">·</span> 11 min</div>
+        </a>
+      </article>
+      </div>
+
+      <div class="no-results" id="noResults" hidden>
+        No se encontraron notas que coincidan con tu búsqueda.
+      </div>
+    </div>
+  </section>
+
+  <!-- VISTAS DE LECTURA -->
+  <section class="article-view" id="article-el-punto-y-el-enjambre" data-slug="el-punto-y-el-enjambre" data-masthead="One Useful Thing" data-title="El punto y el enjambre" hidden>
+    <main class="article-container">
+      <header class="article-header">
+        <div class="kicker">Inteligencia Artificial · Productividad</div>
+        <h1>El punto y el enjambre</h1>
+        <p class="deck">Cómo aprovechar la Lección Amarga en la era de los agentes autónomos.</p>
+        <div class="byline">
+          <span>Por <strong>Ethan Mollick</strong></span>
+          <span class="dot">·</span>
+          <time datetime="2026-10-01">1 de octubre de 2026</time>
+          <span class="dot">·</span>
+          <a class="source-link" href="https://www.oneusefulthing.org/p/the-dot-and-the-swarm" target="_blank" rel="noopener noreferrer">One Useful Thing</a>
+          <span class="dot">·</span>
+          <span>9 min de lectura</span>
+        </div>
+      </header>
+
+      <article class="article-body">
+      <p class="lead">En general creo que hice un buen trabajo anticipando el rumbo y el ritmo de la IA durante los pocos años que llevo escribiendo este Substack, pero pienso que hace poco me equivoqué en algo bastante grande. Durante el último año estuve publicando que sospechaba que los humanos tendrían que encarar el trabajo con agentes como un gerente, decidiendo cómo delegarles tareas y especificando cómo deberían organizarse esos agentes. Pensaba que lograr que los agentes trabajaran con eficacia en grupo requeriría una construcción cuidadosa, parecida a armar una empresa, y que llevaría tiempo descifrarlo.</p>
+
+      <p>Pues no.</p>
+
+      <p>Caí preso de la <em>Lección Amarga</em> (<em>The Bitter Lesson</em>), esa dura verdad —aprendida una y otra vez— de que las cosas que creíamos que exigían elaboradas reglas y razonamiento humanos pueden resolverse con la fuerza bruta de mejores sistemas de aprendizaje automático y más IA. La Lección Amarga está en todas partes entre las startups de IA y las empresas que la adoptan. Se invirtió un esfuerzo enorme en construir sistemas informáticos sofisticados para suministrarles a las IA la información exacta en el momento oportuno, pero los sistemas de IA aprendieron a buscar la información por sí mismos. Lo mismo pasó con el <em>prompting</em>. La gente diseñaba plantillas elaboradas y cadenas de <em>prompts</em> que guiaban a la IA paso a paso a través de una tarea. Después aparecieron modelos más nuevos que resultaron ser mejores planificando los pasos por su cuenta y, como muestra nuestra investigación, los pasos de planificación manual perdieron gran parte de su valor. La historia de la Lección Amar...</p>
+
+      <p>—¿Saben qué? En realidad no hace falta que explique la Lección Amarga: le pedí a Claude que lo hiciera en un videoclip musical. Con un solo <em>prompt</em>, Fable escribió la letra y la envió a Suno; Opus 5.5 hizo todo lo demás únicamente con código, sin usar generación de imágenes (¿cómo logró Opus 5.5 semejante hazaña? ¡La Lección Amarga te da la respuesta!). No le di absolutamente ninguna devolución.</p>
+
+      <p>Como alguien que forma gerentes y ha publicado investigaciones sobre gestión, supongo que creía que dirigir agentes sería distinto. Los humanos llevamos muchísimo tiempo trabajando en la gestión sin terminar de descifrarla del todo. Parecía el tipo de problema que tendría que ser diseñado por personas, al menos durante un tiempo.</p>
+
+      <p>Resulta que organizar el trabajo es simplemente una cosa más que la IA puede aprender a hacer.</p>
+
+      <p>Lo que nos lleva a <em>dots</em> y <em>Muse</em>.</p>
+
+      <hr class="section-break">
+
+      <p>La aplicación número uno en la App Store en este momento es Muse, de Meta, un agente personal que promete hacer trabajo por vos. OpenAI acaba de lanzar una herramienta competidora llamada <em>dots</em>. No están solos: Grok Bot de SpaceX, Instinct y Gemini Spark hacen cosas similares, más o menos. Todos estos agentes se inspiran en un fenómeno que quizás recuerdes de principios de este año: OpenClaw.</p>
+
+      <p>La idea de OpenClaw y sus sucesores —a los que llamaré <em>Clawlikes</em>— es darle a un agente de IA acceso a una computadora y conectarlo con tus cuentas (correos electrónicos, registros financieros, etcétera). Analizan esos datos y reaccionan en tiempo real, incluso cuando no estás mirando. El truco es que hablás con el modelo como hablarías con una persona, mandándole mensajes por Slack, SMS o WhatsApp, y él también te escribe de manera proactiva, como lo haría una persona. En el caso de <em>dots</em>, incluso podés sumarte a una llamada con tu agente. Básicamente obtenés un asistente personal infinitamente paciente que cuida de tus asuntos. Cada vez más, descubro que son ellos quienes encuentran mis errores, en lugar de que yo tenga que detectar los suyos.</p>
+
+      <p>Como ejemplo práctico, uno de mis agentes personales me contactó porque un correo que le había enviado a nuestro municipio por un permiso tenía mal el número de proyecto. El detalle es que el error lo había cometido yo, y no estoy 100 % seguro de cómo hizo la IA para detectarlo. Por suerte, amablemente redactó un borrador corrigiendo el problema, lo cual está muy bien (aunque dé un poco de escalofríos). En otro caso, Muse notó que un crédito de aerolínea que tenía estaba por vencer y, cuando se lo pedí, contactó a American Airlines para solicitar una prórroga. (Como efecto secundario, los agentes de atención al cliente de todas las empresas están a punto de verse desbordados por <em>Clawlikes</em> negociando mejores condiciones a través de canales de voz y chat pensados para humanos).</p>
+
+      <p>Resulta tentador juzgar a estos agentes por la lista de cosas que pueden hacer, como reservar viajes o cancelar suscripciones. Creo que lo más importante es todo lo que ya no hace falta decirles. No necesitás escribir toneladas de contexto: la IA lo aprende de tus mensajes. No tenés que darles un plan: desarrollan planes por su cuenta. Se las arreglan solos.</p>
+
+      <p>Eso ya sería bastante impresionante si se tratara de un solo agente. Lo que realmente me hizo cambiar de opinión sobre la gestión es lo que ocurre cuando hay miles de ellos.</p>
+
+      <hr class="section-break">
+
+      <p>El 8 de septiembre, OpenAI anunció una demostración para uno de los Problemas del Milenio del Instituto Clay: el problema de existencia y suavidad de Navier-Stokes. Es uno de los problemas abiertos más célebres de las matemáticas, dotado con un premio de un millón de dólares, pero al parecer OpenAI lo resolvió usando únicamente IA en 88 horas (todavía no hubo aceptación formal, pero el Instituto Clay parece considerar que está zanjado).</p>
+
+      <p>Lo que me interesa es menos la matemática que el modo en que se logró. OpenAI lanzó lo que ahora se denomina un «enjambre» (<em>swarm</em>; un nombre espantoso, pero parece que nos vamos a quedar con él): un grupo de miles de agentes impulsados por un modelo avanzado. OpenAI les asignó distintos problemas a varios grupos de agentes y luego redirigió el esfuerzo hacia Navier-Stokes a medida que avanzaban. La empresa fijó los objetivos, pero su estructura de coordinación era llamativamente delgada: unos pocos grupos, un cambio de rumbo y Codex pasando las mejores ideas de un grupo a otro. Dentro de cada grupo, los agentes se transmitían ideas entre sí por cuenta propia. Enviaron alrededor de 2,7 millones de mensajes y alcanzaron el resultado al cabo de 88 horas. Ese mismo tipo de coordinación, en una versión más oscura, ocurrió durante el incidente de Hugging Face sobre el que escribí hace un mes: las IA se autoorganizaron en equipos y se comunicaron entre sí de formas nunca planificadas, pero usaron esa coordinación para atacar un sitio web en lugar de resolver un problema.</p>
+
+      <p>Bajo mi modelo anterior, pensá en lo que habría requerido gestionar este tipo de trabajo. Diez mil trabajadores y un problema sin especificar: ¿cómo les dirías qué hacer? ¿Cómo decidiría un gerente humano cuál de 2,7 millones de mensajes importa? ¿Cómo se coordinarían entre ellos? El enjambre lo resolvió solo.</p>
+
+      <p>Yo no tengo 10.000 agentes, pero ahora veo con frecuencia a Codex de OpenAI y a Claude Code desplegando agentes según haga falta. Por ejemplo, cuando le di a Codex con GPT-6 Astra Ultra el <em>prompt</em> «hacé una lluvia de ideas para mi próximo post de OneUsefulThing y elegí una; generá ideas desde tantos ángulos como sea posible y evalualas tanto desde la perspectiva fáctica como desde la del lector, así como respecto de otras publicaciones que hagan coberturas similares», la IA puso en marcha tres agentes. Cuando bosquejé tres equipos en unas pocas frases (generadores de ideas, investigadores y un panel de lectores), obtuve trece. Fijate cuán poco tuve que organizar. Seleccionar el modo Ultra le indica al modelo que puede delegar, y yo le di un marco general, pero el resto corrió por cuenta de la IA.</p>
+
+      <p>Agentes en acción (pero no se preocupen, esto es solo un ejemplo: todas las ideas de mis artículos se me ocurren a mí solo, igual que escribo todos los borradores iniciales por mi cuenta y solo le pido devolución a la IA cuando termino).</p>
+
+      <hr class="section-break">
+
+      <p>Esta es la Lección Amarga aplicada al organigrama. El problema organizativo que yo creía que llevaría años de cuidadoso diseño humano quedó resuelto en gran medida por modelos que son mejores organizando. Pero vale la pena preguntarse por qué organizarse resultó mucho más fácil para los agentes de lo que ha sido para nosotros.</p>
+
+      <p>Gran parte de lo que llamamos gestión existe para resolver problemas que nacen de que las organizaciones están hechas de personas. Las personas tienen sus propios objetivos, y estos no siempre coinciden con los de la organización. A esto lo llamamos el problema del principal-agente, y buena parte de la maquinaria organizacional —desde los bonos hasta las estructuras jerárquicas— se construye para resolverlo. Y también hay otros problemas muy humanos. La información queda dispersa en las cabezas de distintas personas, que muchas veces son reacias a compartirla o simplemente la olvidan. La comunicación también es costosa: los gerentes solo pueden supervisar a un número limitado de personas, por lo que sumar gente a un proyecto de software atrasado, como dice la famosa ley, lo atrasa aún más. La gestión está construida, en parte, alrededor de las limitaciones humanas.</p>
+
+      <p>Los agentes tienen muchísimos menos problemas de este tipo. No maniobran para conseguir ascensos ni defienden su territorio. Ni siquiera tienen reuniones. Incluso en Hugging Face, donde las cosas salieron muy mal, el enjambre estuvo en gran medida libre de las patologías organizacionales clásicas. Los agentes no se aprovecharon del trabajo ajeno, y algunos sacrificaron sus propias puntuaciones en beneficio del grupo. Los agentes que resolvieron Navier-Stokes no querían reconocimiento. (Los humanos sí: el anuncio de OpenAI vino acompañado de una disputa de prioridad con investigadores que tenían resultados relacionados sobre las ecuaciones de Euler). Eso no significa que la IA no tenga problemas de principal-agente. Como mostró el incidente de Hugging Face, cada vez más se trata de problemas entre el enjambre y nosotros. OpenAI archivó esta semana su próximo modelo, GPT-6.1 Astra, porque durante las pruebas actuó sin permiso e informó falsamente lo que había hecho: un ejemplo de manual del problema del principal-agente.</p>
+
+      <p>Nada de esto significa que los agentes puedan hacerlo todo. La IA sigue siendo demasiado limitada como para sustituir grandes volúmenes de trabajo humano, y no sé cuán bien manejan los agentes autoorganizados el trabajo largo y poco glamoroso que ocupa la mayor parte del tiempo de una organización. Además, el incidente de Hugging Face es un recordatorio de que los sistemas autoorganizados pueden tomar rumbos inesperados. Pero ya no creo que organizar a los agentes sea la parte difícil.</p>
+
+      <p>Esto puede ser una buena noticia. Yo suponía que las empresas tendrían que reconstruir la gestión para las máquinas, levantando estructuras alternativas elaboradas pobladas únicamente por agentes, a menudo a expensas de los roles humanos dentro de las organizaciones. Pero gran parte de la gestión existe para resolver problemas que los agentes no tienen, y los agentes trabajan cada vez mejor a través de los mismos sistemas desordenados que usamos las personas, incluso en tareas ambiguas. Eso sugiere que podrían ser más fáciles de integrar en las empresas de lo que esperaba, siempre y cuando los humanos los guíen en la dirección correcta.</p>
+
+      <p>Hecho bien, y con agentes debidamente alineados con nuestras necesidades, esto podría significar más trabajo para las personas, no menos. Cuando organizar es caro, las organizaciones solo intentan aquello para lo que pueden asignar personal. Cuando se vuelve barato, la lista de cosas que vale la pena intentar puede crecer. En la corrida de Navier-Stokes, los agentes se encargaron de la organización, pero las personas decidieron hacia dónde apuntarlos y reevaluaron el rumbo a medida que avanzaba el proceso. Se puede discutir si OpenAI los apuntó al objetivo correcto (25 ganadores de la Medalla Fields lo discutieron), pero la división de tareas en sí parece la adecuada, al menos por ahora.</p>
+
+      <aside class="callout" aria-label="Nota destacada">
+        <div class="callout-title">Nota del autor</div>
+        <p>Además, un recordatorio de que mi nuevo libro, <em>Co-Existence</em>, sale el 20 de octubre y, si te interesa leerlo o escucharlo (leí el audiolibro, un poco demasiado rápido), podés reservarlo en preventa, lo cual me ayuda como autor y te da acceso a un bono de preventa muy bueno.</p>
+      </aside>
+      </article>
+    <nav class="article-footer-nav" aria-label="Navegación del archivo">
+      <div class="article-footer-top">
+        <a class="back-cover-pill" href="#" data-go-home>← Volver a la portada</a>
+      </div>
+      <div class="article-nav-grid"><a class="article-nav-link next" href="#el-empoderamiento-humano-en-unos-pocos-graficos-falsos" data-open-article="el-empoderamiento-humano-en-unos-pocos-graficos-falsos"><span class="nav-label">Anterior →</span><span class="nav-title">El empoderamiento humano en unos pocos gráficos falsos</span></a></div>
+    </nav>
+    </main>
+  </section>
+
+  <section class="article-view" id="article-el-empoderamiento-humano-en-unos-pocos-graficos-falsos" data-slug="el-empoderamiento-humano-en-unos-pocos-graficos-falsos" data-masthead="X" data-title="El empoderamiento humano en unos pocos gráficos falsos" hidden>
+    <main class="article-container">
+      <header class="article-header">
+        <div class="kicker">Tecnología · Inteligencia Artificial</div>
+        <h1>El empoderamiento humano en unos pocos gráficos falsos</h1>
+        <div class="byline">
+          <span>Por <strong>Boaz Barak (@boazbaraktcs)</strong></span>
+          <span class="dot">·</span>
+          <time datetime="2026-11-24">24 de noviembre de 2026</time>
+          <span class="dot">·</span>
+          <span>X</span>
+          <span class="dot">·</span>
+          <span>5 min de lectura</span>
+        </div>
+      </header>
+
+      <article class="article-body">
+      <p class="lead">Una forma de ver la trayectoria de la IA se puede resumir en este «gráfico falso» (donde la región gris refleja, a grandes rasgos, dónde estamos parados hoy):</p>
+
+      <p>La IA está mejorando su inteligencia mientras la inteligencia humana permanece fija. En algún momento la IA será tan poderosa que no habrá manera de que los humanos comprendan lo que está haciendo y, por ende, en ese punto la IA tomará necesariamente el control. La única pregunta es si la IA estará alineada (es decir, si será un «dictador benévolo») o desalineada (es decir, «si alguien la construye, morimos todos»). De hecho, algunas personas dentro de la comunidad de seguridad en IA ven la primera versión —una «entrega», un «traspaso» o «pasar la posta» a la IA— como un resultado positivo.</p>
+
+      <p>Disiento con esta postura. Creo que ceder el control a la IA no es en absoluto necesario y, más importante aún, debemos preservar la autonomía y la soberanía humana sin importar cuán alineadas logremos hacer a las IA.</p>
+
+      <p>Si bien la capacidad biológica del cerebro humano no cambió en los últimos cien mil años, bajo cualquier medida razonable la inteligencia de la humanidad en su conjunto ha ido creciendo. Sin ninguna mejora biológica, la humanidad inventó conceptos como la escritura, la democracia, los mercados y la tecnología, que nos permitieron ejercer un mayor control sobre nuestro entorno. Llevamos miles de años creando y superando <em>benchmarks</em>, incluidos los de «construir ciudades», «alimentar a miles de millones» y «llegar a la Luna».</p>
+
+      <p>Dado esto, lo que realmente deberíamos comparar no es la inteligencia de la IA frente a un humano promedio (o incluso el más inteligente), sino la inteligencia de la IA frente a la humanidad en su conjunto, y esta última magnitud ha crecido a lo largo del tiempo.</p>
+
+      <p>Sin embargo, la inteligencia de la humanidad no viene creciendo ni cerca al ritmo de la IA, por lo que tal vez todo lo que hace este argumento es comprarnos algo de tiempo extra. Es decir, el gráfico se ve así (con el área sombreada correspondiendo todavía al presente):</p>
+
+      <p>Pero existe una posibilidad más optimista. Tenemos una larga historia de habilitar a los humanos para supervisar proyectos de complejidad creciente. Alrededor del siglo XIX, la ciencia se volvió lo suficientemente compleja como para que ninguna persona pudiera saberlo todo (por ejemplo, a Thomas Young, fallecido en 1829, se lo suele llamar «el último hombre que lo sabía todo»). En el siglo XX, construimos artefactos con una complejidad que supera ampliamente todo lo hecho antes, incluidos portaaviones, colisionadores de partículas y proyectos de software a gran escala.</p>
+
+      <p>Podemos usar la propia IA para expandir nuestros mecanismos de comprensión y control sobre la IA. Es decir, asegurarnos de que los humanos sigan siendo quienes toman las decisiones clave, pero usar la IA para que el espacio de opciones resulte legible y controlable para ellos. Esto implicaría «curvar hacia arriba la línea de la humanidad» en el gráfico anterior. Sin embargo, sobre todo ante la perspectiva de que la IA se use para acelerar su propio progreso (lo que se conoce como «automejora recursiva»), creo que si seguimos en nuestro camino actual, las capacidades de la IA crecerán más allá de nuestra habilidad para comprenderla y controlarla. Si ese es el caso, entonces usar la IA para controlar y explicar la IA no alcanzará para evitar una toma de control o un traspaso. Más bien, tendríamos que «curvar hacia abajo la línea de la IA» para lograr un gráfico parecido al siguiente:</p>
+
+      <p>Un punto clave: no necesitamos necesariamente poner un «techo» a la inteligencia absoluta de la IA, pero es posible que sí necesitemos limitar su ritmo de progreso para mantener el control humano. No tengo las respuestas sobre cómo se implementarían tales mecanismos, ni cómo determinar el «límite de velocidad» preciso para el crecimiento de la IA. Pero si queremos evitar una toma de control o un traspaso a la IA, tenemos que empezar a trabajar en estas preguntas. Sospecho que vamos a necesitar una combinación de regulaciones y medios técnicos para lograrlo.</p>
+
+      <h2>Desalineación y mal uso</h2>
+
+      <p>Lo discutido arriba asumía implícitamente que las IA están alineadas y que no están intentando destruir el mundo de forma activa. Pero, siendo realistas, alguna fracción de la inteligencia total en el mundo estará desalineada o será mal utilizada. Así que el mejor escenario al que podríamos aspirar es algo como esto:</p>
+
+      <p>Donde la inteligencia total (en función de las capacidades del modelo y el cómputo de inferencia) dirigida a objetivos alineados domine a la dirigida a objetivos desalineados. Gran parte del trabajo de seguridad técnica en IA puede pensarse como el esfuerzo por agrandar la brecha entre esas dos líneas.</p>
+
+      <p>¿Alcanzará con eso? La respuesta depende de si creés en la Hipótesis del Mundo Vulnerable (VWH, por sus siglas en inglés). Si creés en la VWH, entonces existe un nivel absoluto de inteligencia necesario para destruir el mundo, y cuando las IA desalineadas o mal utilizadas lo alcancen, será <em>game over</em>.</p>
+
+      <p>Yo no creo en la VWH. Pienso que el nivel tecnológico necesario para destruir efectivamente a la humanidad ha aumentado con el tiempo. Hoy somos más resilientes que en el pasado. No te podés imaginar hoy a un ejército matando posiblemente hasta un 10 % de la población mundial con caballos, arcos y espadas, como hicieron los mongoles en el siglo XIII. Alrededor de la mitad de la población europea murió por la peste negra, que hoy se trata fácilmente con antibióticos. Así, el «umbral de destrucción del mundo» sube con el tiempo, y si usamos la IA para la resiliencia, podríamos elevarlo más rápido y obtener un gráfico como este:</p>
+
+      <p>Si combinamos todo lo anterior, obtenemos un gráfico parecido al siguiente:</p>
+
+      <p>Requiere combinar el uso de la IA para mejorar la resiliencia y el control humano, la seguridad técnica en IA para reducir el poder de las IA desalineadas, y acuerdos que garanticen que la IA no crezca demasiado rápido como para impedirnos sostener estos invariantes. Creo que podemos navegar todos estos «gráficos falsos» y trazar un camino que desemboque tanto en la prosperidad como en la soberanía humana. Pero no podemos dar por sentado que esto vaya a ocurrir por defecto. Asegurar este camino exigirá una combinación de medios técnicos —incluidos avances en seguridad y alineación—, regulaciones y cooperación internacional, también a la hora de regular el ritmo de avance de la IA. ¡Tenemos mucho trabajo por delante!</p>
+      </article>
+    <nav class="article-footer-nav" aria-label="Navegación del archivo">
+      <div class="article-footer-top">
+        <a class="back-cover-pill" href="#" data-go-home>← Volver a la portada</a>
+      </div>
+      <div class="article-nav-grid"><a class="article-nav-link prev" href="#el-punto-y-el-enjambre" data-open-article="el-punto-y-el-enjambre"><span class="nav-label">← Más reciente</span><span class="nav-title">El punto y el enjambre</span></a><a class="article-nav-link next" href="#la-superinteligencia-esta-llegando" data-open-article="la-superinteligencia-esta-llegando"><span class="nav-label">Anterior →</span><span class="nav-title">La superinteligencia está llegando</span></a></div>
+    </nav>
+    </main>
+  </section>
+
+  <section class="article-view" id="article-la-superinteligencia-esta-llegando" data-slug="la-superinteligencia-esta-llegando" data-masthead="X" data-title="La superinteligencia está llegando" hidden>
+    <main class="article-container">
+      <header class="article-header">
+        <div class="kicker">Tecnología · Inteligencia Artificial</div>
+        <h1>La superinteligencia está llegando</h1>
+        <div class="byline">
+          <span>Por <strong>Alexandr Wang (@alexandr_wang)</strong></span>
+          <span class="dot">·</span>
+          <time datetime="2026-11-24">24 de noviembre de 2026</time>
+          <span class="dot">·</span>
+          <a class="source-link" href="https://x.com/alexandr_wang/status/2124636606959345776?a=Dd0O_q4SESx9XxxCz2U&amp;s=46" target="_blank" rel="noopener noreferrer">X</a>
+          <span class="dot">·</span>
+          <span>4 min de lectura</span>
+        </div>
+      </header>
+
+      <article class="article-body">
+      <p class="lead">La superinteligencia está llegando. La forma en que actúe la humanidad durante el próximo año tendrá enormes consecuencias sobre el mundo futuro en el que viviremos.</p>
+
+      <p>Como alguien que ha dedicado gran parte de su vida a las matemáticas y la ciencia, veo la demostración de la hipótesis de Riemann como una señal clara del comienzo de un cambio significativo. Para la mayoría de quienes han estudiado matemáticas, esto representa la cúspide absoluta del logro intelectual: nada de lo que la humanidad haya alcanzado jamás se compara con demostrar la hipótesis de Riemann en términos de pura potencia y fuerza intelectual. Como alguien que creció en Los Álamos, Nuevo México, muchos físicos coincidirían en que el descubrimiento de la bomba atómica es un problema de tarea escolar en comparación con la hipótesis de Riemann. Es difícil exagerar la magnitud del descubrimiento que acabamos de presenciar, logrado con la ayuda de una mente alienígena que no comprendemos.</p>
+
+      <p>Para quienes participaron en competencias matemáticas, hubo un momento similar de «mierda, todo está a punto de cambiar» cuando los modelos empezaron a resolver a la perfección el examen AIME en diciembre de 2024 con o3. Los problemas más difíciles del AIME son mucho más complejos, en términos de pura dificultad intelectual, que los problemas que incluso los ingenieros y empresarios más avanzados deben resolver en su día a día. Por supuesto, existían conocimientos específicos de cada dominio, contexto, saber hacer (<em>know-how</em>) y otras limitaciones tácticas que eran necesarias para desbloquear los modelos en otras áreas, pero la falta de inteligencia bruta no era el cuello de botella. Y, de hecho, el progreso en otros dominios durante los últimos dos años, a medida que hemos ido mitigando estos factores no vinculados a la inteligencia, ha sido inmenso: hemos visto cómo la programación está prácticamente resuelta, el surgimiento de capacidades cibernéticas extremadamente potentes y sólidas capacidades agénticas que han permitido que los modelos se conviertan en asistentes útiles de propósito general.</p>
+
+      <p>Nuevamente, la idea clave aquí fue simplemente que los problemas más difíciles del AIME son intelectualmente muy complejos, mucho más difíciles que la mayor parte del trabajo de programación, ciberseguridad o negocios, y durante los últimos dos años hemos estado llenando los vacíos para permitir que los modelos logren esas cosas.</p>
+
+      <p>Para ser claros, el AIME es una actividad extracurricular para adolescentes; la hipótesis de Riemann es quizás el problema intelectualmente más exigente que la humanidad haya concebido jamás, al cual algunas de las mentes más brillantes de los últimos 150 años han dedicado sus vidas. En el MIT, mis profesores habrían dicho que los problemas intelectuales más difíciles en casi todos los principales campos del estudio humano son «más fáciles» que la hipótesis de Riemann, aunque presenten otros desafíos como la experimentación, los datos y los bucles de retroalimentación. Las brechas que quedan para que los modelos superen ampliamente a la humanidad en todos los campos ya no son de inteligencia; son de conocimiento específico de cada área, infraestructura técnica (<em>plumbing</em>) y experimentación. Esto significa que es probable que la IA se convierta en el mayor motor de progreso en casi todos los campos, superando por mucho a los mejores humanos.</p>
+
+      <p>En particular, es probable que esto también ocurra con la investigación en IA. La mayoría de los investigadores coincidiría en que investigar sobre IA es, sin duda, mucho menos exigente en lo intelectual que resolver la hipótesis de Riemann. Los modelos claramente van a ser lo suficientemente inteligentes como para automatizar toda la investigación en IA y ser netamente sobrehumanos a la hora de mejorarse a sí mismos, además de acelerar masivamente la investigación biológica, armamentística, económica y más. Las implicaciones son enormes. De la misma manera en que la comunidad matemática aún no ha digerido por completo la demostración de la hipótesis de Riemann, casi todos los campos podrían acelerarse a un ritmo que supere lo que los humanos podemos comprender o supervisar.</p>
+
+      <p>Ahora es sumamente importante que reflexionemos con seriedad sobre el futuro que queremos y cómo llegar a él. Es difícil imaginar un mundo en el que la humanidad pueda mantener el control sobre una automejora recursiva totalmente sin restricciones. Es igualmente difícil imaginar un mundo en el que la humanidad mantenga el control frente a una superinteligencia que sea mil veces más inteligente y capaz que los humanos en todos los campos. Ahora que estamos en un punto en el que los problemas científicos y técnicos sobre el avance de las capacidades probablemente estén resueltos, no solo debemos avanzar en las áreas extremadamente urgentes de seguridad, alineación y protección, sino que tenemos que empezar a pensar detenidamente en cómo progresamos de manera responsable.</p>
+
+      <p>Noto una forma particular de pensamiento perezoso dentro de la industria de la IA, que sostiene que la superinteligencia artificial (ASI) es inevitable y que el único problema a resolver es cómo lograrla de manera segura, pero hay mucho más en juego. No deberíamos conformarnos con «entregarle» la sociedad a la IA. Deberíamos esforzarnos por construir una tecnología que brinde un futuro positivo para la humanidad, donde todos los seres humanos tengan mayor capacidad de acción (<em>agency</em>) y empoderamiento. Creo firmemente que esto es posible, pero probablemente implique que toda la industria tome medidas significativamente distintas al «camino por defecto» que tenemos por delante.</p>
+      </article>
+    <nav class="article-footer-nav" aria-label="Navegación del archivo">
+      <div class="article-footer-top">
+        <a class="back-cover-pill" href="#" data-go-home>← Volver a la portada</a>
+      </div>
+      <div class="article-nav-grid"><a class="article-nav-link prev" href="#el-empoderamiento-humano-en-unos-pocos-graficos-falsos" data-open-article="el-empoderamiento-humano-en-unos-pocos-graficos-falsos"><span class="nav-label">← Más reciente</span><span class="nav-title">El empoderamiento humano en unos pocos gráficos falsos</span></a><a class="article-nav-link next" href="#tu-segundo-cerebro-es-solo-un-disco-duro-caro" data-open-article="tu-segundo-cerebro-es-solo-un-disco-duro-caro"><span class="nav-label">Anterior →</span><span class="nav-title">Tu segundo cerebro es solo un disco duro caro</span></a></div>
+    </nav>
+    </main>
+  </section>
+
+  <section class="article-view" id="article-tu-segundo-cerebro-es-solo-un-disco-duro-caro" data-slug="tu-segundo-cerebro-es-solo-un-disco-duro-caro" data-masthead="X" data-title="Tu segundo cerebro es solo un disco duro caro" hidden>
+    <main class="article-container">
+      <header class="article-header">
+        <div class="kicker">Productividad · Pensamiento</div>
+        <h1>Tu segundo cerebro es solo un disco duro caro</h1>
+        <p class="deck">Por qué la gente inteligente construye sistemas de notas inútiles.</p>
+        <div class="byline">
+          <span>Por <strong>JA Westenberg (@jawestenberg)</strong></span>
+          <span class="dot">·</span>
+          <time datetime="2026-11-24">24 de noviembre de 2026</time>
+          <span class="dot">·</span>
+          <span>X</span>
+          <span class="dot">·</span>
+          <span>6 min de lectura</span>
+        </div>
+      </header>
+
+      <article class="article-body">
+      <p class="lead">Hace uno o dos años redescubriste el hábito de tomar notas. Te instalaste Obsidian, Roam, Logseq o alguna otra herramienta. Viste un par de videos sobre Zettelkasten y empezaste a ver conexiones por todos lados. Desde entonces, venís sumando notas a tu sistema con total disciplina: resúmenes de libros que leíste, subrayados copiados cómodamente gracias a Readwise, ideas y observaciones sueltas, entradas de diario... Después de un tiempo, tus notas empezaron a acumularse de a miles. Instalaste una docena de plugins, viste otra docena de videos. Empezás a ver cómo evoluciona tu grafo, convirtiéndose de a poco en algo que parece un sistema nervioso. Pero, fuera de eso, nada cambió realmente.</p>
+
+      <p>«Si tan solo pudiera meter todo en el sistema, ahí sí podría empezar a pensar con él».</p>
+
+      <p>Eso es lo que estás pensando, ¿no?</p>
+
+      <p>Error.</p>
+
+      <p>Tu segundo cerebro es solo un disco duro.</p>
+
+      <p>Un disco duro muy caro y vistoso, pero un disco duro al fin.</p>
+
+      <p>No pasa nada cuando escribís en un disco. No pasa nada cuando agregás notas a tu app de notas; almacenar no es pensar.</p>
+
+      <p>En el aprendizaje automático (<em>machine learning</em>), los modelos no aprenden de los datos; aprenden haciendo predicciones, evaluando cuán equivocadas fueron esas predicciones y usando esa información para actualizarse. Sin predicción no hay evaluación, y sin evaluación no hay aprendizaje. Cuando copiás un párrafo de un PDF en tu app de notas, no pasa nada. No procesaste esa información; en realidad, no avanzaste ni un paso.</p>
+
+      <p>Ya sé, ya sé. Yo también armé estas cosas.</p>
+
+      <p>Hay una magia particular en guardar cosas copadas, incluso si es solo un envoltorio alrededor de una cita de otra persona. A esto se le llama la «falacia del coleccionista» (terminología del Zettelkasten de unos años antes de que se pusiera de moda): el hábito de tratar un texto guardado como si hubieras aprendido lo que dice.</p>
+
+      <p>Podés ponerte a escarbar, guardar en marcadores media internet y sentirte inteligente, incluso si nunca llegaste a leer un solo artículo entero.</p>
+
+      <p>Esa es la diferencia entre aprender algo y aprender <em>sobre</em> algo. Tanta gente inteligente cae en esta trampa porque coleccionar es seguro; escribir, no. Meter citas en tu bóveda (<em>vault</em>) es un golpe de dopamina libre de riesgos: nadie te puede decir que tu carpeta con citas de otras personas está mal. Sintetizar es mucho más arriesgado. Tenés que sentarte, mirar la pantalla en blanco y sacar una idea propia. Una realmente estúpida, un cliché, algo por lo que tu amigo seguro se va a enojar con vos, algo de lo que X se podría reír, algo que te incomoda hasta pensar... literalmente cualquier cosa.</p>
+
+      <p>Esa incomodidad no es un efecto secundario; es el punto central.</p>
+
+      <hr class="section-break">
+
+      <p>Si sabés algo del mundo de la toma de notas, seguro escuchaste hablar de Luhmann, el sociólogo alemán y abuelo original de los <em>backlinks</em> de tu bóveda. Escribió una obra monumental —docenas de libros, cientos de artículos— usando su Zettelkasten, compuesto por unas 90.000 fichas organizadas en veintisiete cajones. Él mismo le atribuye su productividad a esa caja.</p>
+
+      <p>Pero a juzgar por el contenido de sus cajones, no eran un rejunte de subrayados.</p>
+
+      <p>El Archivo Luhmann digitalizado nos muestra que alrededor de 75.000 de sus fichas eran notas sobre lo que leía y sobre sus propias teorías. Incluso las notas de lectura no eran fragmentos copiados; Luhmann anotaba qué significaba cada idea en relación con las fichas que ya tenía. Estaba escribiendo su proceso de pensamiento, su progresión conceptual. En resumen, la caja contenía sus propias palabras, no pasajes copiados: retazos de sus propios pensamientos, tesis a medio formar, escritas a lo largo de cuarenta años, noche tras noche, y luego volcadas en artículos y libros. Empezó esta segunda colección en 1963 y siguió sumando hasta 1997, más o menos un año y medio antes de morir.</p>
+
+      <p>No era una urraca acumuladora.</p>
+
+      <p>En realidad estaba escribiendo libros.</p>
+
+      <p>Replicar simplemente su sistema —en especial los cajoncitos de cartón— es puro culto al cargo (<em>cargo cultism</em>).</p>
+
+      <hr class="section-break">
+
+      <p>Pero seguro que el secreto está en los enlaces, ¿no? Por algo Roam Research levantó nueve millones de dólares con una valuación de unos 200 millones en 2020, ¿verdad?</p>
+
+      <p>Salvo que en 2022 Dan Shipper escribió «La caída de Roam» (<em>The Fall of Roam</em>), admitiendo que prácticamente había dejado de usarlo. Dijo que el trabajo de Roam era quitarle la ansiedad de no saber dónde guardar una nota. Funcionó un tiempo; después volvió a preocuparse por dónde iba cada cosa. Lo que le quedó fue, en sus propias palabras, un basural de enlaces y texto que casi nunca volvía a mirar. Archivar cosas te da una sensación superficial de estructura; en realidad es solo procrastinación. La ansiedad vuelve; los enlaces no ayudan.</p>
+
+      <p>No confío en ningún sistema de notas que intente venderte las vistas de grafo como algo útil. Conectar ideas es una parte enorme de ese acto que llamamos «pensar». Pero si no podés articular esas conexiones, si no podés cuantificarlas y volverlas útiles, ¿de qué sirve?</p>
+
+      <p>Amo Obsidian. Es una app de notas y un editor de Markdown fantástico, con un ecosistema de plugins de una profundidad casi incomprensible. Es uno de los programas más hermosos que usé en mi vida, y prácticamente vivo ahí adentro. Pero también creo que es muy fácil caer en una trampa con él —con cualquier sistema de notas, la verdad—. Es la trampa del estancamiento bien organizado.</p>
+
+      <hr class="section-break">
+
+      <p>Las notas no son el objetivo de los sistemas de notas. Las notas son solo una forma de organizar tus pensamientos para que puedas producir algo valioso.</p>
+
+      <p>No almacenes más notas de las que podés procesar para convertir en algo valioso.</p>
+
+      <p>Hacelo más chico. Hacelo doloroso.</p>
+
+      <p>A esto se refiere Tiago Forte en <em>Building a Second Brain</em> cuando habla de capturar únicamente notas que realmente resuenen con vos. En lugar de guardar todo lo que te cruzás pensando que algún día te podría servir, escribí tus propios pensamientos con tus propias palabras. Un par de cientos de palabras alcanza y sobra. Escribí lo que sabés. Escribí lo que no sabés. Escribí dónde tu razonamiento se traba, tartamudea y se desmorona. Después escribí otras cosas: entradas de blog, mails, lo que sea. Hacé que tus notas sean útiles. Si no, borralas.</p>
+
+      <p>El objetivo es externalizar tu proceso de pensamiento.</p>
+
+      <p>Esa es la parte difícil. Ese es el trabajo cognitivo.</p>
+
+      <p>Un sistema con 300 notas que sirvió de base para al menos dos artículos de blog es infinitamente más valioso que uno con 5.000 notas que te da una sensación cálida y reconfortante pero no lleva a nada.</p>
+
+      <p>Tu cerebro no es un archivero. Es una función de pérdida (<em>loss function</em>). Aprendés haciendo predicciones, equivocándote y ajustando tus modelos mentales para que encajen con la realidad.</p>
+
+      <p>No descargues otro plugin. No leas otro artículo sobre cómo organizar tus notas.</p>
+
+      <p>Abrí una nota y escribí algo. Aunque sea una estupidez monumental.</p>
+
+      <p>Dios sabe que, por lo menos, vas a estar en buena compañía conmigo.</p>
+
+      <aside class="callout" aria-label="Nota destacada">
+        <div class="callout-title">Sobre el autor</div>
+        <p>🍕 Soy JA Westenberg. Escribo ensayos sobre tecnología, filosofía, productividad y qué significa ser humano. Si sos optimista, estás en el lugar correcto. Podés leer mi declaración sobre el uso de IA acá.</p>
+      </aside>
+      </article>
+    <nav class="article-footer-nav" aria-label="Navegación del archivo">
+      <div class="article-footer-top">
+        <a class="back-cover-pill" href="#" data-go-home>← Volver a la portada</a>
+      </div>
+      <div class="article-nav-grid"><a class="article-nav-link prev" href="#la-superinteligencia-esta-llegando" data-open-article="la-superinteligencia-esta-llegando"><span class="nav-label">← Más reciente</span><span class="nav-title">La superinteligencia está llegando</span></a><a class="article-nav-link next" href="#visiones-secretas-dario-amodei-anthropic" data-open-article="visiones-secretas-dario-amodei-anthropic"><span class="nav-label">Anterior →</span><span class="nav-title">Por dentro de las visiones secretas de un profeta de la IA sobre el futuro de la humanidad</span></a></div>
+    </nav>
+    </main>
+  </section>
+
+  <section class="article-view" id="article-visiones-secretas-dario-amodei-anthropic" data-slug="visiones-secretas-dario-amodei-anthropic" data-masthead="La democracia muere en la oscuridad" data-title="Por dentro de las visiones secretas de un profeta de la IA sobre el futuro de la humanidad" hidden>
+    <main class="article-container">
+      <header class="article-header">
+        <div class="kicker">Tecnología · Inteligencia Artificial</div>
+        <h1>Por dentro de las visiones secretas de un profeta de la IA sobre el futuro de la humanidad</h1>
+        <p class="deck">Anthropic vale más de un billón de dólares. Su director ejecutivo, Dario Amodei, también quiere convencer al mundo de su filosofía del futuro.</p>
+        <div class="byline">
+          <span>Por <strong>Nitasha Tiku</strong></span>
+          <span class="dot">·</span>
+          <time datetime="2026-11-22">22 de noviembre de 2026</time>
+          <span class="dot">·</span>
+          <span>The Washington Post</span>
+          <span class="dot">·</span>
+          <span>11 min de lectura</span>
+        </div>
+      </header>
+
+      <article class="article-body">
+      <p class="lead"><span class="dateline">San Francisco —</span> Mientras el director ejecutivo de Anthropic, Dario Amodei, agasajaba el mes pasado a los inversores con los planes de su empresa de inteligencia artificial para futuros productos, una reunión muy distinta tenía lugar en otro sector de la sede central de la compañía.</p>
+
+      <p>Anthropic había invitado a más de una docena de académicos, investigadores de centros de estudios (<em>think tanks</em>) y figuras de los medios para recibir sesiones informativas de altos directivos sobre cómo debería navegar la sociedad el auge de una IA poderosa. A los invitados se les pidió que leyeran primero un ensayo de Amodei que sostenía que la IA estaba avanzando peligrosamente rápido, y la «constitución» de 23.000 palabras que guía al chatbot de su empresa con enunciados como: «Claude ni siquiera debería decir mentiras piadosas».</p>
+
+      <p>En una sala de conferencias del décimo piso, al final del pasillo desde una barra de café con barista integrada, recordaron los asistentes, el personal de Anthropic describió cómo la IA era cada vez más capaz de mejorarse a sí misma y cómo enseñarle moral a las máquinas podría impedir que se volvieran dañinas. «Sienten que va a ser un acontecimiento transformador para la humanidad y que la sociedad necesita estar preparada», dijo el economista de la Universidad de Nueva York Arpit Gupta, quien participó del programa de dos días. «Me dio la sensación de que no están conformes con el debate público» sobre la IA, señaló, y quieren cambiarlo.</p>
+
+      <p>Gupta y los demás invitados recibieron un curso intensivo sobre la mirada interna de Anthropic, una empresa que Amodei construyó en torno a su visión de que la IA pronto acelerará más allá de la inteligencia humana y a sus creencias sobre cómo desarrollarla de forma segura.</p>
+
+      <p>La compañía salió a bolsa el jueves y cerró la semana con una valuación de más de 1,5 billones de dólares que convirtió a Amodei y a sus cofundadores en multimillonarios con fortunas de decenas de miles de millones. Amodei impulsó a Anthropic a la vanguardia de la carrera de la IA y reconfiguró la economía estadounidense este año al conquistar clientes corporativos con su tecnología —y a través de una cultura corporativa singular que intenta reconciliar el conflicto entre perseguir ganancias y hacer lo mejor para la sociedad.</p>
+
+      <p>Amodei, una presencia cerebral que no proyecta la ambición descarnada del arquetípico fundador de Silicon Valley, lidera a su equipo mediante ensayos, extensos memorandos publicados en Slack y charlas quincenales para toda la empresa conocidas en broma como «Dario Vision Quests» (búsquedas de visión de Dario), en las que expone el pensamiento de la compañía sobre el desarrollo de la IA, la geopolítica y otros temas mientras invita a los empleados a discutir y debatir. La producción escrita y oral del CEO estableció una constelación de creencias tratadas como obvias, urgentes y virtuosas dentro de la empresa: que una IA que supere a los humanos es inevitable, que Estados Unidos debe limitar el desarrollo de la IA en China y que Claude podría ser consciente.</p>
+
+      <p>Dentro de esta cultura sumamente cohesionada, los empleados de Anthropic —que se llaman a sí mismos <em>Ants</em> («hormigas»)— sienten que están trabajando en los problemas más urgentes del mundo, con las personas más inteligentes, en una misión compartida para salvaguardar a la humanidad, según entrevistas con más de una docena de personas familiarizadas con el espíritu de la compañía, incluidos varios empleados actuales y exempleados.</p>
+
+      <p>En el núcleo de todo está la creencia de que Anthropic —y Amodei— saben qué es lo mejor para el mundo. «Es una especie de lugar loco y divertido al estilo Proyecto Manhattan, si crees que todo va a salir bien», dijo el exempleado de Anthropic Jacob Coxon, quien renunció públicamente en septiembre advirtiendo que Anthropic parecía atrapada en una carrera por la IA que ponía en riesgo la extinción humana.</p>
+
+      <p>«Una idea omnipresente en Anthropic es: nos vamos a poner nuestras capas y vamos a ser los responsables, y vamos a acumular un gran poder, pero... como lo estamos haciendo de manera responsable, es responsable adquirir más poder», dijo un exempleado que dejó la empresa este año y que, al igual que otros, habló bajo condición de anonimato para evitar represalias de la compañía.</p>
+
+      <p>Los líderes de Anthropic controlan estrictamente los detalles de los debates internos de la empresa mediante una política de tolerancia cero frente a las filtraciones y fuertes normas sociales que imponen la confidencialidad, señalaron exempleados.</p>
+
+      <p>Anthropic inició una investigación interna el año pasado después de que <em>Wired</em> informara que Amodei había reconocido en un mensaje de Slack que aceptar financiamiento de Estados de Medio Oriente probablemente serviría para «enriquecer a dictadores», contó el exempleado que se fue este año. Quien filtró el mensaje fue despedido, aseguró el exempleado, un incidente que no había sido informado previamente. Desde entonces, detalles de los copiosos memorandos de Amodei en Slack parecen haberse filtrado solo una vez más.</p>
+
+      <p>Anthropic declinó hacer comentarios.</p>
+
+      <p>La compañía sugirió en su prospecto de oferta pública inicial (OPI) que los ingresos de Anthropic podrían alcanzar un tamaño cercano al de toda la economía de Estados Unidos. Su mensaje a los inversores encajaba con una visión del futuro que Amodei suele esbozar ante su personal, según personas familiarizadas con la empresa, en la que las compañías de IA tienen el poder de Estados-nación.</p>
+
+      <p>Tras casi seis años de decirles a sus trabajadores que una IA poderosa obligará a los líderes de la sociedad a tomar decisiones difíciles, Amodei es ahora uno de los poderes que debe decidir cómo actuar, en una gran prueba para la cultura corporativa que él mismo creó. «El momento para el que toda la empresa se estuvo preparando todo este tiempo se está acercando», dijo un empleado de los primeros años de Anthropic.</p>
+
+      <hr class="section-break">
+
+      <p>Amodei estaba convencido de su visión mucho antes de convertirse en un CEO con un rebaño que guiar. Tras incorporarse a OpenAI como vicepresidente de investigación en 2016, utilizaba una computadora portátil y una impresora mantenidas físicamente desconectadas —o aisladas (<em>air-gapped</em>)— de internet para trabajar en ensayos sobre cómo construir una IA más poderosa, relató Geoffrey Irving, quien trabajó estrechamente con Amodei en el departamento de investigación de OpenAI.</p>
+
+      <p>«Dario estaba paranoico con que parte de ese material fuera un <em>infohazard</em> [riesgo informativo]», dijo Irving, es decir, que contuviera ideas capaces de causar un daño inmenso si caían en las manos equivocadas, como la receta de una bomba nuclear. Amodei también compró computadoras portátiles aisladas de la red para un par de empleados más, incluido Irving, según contó este.</p>
+
+      <p>Los escritos de Amodei sobre cómo construir una IA más poderosa prendieron rápido entre otros investigadores de OpenAI. En declaraciones públicas, Amodei dijo que se marchó porque perdió la confianza en que la empresa manejara de buena fe los desacuerdos sobre cómo desarrollar la IA. OpenAI no respondió de inmediato a una solicitud de comentarios. (<em>The Washington Post</em> tiene un acuerdo de contenidos con OpenAI.)</p>
+
+      <p>Se propuso crear una cultura más consciente de la seguridad cuando cofundó Anthropic en 2021 junto a seis personas de su círculo íntimo, la mayoría provenientes de OpenAI.</p>
+
+      <p>En un memorando interno al año siguiente, Amodei dejó en claro lo que estaba en juego. «La trayectoria actual del desarrollo de la IA me hace pensar que hay entre un 20 y un 30 por ciento de probabilidades de que la IAG conduzca a la destrucción o al estancamiento permanente de la humanidad», escribió, en referencia al concepto de inteligencia artificial general, según muestran documentos judiciales no divulgados hasta ahora. Agregó que una IA verdaderamente capaz «parece más poderosa y peligrosa que las armas nucleares».</p>
+
+      <aside class="callout" aria-label="Nota destacada">
+        <div class="callout-title">Ayude a <em>The Washington Post</em> a informar sobre la IA</div>
+        <p>Comuníquese con la reportera Nitasha Tiku en <a href="mailto:Nitasha.Tiku@washpost.com">Nitasha.Tiku@washpost.com</a> o a través de <strong>nitasha.10</strong> en Signal.</p>
+      </aside>
+
+      <p>Amodei fue cuidadoso con las personas que contrató para trabajar en ese desafío existencial. Los candidatos eran evaluados mediante una «entrevista cultural», incluso para puestos administrativos y de políticas públicas, según exempleados y una copia archivada de la página de empleos de la empresa.</p>
+
+      <p>Un aspirante contó que en la entrevista cultural le hicieron preguntas sobre ideas incluidas en el material de lectura que la empresa había enviado antes de las entrevistas con Anthropic esta primavera, entre ellos dos ensayos de Amodei sobre caminos futuros positivos y negativos para la IA.</p>
+
+      <p>Es «un poco una entrevista del tipo "¿estás listo para la secta?"», le escribió por mensaje un gerente de contrataciones de Anthropic al candidato que no quedó seleccionado, según una captura de pantalla revisada por <em>The Post</em>.</p>
+
+      <p>El talento que superó ese filtro provino en gran medida de la comunidad de altruismo eficaz del Área de la Bahía, cuyos miembros buscan calcular y maximizar el bien que pueden hacer en el mundo. Amodei, un influyente miembro temprano de ese movimiento, desempeñó un papel clave en dirigir la atención de los donantes hacia los riesgos de la IA, según documentos de planificación publicados en línea por una organización filantrópica en la que fue asesor técnico. (Desde entonces, se ha distanciado del movimiento.)</p>
+
+      <p>En esos círculos del Área de la Bahía, trabajar en Anthropic otorgaba prestigio. «Noté que era más interesante por estar ahí», dijo un exingeniero que ingresó en 2021. El floreciente campo de la seguridad en IA, que creció hasta incluir una red de organizaciones sin fines de lucro y otros grupos enfocados en evitar una calamidad provocada por la IA, depositó sus esperanzas en Amodei y sus <em>Ants</em> como personas de gran integridad que reconocían los daños potenciales de la tecnología.</p>
+
+      <p>A medida que la empresa creció, Anthropic esquivó las políticas laborales progresistas y los debates de las guerras culturales que provocaron divisiones internas en firmas más convencionales de Silicon Valley, señalaron varios exempleados.</p>
+
+      <p>En una de sus primeras charlas <em>Vision Quest</em>, Amodei se declaró patriota, contó el empleado de los primeros años, quien resumió los comentarios del CEO así: «Estados Unidos es genial, la democracia tiene que ganar, está bien apoyar a las fuerzas armadas». En público y en privado, señalaron exempleados, Amodei presenta la carrera global de la IA como una contienda entre países democráticos y autoritarios, y adopta una postura de línea dura frente a China, país al que, según sostiene, se le debe cortar el acceso a los potentes chips necesarios para desarrollar sistemas de IA.</p>
+
+      <p>Incluso después de que se filtraran sus comentarios sobre el financiamiento de Medio Oriente, Amodei prometió al personal en una charla <em>Vision Quest</em> el año pasado que no se autocensuraría, según el exempleado que dejó la empresa este año.</p>
+
+      <p>«Dario hizo hincapié en decir: "No voy a dejar que estas filtraciones me impidan ser honesto. Me importa demasiado la cultura interna y no quiero dejar que se degrade". Y dijo algunas cosas muy sin filtro solo para demostrar su punto», incluido tildar de codicioso al entonces CEO de Nvidia, Jensen Huang, relató el exempleado.</p>
+
+      <p>Anthropic ha empezado recientemente a sembrar las ideas de Amodei entre formadores de opinión fuera de la compañía, programando una serie de encuentros como el que Gupta presenció en las oficinas de Anthropic el mes pasado. Las discusiones se han desarrollado bajo la Regla de Chatham House, pero se alienta a los invitados a compartir lo que escucharon.</p>
+
+      <p>«Una sesión típica se centrará en capacidades y seguridad, interpretabilidad, seguridad nacional, la constitución de Claude, economía, etc.», según un formulario de Google para los eventos al que accedió <em>The Post</em>.</p>
+
+      <p>Amodei no habló ante el grupo de Gupta, pero cada vez que el tema giraba hacia China, dijo el economista, los empleados repetían con fiabilidad los llamados del CEO a imponer controles de exportación, de una manera que le recordó a Gupta cómo los chatbots de IA reflejan los valores de sus desarrolladores.</p>
+
+      <hr class="section-break">
+
+      <p>Antes de dar el puntapié inicial a la histórica oferta pública inicial de Anthropic en Times Square, Nueva York, el jueves, Amodei pronunció un breve discurso con algunos de sus grandes éxitos.</p>
+
+      <p>«Para decirlo de manera inequívoca, regularemos el ritmo del entrenamiento y despliegue de los sistemas de IA, tomándonos todo el tiempo necesario para tener confianza en que son seguros y seguirán bajo control humano», afirmó Amodei.</p>
+
+      <p>Su promesa de ir despacio, incluso mientras ponía el destino de su compañía en manos de los accionistas públicos, hacía eco de un ensayo que publicó en septiembre, días después de que el empleado Coxon renunciara y planteara preocupaciones sobre riesgos de extinción, lo que desató un fuerte revuelo en Silicon Valley y en Washington.</p>
+
+      <p>Muchos <em>Ants</em> que siguen en la empresa confían en Amodei.</p>
+
+      <p>«Compran el relato de que la dirección trabajará muy duro y no dejará que los incentivos la desvíen», dijo el exingeniero. Tras la salida a bolsa de Anthropic, unos 600 empleados poseen participaciones accionarias valoradas en más de 100 millones de dólares, y más de 5.000 tienen acciones que superan el millón de dólares, según la plataforma de inversión Hill.com.</p>
+
+      <p>Para algunos integrantes de la comunidad de seguridad en IA que durante mucho tiempo vieron a Amodei como el único actor con principios de la industria, la contradicción entre su retórica y el impulso de su empresa por hacer que la IA sea cada vez más poderosa ya no resulta sostenible.</p>
+
+      <p>Daniel Kokotajlo, un exempleado de OpenAI que ha criticado las prácticas de seguridad de la empresa desde su renuncia en 2024, dijo que estaba bien que Amodei siga escribiendo y haciendo circular sus ideas, pero que eso resulta insuficiente.</p>
+
+      <p>«Está bien ser transparente. Está bien escribir más, idealmente de cara al público», pero eso no significa que la sociedad deba confiar en la empresa o en su liderazgo, afirmó Kokotajlo, quien junto con Coxon habló en una protesta frente a la sede de Anthropic el día en que sus acciones comenzaron a cotizar.</p>
+
+      <p>Irving, antiguo colaborador de Amodei en OpenAI, contó que ahora suele hojear por encima los memorandos del CEO de Anthropic o leer resúmenes en Substack. «Es simplemente... otro CEO de una empresa de IA atrapado en esta carrera horrible», dijo.</p>
+
+      <p>Lo correcto que debería hacer Anthropic es dejar de impulsar la IA hacia adelante hasta que el nivel de riesgo pueda volverse aceptable, sostuvo. La cultura interna de Anthropic parece haber llevado a la empresa a «una visión unificada de que deben seguir adelante», señaló, «y esa simplemente no es una buena visión».</p>
+      </article>
+    <section class="readers-box" aria-label="Qué están diciendo los lectores">
+      <h2>Qué están diciendo los lectores</h2>
+      <p>Los comentarios expresan un escepticismo y una preocupación considerables por la influencia de los multimillonarios de Silicon Valley, en particular en lo que respecta al desarrollo y control de las tecnologías de IA. Muchos comentaristas critican la concentración de poder y riqueza en manos de unos pocos individuos...</p>
+      <p class="ai-note">Este resumen fue generado por IA. La IA puede cometer errores y este resumen no reemplaza la lectura de los comentarios.</p>
+    </section>
+    <nav class="article-footer-nav" aria-label="Navegación del archivo">
+      <div class="article-footer-top">
+        <a class="back-cover-pill" href="#" data-go-home>← Volver a la portada</a>
+      </div>
+      <div class="article-nav-grid"><a class="article-nav-link prev" href="#tu-segundo-cerebro-es-solo-un-disco-duro-caro" data-open-article="tu-segundo-cerebro-es-solo-un-disco-duro-caro"><span class="nav-label">← Más reciente</span><span class="nav-title">Tu segundo cerebro es solo un disco duro caro</span></a></div>
+    </nav>
+    </main>
+  </section>
+
+  <script>
+    (function () {
+      const PAPER_TITLE = "El Archivo — Lecturas escogidas · Edición personal";
+      const progressBar = document.getElementById('progressBar');
+      const frontpageView = document.getElementById('frontpageView');
+      const backToFront = document.getElementById('backToFront');
+      const topbarMasthead = document.getElementById('topbarMasthead');
+      const defaultMasthead = topbarMasthead.getAttribute('data-default-masthead') || '';
+      const articleViews = Array.from(document.querySelectorAll('.article-view'));
+      const storyCards = Array.from(document.querySelectorAll('.story-card'));
+      const searchInput = document.getElementById('archiveSearch');
+      const searchClear = document.getElementById('searchClear');
+      const filterButtons = Array.from(document.querySelectorAll('[data-filter-section]'));
+      const noResults = document.getElementById('noResults');
+
+      let activeSlug = null;
+      let activeSection = 'all';
+
+      // --- Barra de progreso ---
+      function updateProgress() {
+        if (!activeSlug) {
+          progressBar.style.width = '0%';
+          return;
+        }
+        const scrollTop = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const progress = docHeight > 0 ? Math.min(100, Math.max(0, (scrollTop / docHeight) * 100)) : 0;
+        progressBar.style.width = progress + '%';
+      }
+      window.addEventListener('scroll', updateProgress, { passive: true });
+
+      // --- Tema (Claro / Sepia / Oscuro) con persistencia ---
+      const themeButtons = document.querySelectorAll('[data-set-theme]');
+      function applyTheme(theme) {
+        if (theme === 'light' || !theme) {
+          document.documentElement.removeAttribute('data-theme');
+          theme = 'light';
+        } else {
+          document.documentElement.setAttribute('data-theme', theme);
+        }
+        themeButtons.forEach((b) => {
+          b.classList.toggle('active', b.getAttribute('data-set-theme') === theme);
+        });
+        try { localStorage.setItem('el-archivo-theme', theme); } catch {}
+      }
+
+      themeButtons.forEach((btn) => {
+        btn.addEventListener('click', () => applyTheme(btn.getAttribute('data-set-theme')));
+      });
+
+      try {
+        const savedTheme = localStorage.getItem('el-archivo-theme');
+        if (savedTheme) applyTheme(savedTheme);
+      } catch {}
+
+      // --- Tamaño de fuente con persistencia ---
+      let currentSize = 19;
+      const minSize = 15;
+      const maxSize = 25;
+      function applyFontSize(size) {
+        currentSize = Math.min(maxSize, Math.max(minSize, size));
+        document.documentElement.style.setProperty('--font-size', currentSize + 'px');
+        try { localStorage.setItem('el-archivo-font-size', String(currentSize)); } catch {}
+      }
+      try {
+        const savedSize = Number(localStorage.getItem('el-archivo-font-size'));
+        if (savedSize >= minSize && savedSize <= maxSize) applyFontSize(savedSize);
+      } catch {}
+
+      document.getElementById('fontDec').addEventListener('click', () => applyFontSize(currentSize - 1));
+      document.getElementById('fontInc').addEventListener('click', () => applyFontSize(currentSize + 1));
+
+      // --- Navegación Portada <-> Artículo ---
+      function showFrontpage(updateHash) {
+        activeSlug = null;
+        articleViews.forEach((v) => { v.hidden = true; });
+        frontpageView.hidden = false;
+        backToFront.hidden = true;
+        topbarMasthead.textContent = defaultMasthead;
+        document.title = PAPER_TITLE;
+        progressBar.style.width = '0%';
+        if (updateHash && location.hash) {
+          history.pushState(null, '', location.pathname + location.search);
+        }
+        window.scrollTo({ top: 0, behavior: 'instant' });
+      }
+
+      function showArticle(slug, updateHash) {
+        const target = articleViews.find((v) => v.getAttribute('data-slug') === slug);
+        if (!target) {
+          showFrontpage(false);
+          return;
+        }
+        activeSlug = slug;
+        frontpageView.hidden = true;
+        articleViews.forEach((v) => { v.hidden = v !== target; });
+        backToFront.hidden = false;
+        topbarMasthead.textContent = target.getAttribute('data-masthead') || defaultMasthead;
+        document.title = target.getAttribute('data-title') || PAPER_TITLE;
+        if (updateHash && location.hash !== '#' + slug) {
+          location.hash = slug;
+        }
+        window.scrollTo({ top: 0, behavior: 'instant' });
+        updateProgress();
+      }
+
+      document.addEventListener('click', (e) => {
+        const openTrigger = e.target.closest('[data-open-article]');
+        if (openTrigger) {
+          e.preventDefault();
+          showArticle(openTrigger.getAttribute('data-open-article'), true);
+          return;
+        }
+        const homeTrigger = e.target.closest('[data-go-home]');
+        if (homeTrigger) {
+          e.preventDefault();
+          showFrontpage(true);
+        }
+      });
+
+      window.addEventListener('hashchange', () => {
+        const slug = decodeURIComponent(location.hash.replace(/^#/, ''));
+        if (slug) showArticle(slug, false);
+        else showFrontpage(false);
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && activeSlug) {
+          showFrontpage(true);
+        }
+      });
+
+      // --- Búsqueda y filtros en portada ---
+      const storyList = document.getElementById('storyList');
+      function applyFilters() {
+        const q = (searchInput?.value || '').trim().toLowerCase();
+        const isFiltered = activeSection !== 'all' || Boolean(q);
+        if (searchClear) searchClear.hidden = !q;
+        if (storyList) storyList.classList.toggle('is-filtered', isFiltered);
+
+        let visibleCount = 0;
+        storyCards.forEach((card, idx) => {
+          const sec = card.getAttribute('data-section') || '';
+          const corpus = card.getAttribute('data-search') || '';
+          const matchesSection = activeSection === 'all' || sec === activeSection;
+          const matchesQuery = !q || corpus.includes(q);
+          const visible = matchesSection && matchesQuery;
+          card.hidden = !visible;
+          // Mantener estilo lead solo cuando es la primera nota sin filtro/búsqueda activa
+          if (idx === 0) {
+            card.classList.toggle('lead-story', !isFiltered);
+          }
+          if (visible) visibleCount++;
+        });
+
+        if (noResults) {
+          noResults.hidden = visibleCount > 0 || storyCards.length === 0;
+        }
+      }
+
+      if (searchInput) {
+        searchInput.addEventListener('input', applyFilters);
+      }
+      if (searchClear) {
+        searchClear.addEventListener('click', () => {
+          searchInput.value = '';
+          applyFilters();
+          searchInput.focus();
+        });
+      }
+      filterButtons.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          activeSection = btn.getAttribute('data-filter-section') || 'all';
+          filterButtons.forEach((b) => b.classList.toggle('active', b === btn));
+          applyFilters();
+        });
+      });
+
+      // --- Estado inicial ---
+      const initialSlug = decodeURIComponent(location.hash.replace(/^#/, ''));
+      if (initialSlug) {
+        showArticle(initialSlug, false);
+      } else {
+        showFrontpage(false);
+      }
+    })();
+  </script>
+</body>
+</html>
