@@ -12,7 +12,7 @@ Este proyecto genera y mantiene un **único archivo HTML autónomo** ([periodico
 
 ## Estructura y comandos principales
 
-- `periodico.html`: Periódico único portable y offline (portada con grilla de 12 columnas, buscador y filtros por sección + vista de lectura de 680px).
+- `periodico.html` e `index.html`: Periódico único portable y offline (portada con grilla de 12 columnas, buscador y filtros por sección + vista de lectura de 680px). `scripts/build.mjs` mantiene `index.html` sincronizado para **GitHub Pages** (`https://dubnico.github.io/el-archivo/`, repo `https://github.com/dubnico/el-archivo.git`, rama `main`).
 - `data/config.json`: Nombre del periódico, subtítulo y archivo de salida.
 - `data/curacion.json`: Guía editorial (temas de IA, personajes curados y medios internacionales de economías centrales; excluir medios latinoamericanos).
 - `data/articulos/*.json`: Fuente de verdad de cada nota publicada.
@@ -29,4 +29,5 @@ Este proyecto genera y mantiene un **único archivo HTML autónomo** ([periodico
 
 ## Features futuras (Roadmap)
 
-- **Publicación online con Firebase Hosting**: Configurar Firebase Hosting (`firebase deploy`) para publicar `periodico.html` en una URL propia con HTTPS (ej. `https://<proyecto>.web.app`) y poder leerlo cómodamente desde el celular (especialmente iOS/Android) sin depender de visores locales de mail. Opcionalmente integrar el deploy automático al final de `scripts/add-article.mjs` o de la automatización diaria.
+- **Deploy automático al publicar notas**: Automatizar `git add / commit / push` (para actualizar **GitHub Pages** en `https://dubnico.github.io/el-archivo/` cada vez que se agrega una nota con `/nota` o con la automatización diaria de las 16:00).
+- **Alternativa en Google (Firebase Hosting)**: Si se prefiere no depender de un repositorio público en GitHub, migrar la publicación online a Firebase Hosting (`firebase deploy`, `https://<proyecto>.web.app`).
