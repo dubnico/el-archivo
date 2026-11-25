@@ -6,14 +6,61 @@ import { ARTICLES_DIR, ROOT, buildNewspaper, loadConfig } from './build.mjs';
 import { validateAndNormalizeArticle } from './schema.mjs';
 
 function parseArgs(argv) {
-  const args = { file: null, open: false, overwrite: false, cleanup: false };
+  const args = { file: null, open: false, overwrite: false, cleanup: false, push: false };
   for (const a of argv) {
     if (a === '--open') args.open = true;
     else if (a === '--overwrite') args.overwrite = true;
     else if (a === '--cleanup') args.cleanup = true;
+    else if (a === '--push') args.push = true;
     else if (!a.startsWith('-') && !args.file) args.file = a;
   }
   return args;
+}
+
+function runGit(gitArgs) {
+  return new Promise((resolve, reject) => {
+    execFile('git', gitArgs, { cwd: ROOT }, (err, stdout, stderr) => {
+      if (err) {
+        const detail = (stderr || stdout || err.message).trim();
+        reject(new Error(`git ${gitArgs[0]} falló: ${detail}`));
+        return;
+      }
+      resolve({ stdout: stdout.trim(), stderr: stderr.trim() });
+    });
+  });
+}
+
+async function gitPublish(article) {
+  const candidates = ['data/articulos', 'assets', 'periodico.html', 'index.html'];
+  const existingPaths = [];
+  for (const rel of candidates) {
+    try {
+      await fs.access(path.join(ROOT, rel));
+      existingPaths.push(rel);
+    } catch {}
+  }
+
+  if (existingPaths.length === 0) {
+    return { pushed: false, reason: 'No hay archivos de publicación para subir.' };
+  }
+
+  await runGit(['add', '--', ...existingPaths]);
+
+  let hasChanges = false;
+  try {
+    await runGit(['diff', '--cached', '--quiet']);
+  } catch {
+    hasChanges = true;
+  }
+
+  if (!hasChanges) {
+    return { pushed: false, reason: 'Sin cambios nuevos para subir.' };
+  }
+
+  const commitMsg = `Agrega nota: ${article.title}`;
+  await runGit(['commit', '-m', commitMsg]);
+  await runGit(['push']);
+  return { pushed: true, commitMessage: commitMsg };
 }
 
 function openInBrowser(filePath) {
@@ -76,6 +123,16 @@ async function main() {
 
   const { outputPath, articleCount } = await buildNewspaper();
 
+  if (args.cleanup) {
+    const tmpDir = path.join(ROOT, '.tmp');
+    await fs.rm(tmpDir, { recursive: true, force: true });
+  }
+
+  let gitResult;
+  if (args.push) {
+    gitResult = await gitPublish(article);
+  }
+
   console.log(
     JSON.stringify(
       {
@@ -85,16 +142,12 @@ async function main() {
         articleJson: targetPath,
         newspaperHtml: outputPath,
         totalArticles: articleCount,
+        ...(gitResult ? { git: gitResult } : {}),
       },
       null,
       2
     )
   );
-
-  if (args.cleanup) {
-    const tmpDir = path.join(ROOT, '.tmp');
-    await fs.rm(tmpDir, { recursive: true, force: true });
-  }
 
   if (args.open) {
     await openInBrowser(outputPath);

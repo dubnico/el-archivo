@@ -20,15 +20,14 @@ Este proyecto genera y mantiene un **único archivo HTML autónomo** ([periodico
 - `scripts/extract.mjs`: Extrae texto de URLs (`@mozilla/readability` + `linkedom`), PDFs (`unpdf`) o archivos de texto; detecta paywalls/bloqueos.
 - `scripts/build.mjs`: Reconstruye `periodico.html` e `index.html` (soporta `--list` para listar notas existentes sin duplicar; renderiza bloques `lead`, `paragraph`, `heading`, `subheading`, `blockquote`, `list`, `code`, `figure`, `section_break` y `callout`, embebiendo imágenes locales de `assets/` como data URIs base64 para mantener el HTML 100% autónomo).
 - `assets/`: Imágenes y gráficos originales descargados por artículo (embebidos automáticamente al compilar `periodico.html`).
-- `scripts/add-article.mjs`: Valida el JSON editorial, guarda en `data/articulos/`, reconstruye `periodico.html` y soporta `--open`, `--overwrite` y `--cleanup`.
+- `scripts/add-article.mjs`: Valida el JSON editorial, guarda en `data/articulos/`, reconstruye `periodico.html` e `index.html` y soporta `--open`, `--overwrite`, `--cleanup` y `--push` (hace `git add / commit / push` solo de `data/articulos/`, `assets/`, `periodico.html` e `index.html` para actualizar **GitHub Pages** automáticamente).
 
 ## Automatización diaria
 
 - **Nombre**: `Edición Diaria — El Archivo (IA)` (`~/.gemini/config/sidecars/diario-ia-el-archivo/sidecar.json`).
 - **Horario**: Todos los días a las 16:00 hs (`CRON_TZ=America/Argentina/Buenos_Aires`).
-- **Comportamiento**: Busca 1 o 2 notas recientes de acceso abierto guiándose por `data/curacion.json`, evita duplicados con `node scripts/build.mjs --list`, extrae, traduce íntegramente y publica en `periodico.html`.
+- **Comportamiento**: Busca 1 o 2 notas recientes de acceso abierto guiándose por `data/curacion.json`, evita duplicados con `node scripts/build.mjs --list`, extrae, traduce íntegramente, publica en `periodico.html` y sube automáticamente a GitHub Pages (`--cleanup --push`).
 
 ## Features futuras (Roadmap)
 
-- **Deploy automático al publicar notas**: Automatizar `git add / commit / push` (para actualizar **GitHub Pages** en `https://dubnico.github.io/el-archivo/` cada vez que se agrega una nota con `/nota` o con la automatización diaria de las 16:00).
 - **Alternativa en Google (Firebase Hosting)**: Si se prefiere no depender de un repositorio público en GitHub, migrar la publicación online a Firebase Hosting (`firebase deploy`, `https://<proyecto>.web.app`).

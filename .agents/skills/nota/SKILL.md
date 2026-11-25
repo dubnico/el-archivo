@@ -92,18 +92,18 @@ Notas del esquema:
   }
   ```
 
-### 4. Agregar al archivo, regenerar `periodico.html` y abrirlo
+### 4. Agregar al archivo, regenerar `periodico.html`, publicar en GitHub Pages y abrirlo
 
 Ejecutar:
 
 ```powershell
-node scripts/add-article.mjs .tmp/new-article.json --open
+node scripts/add-article.mjs .tmp/new-article.json --cleanup --open --push
 ```
 
-- Esto valida el esquema, guarda el artículo en `data/articulos/<fecha>-<slug>.json`, regenera `periodico.html` con todas las notas acumuladas y lo abre en el navegador.
+- Esto valida el esquema, guarda el artículo en `data/articulos/<fecha>-<slug>.json`, regenera `periodico.html` e `index.html`, limpia `.tmp`, hace `git commit` + `git push` de los archivos publicados (actualizando **GitHub Pages** en `https://dubnico.github.io/el-archivo/`) y abre `periodico.html` en el navegador.
 - Si el usuario pidió actualizar una nota ya existente con el mismo slug, sumar `--overwrite`.
+- Si el usuario pidió expresamente NO subir a GitHub, omitir `--push`.
 
-### 5. Limpiar temporales y confirmar
+### 5. Confirmar
 
-- Eliminar `.tmp/extracted.json` y `.tmp/new-article.json` (si se crearon).
-- Confirmar al usuario el título agregado, la sección, la cantidad total de notas en `periodico.html` y enlazar el archivo `periodico.html`.
+- Confirmar al usuario el título agregado, la sección, la cantidad total de notas en `periodico.html`, el enlace local a `periodico.html` y el enlace online `https://dubnico.github.io/el-archivo/`.
